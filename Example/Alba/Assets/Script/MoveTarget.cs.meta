@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 6dc3aaa98b752de4a8c7a2196a3db0f8
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - Target: {instanceID: 0}
+  - Punch: {fileID: 8300000, guid: fcea3f1518bc43548b286031ab6ee00e, type: 3}
+  - Pic: {fileID: 8300000, guid: 433ca4706b817a64682f776ba4a846ff, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
