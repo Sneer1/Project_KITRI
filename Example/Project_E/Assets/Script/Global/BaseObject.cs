@@ -14,23 +14,23 @@ public class BaseObject : MonoBehaviour
 		set { TargetComponent = value; }
 	}
 
-	E_BASEOBJECTSTATE ObjectState = E_BASEOBJECTSTATE.STATE_NORMAL;
-	public E_BASEOBJECTSTATE OBJECT_STATE
-	{
+	E_BASEOBJECTSTATE _ObjectState = E_BASEOBJECTSTATE.STATE_NORMAL;
+	public E_BASEOBJECTSTATE ObjectState
+    {
 		get
 		{
 			if (Target == null)
-				return ObjectState;
+				return _ObjectState;
 			else
-				return Target.OBJECT_STATE;
+				return Target.ObjectState;
 		}
 
 		set
 		{
 			if (Target == null)
-				ObjectState = value;
+                _ObjectState = value;
 			else
-				Target.OBJECT_STATE = value;
+				Target.ObjectState = value;
 		}
 	}
 

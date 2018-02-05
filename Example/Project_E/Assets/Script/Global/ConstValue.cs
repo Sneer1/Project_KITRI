@@ -11,11 +11,13 @@ public static class ConstValue
 		"CHARACTER_TEMPLATE";
 
 	public const string SkillTemplatePath = "JSON/SKILL_TEMPLATE";
-	public const string SkillDataPath = "JSON/SKILL_DATA";
+	public const string SkillTemplateKey = "SKILL_TEMPLATE";
 
+    public const string SkillDataPath = "JSON/SKILL_DATA";
+    public const string SkillDataKey = "SKILL_DATA";
 
-	// StatusData Key 관련
-	public const string CharacterStatusDataKey =
+    // StatusData Key 관련
+    public const string CharacterStatusDataKey =
 		"CHARACTER_TEMPLATE";
 
 	// GetData Key관련

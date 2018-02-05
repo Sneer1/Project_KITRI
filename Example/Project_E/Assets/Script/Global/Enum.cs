@@ -5,28 +5,39 @@ public enum E_BASEOBJECTSTATE
     STATE_DIE
 }
 
-//public enum eStateType
-//{
-//    STATE_NONE = 0,
-//    STATE_IDLE,
-//    STATE_ATTACK,
-//    STATE_WALK,
-//    STATE_DEAD
-//}
+public enum E_AITYPE
+{
+    NormalAI,
+}
 
-//public enum eStatusData
-//{
-//    MAX_HP,
-//    ATTACK,
-//    DEFFENCE,
-//    MAX,
-//}
+public enum E_STATETYPE
+{
+    STATE_NONE = 0,
+    STATE_IDLE,
+    STATE_ATTACK,
+    STATE_WALK,
+    STATE_DEAD
+}
 
-//public enum eTeamType
-//{
-//    TEAM_1,
-//    TEAM_2,
-//}
+public enum E_STATUSDATA
+{
+    MAX_HP,
+    ATTACK,
+    DEFFENCE,
+    MAX,
+}
+
+public enum E_TEAMTYPE
+{
+    TEAM_1,
+    TEAM_2,
+}
+
+public enum E_AUTOMODE
+{
+    Auto_On,
+    Auto_Off,
+}
 
 
 //Monster 관련
@@ -37,33 +48,35 @@ public enum E_BASEOBJECTSTATE
 //    TRIGGER_EVENT,
 //}
 
-//public enum eMonsterType
-//{
-//    A_Monster,
-//    B_Monster,
-//    C_Monster,
-//    MAX,
-//}
+public enum E_ENEMYTYPE
+{
+    A_Monster,
+    B_Monster,
+    C_Monster,
+    knight_Blue,
+    knight_Red,
+    MAX
+}
 
 //Skill 관련
-//public enum eSkillTemplateType
-//{
-//    TARGET_ATTACK,
-//    RANGE_ATTACK,
-//}
+public enum E_SKILLTEMPLATETYPE
+{
+    TARGET_ATTACK,
+    RANGE_ATTACK,
+}
 
-//public enum eSkillAttackRangeType
-//{
-//    RANGE_BOX,
-//    RANGE_SPHERE,
-//}
+public enum E_SKILLRANGETYPE
+{
+    RANGE_BOX,
+    RANGE_SPHERE,
+}
 
-//public enum eSkillModelType
-//{
-//    CIRCLE,
-//    BOX,
-//    MAX
-//}
+public enum E_SKILLMODETYPE
+{
+    CIRCLE,
+    BOX,
+    MAX
+}
 
 //public enum eBoardType
 //{
