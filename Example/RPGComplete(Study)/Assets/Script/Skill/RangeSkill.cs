@@ -11,6 +11,7 @@ public class RangeSkill : BaseSkill
             return;
 
         GameObject go = Instantiate(ModelPrefab, Vector3.zero, Quaternion.identity);
+
         go.transform.SetParent(this.transform, false);
     }
 

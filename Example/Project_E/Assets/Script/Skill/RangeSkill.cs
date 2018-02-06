@@ -5,6 +5,7 @@ using UnityEngine;
 public class RangeSkill : BaseSkill
 {
     GameObject ModelPrefab = null;
+
     public override void InitSkill()
     {
         if (ModelPrefab == null)
