@@ -39,8 +39,8 @@ GameObject:
   m_Component:
   - component: {fileID: 448752}
   - component: {fileID: 9548940}
-  - component: {fileID: 11448940}
-  - component: {fileID: 11448938}
+  - component: {fileID: 195795629593252144}
+  - component: {fileID: 114863221558905726}
   m_Layer: 0
   m_Name: Rose
   m_TagString: Untagged
@@ -1506,8 +1506,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148752}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -5.271, y: 0, z: -4.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 448886}
@@ -1521,7 +1521,7 @@ Transform:
   - {fileID: 448868}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &448754
 Transform:
   m_ObjectHideFlags: 1
@@ -1611,7 +1611,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148766}
-  m_LocalRotation: {x: 0.6047469, y: -0.36644417, z: 0.34050405, w: 0.6197234}
+  m_LocalRotation: {x: 0.6047468, y: -0.36644414, z: 0.34050402, w: 0.6197233}
   m_LocalPosition: {x: -0.14507042, y: -0.017404357, z: 0.040430002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2873,29 +2873,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 1
---- !u!114 &11448938
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd1e95e523ce0a348b43464f37a20f79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11448940
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38f7550202740494ca0700218af400a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motionIndex: 10
 --- !u!137 &13748920
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3513,3 +3490,39 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148752}
   m_IsPrefabParent: 1
+--- !u!114 &114863221558905726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2433fb9e5e57a254286b878fc9df4b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _TeamType: 0
+  TemplateKey: CHARACTER_1
+  AIType: 0
+  bEnableBoard: 1
+--- !u!195 &195795629593252144
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148752}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
