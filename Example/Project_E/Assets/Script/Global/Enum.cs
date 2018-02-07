@@ -41,20 +41,23 @@ public enum E_AUTOMODE
 
 
 //Monster 관련
-//public enum eRegeneratorType
-//{
-//    NONE,
-//    REGENTIME_EVENT,
-//    TRIGGER_EVENT,
-//}
+public enum E_PLAYTYPE
+{
+    PF_CHARACTER_HANRAN,
+    PF_CHARACTER_IRIS,
+    PF_CHARACTER_TIBOUCHINA,
+    PF_CHARACTER_VERBENA,
+    PF_CHARACTER_ROSE,
+    MAX
+}
 
 public enum E_ENEMYTYPE
 {
-    A_Monster,
-    B_Monster,
-    C_Monster,
-    knight_Blue,
-    knight_Red,
+    PF_ENEMY_BLUE,
+    PF_ENEMY_RED,
+    PF_ENEMY_TIBOUCHINA,
+    PF_ENEMY_VERBENA,
+    PF_ENEMY_ROSE,
     MAX
 }
 

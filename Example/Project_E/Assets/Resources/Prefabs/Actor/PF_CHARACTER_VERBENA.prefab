@@ -1577,7 +1577,7 @@ GameObject:
   - component: {fileID: 114310884430935744}
   - component: {fileID: 195119877935641498}
   m_Layer: 0
-  m_Name: Verbena
+  m_Name: PF_CHARACTER_VERBENA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

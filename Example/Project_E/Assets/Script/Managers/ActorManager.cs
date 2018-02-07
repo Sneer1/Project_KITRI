@@ -2,24 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class ActorManager : MonoSingleton<ActorManager>
 {
     Dictionary<E_TEAMTYPE, List<Actor>> DicActor = new Dictionary<E_TEAMTYPE, List<Actor>>();
 
     Transform ActorRoot = null;
 
+    Dictionary<E_PLAYTYPE, GameObject> DicPlayerPrefab = new Dictionary<E_PLAYTYPE, GameObject>();
     Dictionary<E_ENEMYTYPE, GameObject> DicEnemyPrefab = new Dictionary<E_ENEMYTYPE, GameObject>();
 
     private void Awake()
     {
+        PlayerPrefabInit();
         EnemyPrefabInit();
+    }
+
+    void PlayerPrefabInit()
+    {
+        for (int i = 0; i < (int)E_PLAYTYPE.MAX; ++i)
+        {
+            GameObject go = Resources.Load("Prefabs/Actor/" + ((E_PLAYTYPE)i).ToString()) as GameObject;
+
+            if (go == null)
+            {
+                Debug.LogError(((E_PLAYTYPE)i).ToString() + "로드 실패");
+            }
+            else
+            {
+                DicPlayerPrefab.Add((E_PLAYTYPE)i, go);
+            }
+
+        }
     }
 
     void EnemyPrefabInit()
     {
         for(int i =0; i < (int)E_ENEMYTYPE.MAX; ++i)
         {
-            GameObject go = Resources.Load("Prefabs/Monsters/" + ((E_ENEMYTYPE)i).ToString()) as GameObject;
+            GameObject go = Resources.Load("Prefabs/Enemy/" + ((E_ENEMYTYPE)i).ToString()) as GameObject;
 
             if(go == null)
             {
@@ -30,6 +52,19 @@ public class ActorManager : MonoSingleton<ActorManager>
                 DicEnemyPrefab.Add((E_ENEMYTYPE)i, go);
             }
 
+        }
+    }
+
+    public GameObject GetPlayerPrefab(E_PLAYTYPE type)
+    {
+        if (DicPlayerPrefab.ContainsKey(type) == true)
+        {
+            return DicPlayerPrefab[type];
+        }
+        else
+        {
+            Debug.LogError(type.ToString() + "해당 타입 프리팹이 없습니다");
+            return null;
         }
     }
 
@@ -44,15 +79,6 @@ public class ActorManager : MonoSingleton<ActorManager>
             Debug.LogError(type.ToString() + "해당 타입 프리팹이 없습니다");
             return null;
         }
-    }
-
-    public Actor PlayerLoad()
-    {
-        GameObject playerPrefab = Resources.Load("Prefabs/Actor/" + "Iris") as GameObject;
-
-        GameObject go = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-
-        return go.GetComponent<Actor>();
     }
 
     public Actor InstantiateOnce(GameObject prefab, Vector3 pos)
