@@ -10,7 +10,11 @@ public enum ECharacter { NONE, HANRAN, IRIS, HERO, TIBOUCHINA, VERBENA, ROSE, MA
 
 public class UI_Conversation : MonoSingleton<UI_Conversation>
 {
-    Dictionary<EStageLevel, List<string>> ConversationDic = new Dictionary<EStageLevel, List<string>>();
+    //JSONLoad클래스
+    ConversationData ConversationData = new ConversationData();
+    
+    //대사집딕셔너리
+    Dictionary<EStageLevel, List<string>> ConversationDic;
 
     Color _fontColor = UnityEngine.Color.black;
     Font _textFont = null;
@@ -30,11 +34,13 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     int _fontSize = 0;
     int currentindex = 0;
-    int listIndex = 0;
-    //int nextindex = 0;
 
     bool startconversation = true;
+    string StrSpriteCurrent = null;
+    string StrSpriteNext = null;
 
+    string leftSprite = null;
+    string rightSprite = null;
 
     public int FontSize
     {
@@ -59,7 +65,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             _bSetCanvas = value;
         }
     }
-
     public Color FontColor
     {
         get
@@ -82,6 +87,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             _textFont = value;
         }
     }
+    //dialog property
     public Text Dialog
     {
         get
@@ -108,16 +114,14 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     private new void Init()
     {
+        MyGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Conversation/UIConversationCanvas"), this.transform);
         Dialog = GameObject.Find("ConversationDialog").GetComponent<Text>();
+        ConversationDic = ConversationData.LoadJSONdialogtext("JSON/ConversationText");
         SetSpriteResource();
-
     }
 
     private void Awake()
     {
-        MyGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Conversation/UIConversationCanvas"), this.transform);
-        LoadJSONStrAdd("JSON/ConversationText");
-
         Init();
     }
 
@@ -134,62 +138,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         ViewText(EStageLevel.STAGE_1_START);
     }
 
-    //제이슨으로 로드한 데이터를 dic에 저장한다
-    public void LoadJSONStrAdd(string ConversationTextPath)
-    {
-
-        TextAsset TextData = Resources.Load(ConversationTextPath) as TextAsset;
-        if (TextData == null)
-        {
-            Debug.LogError("스킬 데이터 로드 실패");
-            return;
-        }
-
-        JSONNode rootNode = JSON.Parse(TextData.text);
-
-        if (rootNode == null)
-            return;
-
-        JSONObject TextDataNode = rootNode["ConversationText"] as JSONObject;
-
-        List<string> liststring = new List<string>();
-
-        foreach (KeyValuePair<string, JSONNode> pair in TextDataNode)
-        {
-
-            for (int i = 1; i < 7; ++i)
-            {
-                if (pair.Value["TEXT_" + i] != 0)
-                {
-                    liststring.Add(pair.Value["TEXT_" + i]);
-                }
-            }
-
-            EStageLevel parsed_enum = (EStageLevel)System.Enum.Parse(typeof(EStageLevel), pair.Key);
-
-            List<string> temp = new List<string>();
-            for (int i = listIndex; i < liststring.Count; i++)
-            {
-                temp.Add(liststring[i]);
-            }
-            listIndex = liststring.Count;
-            ConversationDic.Add(parsed_enum, temp);
-        }
-    }
-
-    //스테이지 안에 있는 모든 다이얼로그를 얻는다
-    public List<string> GetStageConversation(EStageLevel eStageLevel)
-    {
-        foreach (KeyValuePair<EStageLevel, List<string>> p in ConversationDic)
-        {
-            if (p.Key == eStageLevel)
-            {
-                return p.Value;
-            }
-        }
-        return null;
-    }
-
     public void SetSpriteImage(EStageLevel eStageLevel)
     {
         Image SpriteLeft = GameObject.Find("CharacterSpriteLeft").GetComponent<Image>();
@@ -201,8 +149,11 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             return;
         }
 
-        string StrSpriteCurrent = null;
-        string StrSpriteNext = null;
+        if (StrSpriteCurrent != null)
+        {
+            leftSprite = StrSpriteCurrent;
+            rightSprite = StrSpriteNext;
+        }
 
         StrSpriteCurrent = GetDialogName(eStageLevel);
         if (GetNextDialogName(eStageLevel) != null)
@@ -216,16 +167,18 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
         ECharacter leftcharacter_enum = ECharacter.NONE;
         ECharacter rightcharacter_enum = ECharacter.NONE;
-
-
-        string leftSprite = null;
-        string rightSprite = null;
-
+        
         if (leftSprite != StrSpriteCurrent && leftSprite != StrSpriteNext)
-            leftSprite = null;
+            leftSprite = StrSpriteNext;
 
         if (rightSprite != StrSpriteCurrent && rightSprite != StrSpriteNext)
-            rightSprite = null;
+            rightSprite = StrSpriteCurrent;
+
+        if(leftSprite == null && rightSprite == null)
+        {
+            leftSprite = StrSpriteCurrent;
+            rightSprite = StrSpriteNext;
+        }
 
         leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), leftSprite);
         rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), rightSprite);
@@ -240,21 +193,21 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     {
         string charactername = null;
         List<string> currentstagedialog = ConversationDic[eStage];
-        if (IsCurrent)
+        for (int i = 0; i < currentstagedialog[currentindex].Length; ++i)
         {
-            for (int i = 0; i < currentstagedialog[currentindex].Length; ++i)
+            if (currentstagedialog[currentindex].Substring(i, 1) == "/")
             {
-                if (currentstagedialog[currentindex].Substring(i, 1) == "/")
-                {
-                    charactername = currentstagedialog[currentindex].Substring(0, i);
-                    ConversationIndex = i + 1;
-                    break;
-                }
+                charactername = currentstagedialog[currentindex].Substring(0, i);
+                ConversationIndex = i + 1;
+                break;
             }
-            return charactername;
         }
-
+        return charactername;
+    }
+    string GetNextDialogName(EStageLevel estage)
+    {
         string nextcharactername = null;
+        List<string> currentstagedialog = ConversationDic[estage];
         for (int j = currentindex; j < currentstagedialog.Count; ++j)
         {
             for (int i = 0; i < currentstagedialog[j].Length; ++i)
@@ -262,7 +215,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
                 if (currentstagedialog[j].Substring(i, 1) == "/")
                 {
                     nextcharactername = currentstagedialog[j].Substring(0, i);
-                    if (GetDialogName(eStage).Equals(nextcharactername) == false)
+                    if (GetDialogName(estage).Equals(nextcharactername) == false)
                     {
                         return nextcharactername;
                     }
@@ -272,12 +225,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         nextcharactername = null;
         return nextcharactername;
     }
-
-    string GetNextDialogName(EStageLevel estage)
-    {
-        
-    }
-
     string GetPreviousDialog(EStageLevel estage)
     {
         string previousname = null;
@@ -327,13 +274,11 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
         printTextTime += Time.deltaTime;
 
-
         if (startconversation)
         {
             SetSpriteImage(eStageLevel);
             startconversation = false;
         }
-
 
         //기본으로 출력되는 다이얼로그 
         if (fastreading == false && reading == true)
@@ -373,7 +318,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             currentindex++;
             reading = false;
             ConversationIndex = 0;
-            //nextindex = viewindex;
         }
     }
 
