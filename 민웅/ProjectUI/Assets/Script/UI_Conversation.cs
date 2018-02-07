@@ -29,7 +29,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     int ConversationIndex = 0;
 
     int _fontSize = 0;
-    int viewindex = 0;
+    int currentindex = 0;
     int listIndex = 0;
     //int nextindex = 0;
 
@@ -131,7 +131,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     private void Update()
     {
-        ViewText(EStageLevel.STAGE_3_END);
+        ViewText(EStageLevel.STAGE_1_START);
     }
 
     //제이슨으로 로드한 데이터를 dic에 저장한다
@@ -213,11 +213,22 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         {
             StrSpriteNext = GetPreviousDialog(eStageLevel);
         }
+
         ECharacter leftcharacter_enum = ECharacter.NONE;
         ECharacter rightcharacter_enum = ECharacter.NONE;
 
-        leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), StrSpriteCurrent);
-        rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), StrSpriteNext);
+
+        string leftSprite = null;
+        string rightSprite = null;
+
+        if (leftSprite != StrSpriteCurrent && leftSprite != StrSpriteNext)
+            leftSprite = null;
+
+        if (rightSprite != StrSpriteCurrent && rightSprite != StrSpriteNext)
+            rightSprite = null;
+
+        leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), leftSprite);
+        rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), rightSprite);
 
         SpriteLeft.sprite = listsprite[(int)leftcharacter_enum];
         SpriteRight.sprite = listsprite[(int)rightcharacter_enum];
@@ -225,27 +236,54 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         SpriteRight.color = new Color(0.3f, 0.3f, 0.3f, 1f);
     }
 
-    string GetDialogName(EStageLevel eStage)
+    string GetDialogName(EStageLevel eStage, bool IsCurrent = true)
     {
         string charactername = null;
-        for (int i = 0; i < ConversationDic[eStage][viewindex].Length; ++i)
+        List<string> currentstagedialog = ConversationDic[eStage];
+        if (IsCurrent)
         {
-            if (ConversationDic[eStage][viewindex].Substring(i, 1) == "/")
+            for (int i = 0; i < currentstagedialog[currentindex].Length; ++i)
             {
-                charactername = ConversationDic[eStage][viewindex].Substring(0, i);
-                ConversationIndex = i + 1;
-                break;
+                if (currentstagedialog[currentindex].Substring(i, 1) == "/")
+                {
+                    charactername = currentstagedialog[currentindex].Substring(0, i);
+                    ConversationIndex = i + 1;
+                    break;
+                }
+            }
+            return charactername;
+        }
+
+        string nextcharactername = null;
+        for (int j = currentindex; j < currentstagedialog.Count; ++j)
+        {
+            for (int i = 0; i < currentstagedialog[j].Length; ++i)
+            {
+                if (currentstagedialog[j].Substring(i, 1) == "/")
+                {
+                    nextcharactername = currentstagedialog[j].Substring(0, i);
+                    if (GetDialogName(eStage).Equals(nextcharactername) == false)
+                    {
+                        return nextcharactername;
+                    }
+                }
             }
         }
-        return charactername;
+        nextcharactername = null;
+        return nextcharactername;
+    }
+
+    string GetNextDialogName(EStageLevel estage)
+    {
+        
     }
 
     string GetPreviousDialog(EStageLevel estage)
     {
         string previousname = null;
-        for (int i = viewindex; i > 0; --i)
+        for (int i = currentindex; i > 0; --i)
         {
-            for(int j =0; j < ConversationDic[estage][i].Length; ++j)
+            for (int j = 0; j < ConversationDic[estage][i].Length; ++j)
             {
                 if (ConversationDic[estage][i].Substring(j, 1) == "/")
                 {
@@ -259,27 +297,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
         previousname = null;
         return previousname;
-    }
-
-    string GetNextDialogName(EStageLevel estage)
-    {
-        string nextcharactername = null;
-        for (int j = viewindex; j < ConversationDic[estage].Count; ++j)
-        {
-            for (int i = 0; i < ConversationDic[estage][j].Length; ++i)
-            {
-                if (ConversationDic[estage][j].Substring(i, 1) == "/")
-                {
-                    nextcharactername = ConversationDic[estage][j].Substring(0, i);
-                    if (GetDialogName(estage).Equals(nextcharactername) == false)
-                    {
-                        return nextcharactername;
-                    }
-                }
-            }
-        }
-        nextcharactername = null;
-        return nextcharactername;
     }
 
     public void ViewText(EStageLevel eStageLevel)
@@ -305,10 +322,11 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
 
         //설정된 다이얼로그 list의 최대 인덱스보다 크면 리턴
-        if (ConversationDic[eStageLevel].Count <= viewindex)
+        if (ConversationDic[eStageLevel].Count <= currentindex)
             return;
 
         printTextTime += Time.deltaTime;
+
 
         if (startconversation)
         {
@@ -316,13 +334,14 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             startconversation = false;
         }
 
+
         //기본으로 출력되는 다이얼로그 
         if (fastreading == false && reading == true)
         {
             if (printTextTime > ConstValue.TextTimeCheck)
             {
-                Dialog.text = ConversationDic[eStageLevel][viewindex].Substring(ConversationIndex, length);
-                if (ConversationDic[eStageLevel][viewindex].Length - ConversationIndex >= length)
+                Dialog.text = ConversationDic[eStageLevel][currentindex].Substring(ConversationIndex, length);
+                if (ConversationDic[eStageLevel][currentindex].Length - ConversationIndex >= length)
                 {
                     length++;
                 }
@@ -337,8 +356,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             printTextTime += ConstValue.TextTimeCheck;
             if (printTextTime > ConstValue.TextTimeCheck)
             {
-                Dialog.text = ConversationDic[eStageLevel][viewindex].Substring(ConversationIndex, length);
-                if (ConversationDic[eStageLevel][viewindex].Length - ConversationIndex >= length)
+                Dialog.text = ConversationDic[eStageLevel][currentindex].Substring(ConversationIndex, length);
+                if (ConversationDic[eStageLevel][currentindex].Length - ConversationIndex >= length)
                 {
                     length++;
                 }
@@ -347,11 +366,11 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
 
         //다이얼로그 하나가 끝나면 다음 다이얼로그로 넘어간다.
-        if (length >= ConversationDic[eStageLevel][viewindex].Length - ConversationIndex + 1)
+        if (length >= ConversationDic[eStageLevel][currentindex].Length - ConversationIndex + 1)
         {
             length = 1;
             fastreading = false;
-            viewindex++;
+            currentindex++;
             reading = false;
             ConversationIndex = 0;
             //nextindex = viewindex;
