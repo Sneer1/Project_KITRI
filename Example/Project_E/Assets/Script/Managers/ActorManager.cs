@@ -48,7 +48,7 @@ public class ActorManager : MonoSingleton<ActorManager>
 
     public Actor PlayerLoad()
     {
-        GameObject playerPrefab = Resources.Load("Prefabs/" + "Player") as GameObject;
+        GameObject playerPrefab = Resources.Load("Prefabs/Actor/" + "Iris") as GameObject;
 
         GameObject go = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 
