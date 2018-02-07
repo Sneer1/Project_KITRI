@@ -29,8 +29,13 @@ public class ViewText : MonoBehaviour
     Image SpriteLeft = null;
     Image SpriteRight = null;
 
+    List<string> CurrentCharacterNameList = new List<string>();
+
+    int ConversationListSize = 0;
+
     void Init()
     {
+        ConversationListSize = ConversationDic[StageLevel].Count;
         LoadToListSprite();
     }
 
@@ -60,10 +65,7 @@ public class ViewText : MonoBehaviour
 
     void BeforeConversation()
     {
-        string current = null;
-        string next = null;
-
-        SetSpriteImage(current, next);
+        SetSpriteImage();
     }
 
     void BeginnigConversation(int currentindex, bool fastread = false)
@@ -111,7 +113,7 @@ public class ViewText : MonoBehaviour
         return charactername;
     }
 
-    void SetSpriteImage(string left, string right)
+    void SetSpriteImage()
     {
         if (SpriteLeft == null || SpriteRight == null)
         {
@@ -119,8 +121,13 @@ public class ViewText : MonoBehaviour
             return;
         }
 
-        leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), left);
-        rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), right);
+        for (int i = 0; i < ConversationListSize; ++i)
+        {
+            CurrentCharacterNameList.Add(GetDialogName(i));
+        }
+
+        leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), CurrentCharacterNameList[0]);
+        rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), CurrentCharacterNameList[1]);
 
         SpriteLeft.sprite = ListSprite[(int)leftcharacter_enum];
         SpriteRight.sprite = ListSprite[(int)rightcharacter_enum];
