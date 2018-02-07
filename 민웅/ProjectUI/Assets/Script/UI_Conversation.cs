@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using SimpleJSON;
 
 public enum EStageLevel { STAGE_1_START, STAGE_1_END, STAGE_2_START, STAGE_2_END, STAGE_3_START, STAGE_3_END, STAGE_4_START, STAGE_4_END }
-public enum ECharacter { HANRAN, IRIS, HERO, TIBOUCHINA, VERBENA, ROSE, MAX }
+public enum ECharacter { NONE, HANRAN, IRIS, HERO, TIBOUCHINA, VERBENA, ROSE, MAX }
 
 public class UI_Conversation : MonoSingleton<UI_Conversation>
 {
@@ -31,8 +31,10 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     int _fontSize = 0;
     int viewindex = 0;
     int listIndex = 0;
+    //int nextindex = 0;
 
     bool startconversation = true;
+
 
     public int FontSize
     {
@@ -108,12 +110,14 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     {
         Dialog = GameObject.Find("ConversationDialog").GetComponent<Text>();
         SetSpriteResource();
+
     }
 
     private void Awake()
     {
         MyGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Conversation/UIConversationCanvas"), this.transform);
         LoadJSONStrAdd("JSON/ConversationText");
+
         Init();
     }
 
@@ -127,7 +131,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     private void Update()
     {
-        ViewText(EStageLevel.STAGE_1_START);
+        ViewText(EStageLevel.STAGE_3_END);
     }
 
     //제이슨으로 로드한 데이터를 dic에 저장한다
@@ -191,51 +195,91 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         Image SpriteLeft = GameObject.Find("CharacterSpriteLeft").GetComponent<Image>();
         Image SpriteRight = GameObject.Find("CharacterSpriteRight").GetComponent<Image>();
 
-        if (SpriteLeft == null)
+        if (SpriteLeft == null || SpriteRight == null)
         {
             Debug.LogError("스프라이트를 찾지 못했습니다");
             return;
         }
 
-        int nextindex = viewindex;
-
         string StrSpriteCurrent = null;
         string StrSpriteNext = null;
 
-        int DialogCount = ConversationDic[eStageLevel].Count;
-
-        StrSpriteCurrent = GetDialogName(eStageLevel, viewindex);
-
-        if (DialogCount < nextindex)
+        StrSpriteCurrent = GetDialogName(eStageLevel);
+        if (GetNextDialogName(eStageLevel) != null)
         {
-            Debug.LogError("다음 다이얼로그가 없습니다");
-            return;
+            StrSpriteNext = GetNextDialogName(eStageLevel);
         }
+        else
+        {
+            StrSpriteNext = GetPreviousDialog(eStageLevel);
+        }
+        ECharacter leftcharacter_enum = ECharacter.NONE;
+        ECharacter rightcharacter_enum = ECharacter.NONE;
 
-        //if (StrSpriteCurrent.Equals(StrSpriteNext))
-        //    nextindex++;
-
-        StrSpriteNext = GetDialogName(eStageLevel, nextindex);
-
-        ECharacter leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), StrSpriteCurrent);
-        ECharacter rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), StrSpriteNext);
+        leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), StrSpriteCurrent);
+        rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), StrSpriteNext);
 
         SpriteLeft.sprite = listsprite[(int)leftcharacter_enum];
         SpriteRight.sprite = listsprite[(int)rightcharacter_enum];
+
+        SpriteRight.color = new Color(0.3f, 0.3f, 0.3f, 1f);
     }
 
-    string GetDialogName(EStageLevel eStage, int index)
+    string GetDialogName(EStageLevel eStage)
     {
         string charactername = null;
-        for(int i =0; i < ConversationDic[eStage][index].Length; ++i)
+        for (int i = 0; i < ConversationDic[eStage][viewindex].Length; ++i)
         {
-            if(ConversationDic[eStage][index].Substring(i, 1) == "/")
+            if (ConversationDic[eStage][viewindex].Substring(i, 1) == "/")
             {
-                charactername = ConversationDic[eStage][index].Substring(0, i);
+                charactername = ConversationDic[eStage][viewindex].Substring(0, i);
+                ConversationIndex = i + 1;
                 break;
             }
         }
         return charactername;
+    }
+
+    string GetPreviousDialog(EStageLevel estage)
+    {
+        string previousname = null;
+        for (int i = viewindex; i > 0; --i)
+        {
+            for(int j =0; j < ConversationDic[estage][i].Length; ++j)
+            {
+                if (ConversationDic[estage][i].Substring(j, 1) == "/")
+                {
+                    previousname = ConversationDic[estage][i].Substring(0, j);
+                    if (GetDialogName(estage).Equals(previousname) == false)
+                    {
+                        return previousname;
+                    }
+                }
+            }
+        }
+        previousname = null;
+        return previousname;
+    }
+
+    string GetNextDialogName(EStageLevel estage)
+    {
+        string nextcharactername = null;
+        for (int j = viewindex; j < ConversationDic[estage].Count; ++j)
+        {
+            for (int i = 0; i < ConversationDic[estage][j].Length; ++i)
+            {
+                if (ConversationDic[estage][j].Substring(i, 1) == "/")
+                {
+                    nextcharactername = ConversationDic[estage][j].Substring(0, i);
+                    if (GetDialogName(estage).Equals(nextcharactername) == false)
+                    {
+                        return nextcharactername;
+                    }
+                }
+            }
+        }
+        nextcharactername = null;
+        return nextcharactername;
     }
 
     public void ViewText(EStageLevel eStageLevel)
@@ -309,6 +353,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             fastreading = false;
             viewindex++;
             reading = false;
+            ConversationIndex = 0;
+            //nextindex = viewindex;
         }
     }
 
