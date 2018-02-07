@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using SimpleJSON;
 
 public enum EStageLevel { STAGE_1_START, STAGE_1_END, STAGE_2_START, STAGE_2_END, STAGE_3_START, STAGE_3_END, STAGE_4_START, STAGE_4_END }
-public enum ECharacter { HANRAN, IRIS , HERO , TIBOUCHINA , VERBENA , ROSE, MAX }
+public enum ECharacter { HANRAN, IRIS, HERO, TIBOUCHINA, VERBENA, ROSE, MAX }
 
 public class UI_Conversation : MonoSingleton<UI_Conversation>
 {
@@ -15,10 +15,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     Color _fontColor = UnityEngine.Color.black;
     Font _textFont = null;
     Text _dialog = null;
-    Image _playerSprite = null;
 
-
-    [SerializeField]
     bool _bSetCanvas = false;
 
     bool fastreading = false;
@@ -34,6 +31,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     int _fontSize = 0;
     int viewindex = 0;
     int listIndex = 0;
+
+    bool startconversation = true;
 
     public int FontSize
     {
@@ -93,17 +92,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
 
     }
-    public Image PlayerSprite
-    {
-        get
-        {
-            return _playerSprite;
-        }
-        set
-        {
-            _playerSprite = value;
-        }
-    }
     public GameObject MyGameObject
     {
         get
@@ -116,15 +104,15 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
     }
 
-    public void Init()
+    private new void Init()
     {
-        MyGameObject = this.gameObject;
-
         Dialog = GameObject.Find("ConversationDialog").GetComponent<Text>();
+        SetSpriteResource();
     }
 
     private void Awake()
     {
+        MyGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Conversation/UIConversationCanvas"), this.transform);
         LoadJSONStrAdd("JSON/ConversationText");
         Init();
     }
@@ -200,29 +188,54 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     public void SetSpriteImage(EStageLevel eStageLevel)
     {
-        PlayerSprite = GameObject.Find("PlayerCharacterSprite").GetComponent<Image>();
+        Image SpriteLeft = GameObject.Find("CharacterSpriteLeft").GetComponent<Image>();
+        Image SpriteRight = GameObject.Find("CharacterSpriteRight").GetComponent<Image>();
 
-        if (PlayerSprite == null)
+        if (SpriteLeft == null)
         {
             Debug.LogError("스프라이트를 찾지 못했습니다");
             return;
         }
 
-        string strplayer = null;
+        int nextindex = viewindex;
 
-        for (int i = 0; i < ConversationDic[eStageLevel][viewindex].Length; ++i)
+        string StrSpriteCurrent = null;
+        string StrSpriteNext = null;
+
+        int DialogCount = ConversationDic[eStageLevel].Count;
+
+        StrSpriteCurrent = GetDialogName(eStageLevel, viewindex);
+
+        if (DialogCount < nextindex)
         {
-            if (ConversationDic[eStageLevel][viewindex].Substring(i, 1) == "/")
+            Debug.LogError("다음 다이얼로그가 없습니다");
+            return;
+        }
+
+        //if (StrSpriteCurrent.Equals(StrSpriteNext))
+        //    nextindex++;
+
+        StrSpriteNext = GetDialogName(eStageLevel, nextindex);
+
+        ECharacter leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), StrSpriteCurrent);
+        ECharacter rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), StrSpriteNext);
+
+        SpriteLeft.sprite = listsprite[(int)leftcharacter_enum];
+        SpriteRight.sprite = listsprite[(int)rightcharacter_enum];
+    }
+
+    string GetDialogName(EStageLevel eStage, int index)
+    {
+        string charactername = null;
+        for(int i =0; i < ConversationDic[eStage][index].Length; ++i)
+        {
+            if(ConversationDic[eStage][index].Substring(i, 1) == "/")
             {
-                strplayer = ConversationDic[eStageLevel][viewindex].Substring(0, i);
-                ConversationIndex = i + 1;
+                charactername = ConversationDic[eStage][index].Substring(0, i);
                 break;
             }
-
         }
-        ECharacter parsed_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), strplayer);
-        PlayerSprite.sprite = listsprite[(int)parsed_enum];
-
+        return charactername;
     }
 
     public void ViewText(EStageLevel eStageLevel)
@@ -243,6 +256,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
                 fastreading = true;
 
             reading = true;
+
+            startconversation = true;
         }
 
         //설정된 다이얼로그 list의 최대 인덱스보다 크면 리턴
@@ -250,6 +265,12 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             return;
 
         printTextTime += Time.deltaTime;
+
+        if (startconversation)
+        {
+            SetSpriteImage(eStageLevel);
+            startconversation = false;
+        }
 
         //기본으로 출력되는 다이얼로그 
         if (fastreading == false && reading == true)
@@ -281,7 +302,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             }
         }
 
-        SetSpriteImage(eStageLevel);
         //다이얼로그 하나가 끝나면 다음 다이얼로그로 넘어간다.
         if (length >= ConversationDic[eStageLevel][viewindex].Length - ConversationIndex + 1)
         {
@@ -290,7 +310,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             viewindex++;
             reading = false;
         }
-        
     }
 
     public void SetCanvas(bool bsetcanvas = false)
