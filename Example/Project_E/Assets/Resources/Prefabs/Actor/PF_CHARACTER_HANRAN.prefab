@@ -2265,7 +2265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _TeamType: 0
-  TemplateKey: CHARACTER_1
+  TemplateKey: CHARACTER_HANRAN
   AIType: 0
   bEnableBoard: 1
 --- !u!195 &195394566546087574

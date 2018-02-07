@@ -6312,7 +6312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _TeamType: 0
-  TemplateKey: 
+  TemplateKey: CHARACTER_VERBENA
   AIType: 0
   bEnableBoard: 1
 --- !u!195 &195119877935641498

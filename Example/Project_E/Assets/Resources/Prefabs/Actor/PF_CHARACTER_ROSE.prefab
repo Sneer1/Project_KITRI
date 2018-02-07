@@ -1611,7 +1611,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148766}
-  m_LocalRotation: {x: 0.6047469, y: -0.36644417, z: 0.34050405, w: 0.6197234}
+  m_LocalRotation: {x: 0.6047468, y: -0.36644414, z: 0.34050402, w: 0.6197233}
   m_LocalPosition: {x: -0.14507042, y: -0.017404357, z: 0.040430002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3502,7 +3502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _TeamType: 0
-  TemplateKey: CHARACTER_1
+  TemplateKey: CHARACTER_ROSE
   AIType: 0
   bEnableBoard: 1
 --- !u!195 &195795629593252144

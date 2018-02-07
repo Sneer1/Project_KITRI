@@ -5,7 +5,6 @@
       "ATTACK": 10,
       "DEFFENCE": 5,
       "SKILL": [
-        "RANGE_NOMAL",
         "SAI"
       ]
     },
@@ -14,8 +13,7 @@
       "ATTACK": 99,
       "DEFFENCE": 20,
       "SKILL": [
-        "MELEE_1",
-        "MELEE_2"
+        "FIGHT"
       ]
     },
     "CHARACTER_TIBOUCHINA": {
@@ -23,7 +21,7 @@
       "ATTACK": 99,
       "DEFFENCE": 20,
       "SKILL": [
-        "RANGE_1"
+        "ELEMENT"
       ]
     },
     "CHARACTER_VERBENA": {
@@ -31,7 +29,7 @@
       "ATTACK": 99,
       "DEFFENCE": 20,
       "SKILL": [
-        "RANGE_1"
+        "GRAVITY"
       ]
     },
     "CHARACTER_ROSE": {
@@ -39,7 +37,7 @@
       "ATTACK": 99,
       "DEFFENCE": 20,
       "SKILL": [
-        "RANGE_1"
+        "DODGE"
       ]
     },
     "ENEMY_BLUE": {

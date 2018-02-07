@@ -2097,7 +2097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _TeamType: 0
-  TemplateKey: CHARACTER_1
+  TemplateKey: CHARACTER_TIBOUCHINA
   AIType: 0
   bEnableBoard: 1
 --- !u!195 &195941691868941148
