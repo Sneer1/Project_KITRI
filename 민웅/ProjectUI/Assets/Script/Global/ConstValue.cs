@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class ConstValue
 {
-    public const float TextTimeCheck = 0.1f;
+    public const float TextTimeCheck = 0.05f;
 
 }
