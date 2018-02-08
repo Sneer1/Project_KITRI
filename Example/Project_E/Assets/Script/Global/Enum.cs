@@ -124,4 +124,44 @@ public enum E_UITYPE
 //    SLOT_MAX
 //}
 
+//스테이지 레벨
+public enum ESTAGELEVEL
+{
+    STAGE_1_START,
+    STAGE_1_END,
+    STAGE_2_START,
+    STAGE_2_END,
+    STAGE_3_START,
+    STAGE_3_END,
+    STAGE_4_START,
+    STAGE_4_END
+}
+//캐릭터
+public enum ECHARACTER
+{
+    NONE,
+    HANRAN,
+    IRIS,
+    HERO,
+    TIBOUCHINA,
+    VERBENA,
+    ROSE,
+    MAX
+}
 
+public enum ESCORETYPE
+{
+    Score_Miss,
+    Score_Good,
+    Score_Great,
+    Score_Excellent,
+}
+
+public enum ESELECTCHARACTERSTAGE
+{
+    STAGE_1,
+    STAGE_2,
+    STAGE_3,
+    STAGE_4,
+    MAX
+}

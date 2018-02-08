@@ -5,9 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using SimpleJSON;
 
-public enum ESTAGELEVEL { STAGE_1_START, STAGE_1_END, STAGE_2_START, STAGE_2_END, STAGE_3_START, STAGE_3_END, STAGE_4_START, STAGE_4_END }
-public enum ECHARACTER { NONE, HANRAN, IRIS, HERO, TIBOUCHINA, VERBENA, ROSE, MAX }
-
 public class UI_Conversation : MonoSingleton<UI_Conversation>
 {
     //JSONLoad클래스
@@ -275,7 +272,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
         }
     }
-
+    
     public void SetCanvas(bool bsetcanvas = false)
     {
         GameObject _gobj = GameObject.Find("UIConversationCanvas").gameObject;

@@ -1,0 +1,28 @@
+{
+	"STAGE_CHARACTER_DATA": {
+		"STAGE_1": {
+			"CHARACTER_1": "HANRAN",
+			"CHARACTER_2": "IRIS",
+			"CHARACTER_3": 0,
+			"CHARACTER_4": 0
+		},
+		"STAGE_2": {
+			"CHARACTER_1": "HANRAN",
+			"CHARACTER_2": "IRIS",
+			"CHARACTER_3": 0,
+			"CHARACTER_4": 0
+		},
+		"STAGE_3": {
+			"CHARACTER_1": "HANRAN",
+			"CHARACTER_2": "IRIS",
+			"CHARACTER_3": "TIBOUCHINA",
+			"CHARACTER_4": 0
+		},
+		"STAGE_4": {
+			"CHARACTER_1": "HANRAN",
+			"CHARACTER_2": "IRIS",
+			"CHARACTER_3": "TIBOUCHINA",
+			"CHARACTER_4": "VERBENA"
+		}
+	}
+}
