@@ -12,7 +12,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 {
     //JSONLoad클래스
     ConversationData ConversationData = new ConversationData();
-    
+
     //대사집딕셔너리
     Dictionary<EStageLevel, List<string>> ConversationDic;
 
@@ -37,11 +37,9 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     bool startconversation = true;
     string StrSpriteCurrent = null;
-    string StrSpriteNext = null;
 
-    string leftSprite = null;
-    string rightSprite = null;
-
+    string CenterSprite = null;
+    
     public int FontSize
     {
         get
@@ -135,58 +133,32 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     private void Update()
     {
-        ViewText(EStageLevel.STAGE_1_START);
+        ViewText(EStageLevel.STAGE_4_END);
     }
 
     public void SetSpriteImage(EStageLevel eStageLevel)
     {
-        Image SpriteLeft = GameObject.Find("CharacterSpriteLeft").GetComponent<Image>();
-        Image SpriteRight = GameObject.Find("CharacterSpriteRight").GetComponent<Image>();
+        Image SpriteCenter = GameObject.Find("CharacterSpriteCenter").GetComponent<Image>();
 
-        if (SpriteLeft == null || SpriteRight == null)
+        if (SpriteCenter == null)
         {
             Debug.LogError("스프라이트를 찾지 못했습니다");
             return;
         }
 
-        if (StrSpriteCurrent != null)
+        CenterSprite = GetDialogName(eStageLevel);
+        SpriteCenter.color = new Color(1f, 1f, 1f);
+        if (GetDialogName(eStageLevel).Equals("HERO"))
         {
-            leftSprite = StrSpriteCurrent;
-            rightSprite = StrSpriteNext;
+            CenterSprite = GetNextDialogName(eStageLevel);
+            SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
         }
 
-        StrSpriteCurrent = GetDialogName(eStageLevel);
-        if (GetNextDialogName(eStageLevel) != null)
-        {
-            StrSpriteNext = GetNextDialogName(eStageLevel);
-        }
-        else
-        {
-            StrSpriteNext = GetPreviousDialog(eStageLevel);
-        }
+        ECharacter Character_enum = ECharacter.NONE;
 
-        ECharacter leftcharacter_enum = ECharacter.NONE;
-        ECharacter rightcharacter_enum = ECharacter.NONE;
-        
-        if (leftSprite != StrSpriteCurrent && leftSprite != StrSpriteNext)
-            leftSprite = StrSpriteNext;
+        Character_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), CenterSprite);
 
-        if (rightSprite != StrSpriteCurrent && rightSprite != StrSpriteNext)
-            rightSprite = StrSpriteCurrent;
-
-        if(leftSprite == null && rightSprite == null)
-        {
-            leftSprite = StrSpriteCurrent;
-            rightSprite = StrSpriteNext;
-        }
-
-        leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), leftSprite);
-        rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), rightSprite);
-
-        SpriteLeft.sprite = listsprite[(int)leftcharacter_enum];
-        SpriteRight.sprite = listsprite[(int)rightcharacter_enum];
-
-        SpriteRight.color = new Color(0.3f, 0.3f, 0.3f, 1f);
+        SpriteCenter.sprite = listsprite[(int)Character_enum];
     }
 
     string GetDialogName(EStageLevel eStage, bool IsCurrent = true)
@@ -225,27 +197,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         nextcharactername = null;
         return nextcharactername;
     }
-    string GetPreviousDialog(EStageLevel estage)
-    {
-        string previousname = null;
-        for (int i = currentindex; i > 0; --i)
-        {
-            for (int j = 0; j < ConversationDic[estage][i].Length; ++j)
-            {
-                if (ConversationDic[estage][i].Substring(j, 1) == "/")
-                {
-                    previousname = ConversationDic[estage][i].Substring(0, j);
-                    if (GetDialogName(estage).Equals(previousname) == false)
-                    {
-                        return previousname;
-                    }
-                }
-            }
-        }
-        previousname = null;
-        return previousname;
-    }
-
+    
     public void ViewText(EStageLevel eStageLevel)
     {
         if (Dialog == null)
@@ -263,9 +215,11 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             if (reading == true)
                 fastreading = true;
 
+            if (reading == false)
+                startconversation = true;
+
             reading = true;
 
-            startconversation = true;
         }
 
         //설정된 다이얼로그 list의 최대 인덱스보다 크면 리턴
@@ -318,6 +272,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             currentindex++;
             reading = false;
             ConversationIndex = 0;
+
         }
     }
 

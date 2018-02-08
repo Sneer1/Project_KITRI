@@ -33,11 +33,23 @@ public class ViewText : MonoBehaviour
 
     int ConversationListSize = 0;
 
+    //bool StartConversation = false;
+    bool Reading = false;
+
     void Init()
     {
         ConversationListSize = ConversationDic[StageLevel].Count;
         LoadToListSprite();
+
+
     }
+
+    private void Update()
+    {
+
+    }
+
+
 
     void LoadToListSprite()
     {
@@ -48,6 +60,12 @@ public class ViewText : MonoBehaviour
         {
             ListSprite.Add(Resources.Load<Sprite>("Prefabs/UI/Images/" + ((ECharacter)i).ToString()));
         }
+
+        for (int i = 0; i < ConversationListSize; ++i)
+        {
+            CurrentCharacterNameList.Add(GetDialogName(i));
+        }
+
     }
 
     //대사집 딕셔너리, 스테이지레벨
@@ -65,11 +83,17 @@ public class ViewText : MonoBehaviour
 
     void BeforeConversation()
     {
-        SetSpriteImage();
+
     }
 
-    void BeginnigConversation(int currentindex, bool fastread = false)
+    void ReadingConversation(int currentindex, bool fastread = false)
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Reading == false)
+                SetSpriteImage();
+        }
+
         List<string> CurrentStageTextList = ConversationDic[StageLevel];
 
         int DialogTextLength = CurrentStageTextList[currentindex].Length;
@@ -91,11 +115,13 @@ public class ViewText : MonoBehaviour
             }
             printTextTime = 0;
         }
+        
     }
 
     void AfterConversation()
     {
 
+        //SetSpriteImage();
     }
 
     string GetDialogName(int wantindex)
@@ -121,11 +147,6 @@ public class ViewText : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < ConversationListSize; ++i)
-        {
-            CurrentCharacterNameList.Add(GetDialogName(i));
-        }
-
         leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), CurrentCharacterNameList[0]);
         rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), CurrentCharacterNameList[1]);
 
@@ -133,5 +154,12 @@ public class ViewText : MonoBehaviour
         SpriteRight.sprite = ListSprite[(int)rightcharacter_enum];
 
         //SpriteRight.color = new Color(0.3f, 0.3f, 0.3f, 1f);
+    }
+
+    string GetSpriteCharacterName()
+    {
+
+
+        return null;
     }
 }
