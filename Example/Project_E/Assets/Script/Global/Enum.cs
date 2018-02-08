@@ -153,3 +153,12 @@ public enum ESCORETYPE
     Score_Great,
     Score_Excellent,
 }
+
+public enum ESELECTCHARACTERSTAGE
+{
+    STAGE_1,
+    STAGE_2,
+    STAGE_3,
+    STAGE_4,
+    MAX
+}
