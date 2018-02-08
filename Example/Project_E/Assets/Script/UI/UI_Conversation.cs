@@ -272,7 +272,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
         }
     }
-
+    
     public void SetCanvas(bool bsetcanvas = false)
     {
         GameObject _gobj = GameObject.Find("UIConversationCanvas").gameObject;

@@ -146,3 +146,10 @@ public enum ECHARACTER
     MAX
 }
 
+public enum ESCORETYPE
+{
+    Score_Miss,
+    Score_Good,
+    Score_Great,
+    Score_Excellent,
+}
