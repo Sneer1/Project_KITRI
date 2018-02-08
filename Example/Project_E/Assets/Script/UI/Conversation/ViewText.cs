@@ -23,7 +23,7 @@ public class ViewText : MonoBehaviour
     //스프라이트 리스트
     List<Sprite> ListSprite = new List<Sprite>();
 
-    ECHARACTER Centercharacter_enum = ECHARACTER.NONE;
+    ECHARACTER Centercharacter_enum;
 
 
     Image SpriteCenter = null;
