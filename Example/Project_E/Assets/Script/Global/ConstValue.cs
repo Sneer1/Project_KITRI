@@ -4,6 +4,10 @@ using UnityEngine;
 
 public static class ConstValue 
 {
+    //텍스트 시간체크
+    public const float TextTimeCheck = 0.05f;
+
+
 	// JSON 관련
 	public const string CharacterTemplatePath =
 		"JSON/CHARACTER_TEMPLATE";
