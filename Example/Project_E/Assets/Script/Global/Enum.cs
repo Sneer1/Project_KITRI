@@ -139,13 +139,12 @@ public enum ESTAGELEVEL
 //캐릭터
 public enum ECHARACTER
 {
-    NONE,
     HANRAN,
     IRIS,
-    HERO,
     TIBOUCHINA,
     VERBENA,
     ROSE,
+    HERO,
     MAX
 }
 

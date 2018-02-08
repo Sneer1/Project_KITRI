@@ -151,9 +151,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
         }
 
-        ECHARACTER Character_enum = ECHARACTER.NONE;
-
-        Character_enum = (ECHARACTER)System.Enum.Parse(typeof(ECHARACTER), CenterSprite);
+        ECHARACTER Character_enum = (ECHARACTER)System.Enum.Parse(typeof(ECHARACTER), CenterSprite);
 
         SpriteCenter.sprite = listsprite[(int)Character_enum];
     }
