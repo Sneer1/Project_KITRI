@@ -5,22 +5,21 @@ using UnityEngine;
 public class BaseBoard : MonoBehaviour
 {
     BaseObject TargetActor;
-    Camera UICam = null;
-    Camera WorldCam = null;
+
+    Camera Cam = null;
 
     Transform BoardTransform = null;
 
-    [SerializeField]
     bool AttachBoard = true;
+
     Vector3 Position = Vector3.zero;
 
-    [SerializeField]
     float DestroyTime = 0.0f;
     protected float CurTime = 0.0f;
 
-    public virtual EBoardType BoardType
+    public virtual E_BOARDTYPE BoardType
     {
-        get { return EBoardType.Board_None; }
+        get { return E_BOARDTYPE.BOARD_NONE; }
     }
 
     public BaseObject TargetComponent
@@ -28,19 +27,7 @@ public class BaseBoard : MonoBehaviour
         set
         {
             TargetActor = value;
-            BoardTransform = TargetActor.FindInChild("BoardPos");
-        }
-    }
-
-    public Camera UI_CAM
-    {
-        get
-        {
-            if (UICam == null)
-            {
-                UICam = NGUITools.FindCameraForLayer(LayerMask.NameToLayer("UI"));
-            }
-            return UICam;
+            BoardTransform = TargetActor.FindInChild("HUD_Pos");
         }
     }
 
@@ -48,10 +35,10 @@ public class BaseBoard : MonoBehaviour
     {
         get
         {
-            if (WorldCam == null)
-                WorldCam = Camera.main;
+            if (Cam == null)
+                Cam = Camera.main;
 
-            return WorldCam;
+            return Cam;
         }
     }
 
@@ -63,12 +50,6 @@ public class BaseBoard : MonoBehaviour
     public virtual void UpdateBoard()
     {
         CurTime += Time.deltaTime;
-
-        if (UI_CAM == null || WORLD_CAM == null)
-        {
-            Debug.LogError("Not Found Camera");
-            return;
-        }
 
         if (BoardTransform == null)
         {
@@ -86,12 +67,28 @@ public class BaseBoard : MonoBehaviour
                 Position = BoardTransform.position;
         }
 
-        Vector3 viewPort = WORLD_CAM.WorldToViewportPoint(Position);
-        Vector3 boardPosition = UI_CAM.ViewportToWorldPoint(viewPort);
+        //Vector2 viewPort = WORLD_CAM.WorldToViewportPoint(BoardTransform.position);
+        //Vector3 boardPosition = UI_CAM.ViewportToWorldPoint(viewPort);
 
-        boardPosition.z = 0f;
-        this.transform.position = boardPosition;
+        Vector3 boardPosition = BoardTransform.position;
+
+        Vector2 pos = RectTransformUtility.WorldToScreenPoint(WORLD_CAM, BoardTransform.position);
+
+        Vector3 viewPos = WORLD_CAM.ScreenToViewportPoint(pos);
+        viewPos.z = 0;
+
+        //Vector3 uiscreenPos = 
+
+        //Vector3 aa = WORLD_CAM.WorldToScreenPoint(BoardTransform.position);
+
+        //RectTransform recttrans = this.GetComponent<RectTransform>();
+
+        //boardPosition.z = 0f;
+        //this.transform.position = boardPosition;
+        //recttrans.anchoredPosition = pos;
+
     }
+
     public bool CheckDestroyTime()
     {
         if (DestroyTime == 0.0f)

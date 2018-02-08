@@ -41,7 +41,7 @@ public static class ConstValue
 
 	// UI Path  관련
 	public const string UI_PATH_HP = "Prefabs/UI/HP_Board";
-	public const string UI_PATH_Damage = "Prefabs/UI/Damage_Board";
+	public const string UI_PATH_DAMAGE = "Prefabs/UI/Damage_Board";
 
 	// LocalSave
 	public const string LocalSave_ItemInstance = "ITEM_INSTANCE";

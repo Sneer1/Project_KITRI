@@ -66,6 +66,9 @@ public enum E_SKILLTEMPLATETYPE
 {
     TARGET_ATTACK,
     RANGE_ATTACK,
+    STUN_CROWDCONTROL,
+    GRAVITY_MAGIC,
+    DODGE_BUFF
 }
 
 public enum E_SKILLRANGETYPE
@@ -81,12 +84,12 @@ public enum E_SKILLMODETYPE
     MAX
 }
 
-//public enum eBoardType
-//{
-//    BOARD_NONE,
-//    BOARD_HP,
-//    BOARD_DAMAGE,
-//}
+public enum E_BOARDTYPE
+{
+    BOARD_NONE,
+    BOARD_HP,
+    BOARD_DAMAGE,
+}
 
 //public enum eClearType
 //{

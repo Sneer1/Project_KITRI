@@ -1,22 +1,95 @@
 {
-	"SKILL_TEMPLATE": {
-		"MELEE_A_1": {
-			"SKILL_TYPE": 0,
-			"RANGE_TYPE": 0,
-			"RANGE_DATA_1": 2,
-			"RANGE_DATA_2": 3,
-			"MAX_HP": 0,
-			"ATTACK": 5,
-			"DEFFENCE": 0
-		},
-		"RANGE_A_1": {
-			"SKILL_TYPE": 1,
-			"RANGE_TYPE": 1,
-			"RANGE_DATA_1": 1,
-			"RANGE_DATA_2": 0,
-			"MAX_HP": 0,
-			"ATTACK": 1,
-			"DEFFENCE": 0
-		}
-	}
+  "SKILL_TEMPLATE": {
+    "MELEE_A": {
+      "SKILL_TYPE": 0,
+      "RANGE_TYPE": 0,
+      "RANGE_DATA_1": 2,
+      "RANGE_DATA_2": 3,
+      "MAX_HP": 0,
+      "ATTACK": 5,
+      "DEFFENCE": 0
+    },
+    "RANGE_A": {
+      "SKILL_TYPE": 1,
+      "RANGE_TYPE": 0,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 1,
+      "DEFFENCE": 0
+    },
+    "STUN": {
+      "SKILL_TYPE": 2,
+      "RANGE_TYPE": 1,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 0,
+      "DEFFENCE": 0
+    },
+    "PUNCH": {
+      "SKILL_TYPE": 0,
+      "RANGE_TYPE": 0,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 1,
+      "DEFFENCE": 0
+    },
+    "KICK": {
+      "SKILL_TYPE": 0,
+      "RANGE_TYPE": 0,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 1,
+      "DEFFENCE": 0
+    },
+    "FIRE": {
+      "SKILL_TYPE": 1,
+      "RANGE_TYPE": 1,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 1,
+      "DEFFENCE": 0
+    },
+    "ICE": {
+      "SKILL_TYPE": 1,
+      "RANGE_TYPE": 1,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 1,
+      "DEFFENCE": 0
+    },
+    "GRAVITY": {
+      "SKILL_TYPE": 3,
+      "RANGE_TYPE": 1,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 1,
+      "DEFFENCE": 0
+    },
+    "DODGE": {
+      "SKILL_TYPE": 4,
+      "RANGE_TYPE": 1,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 0,
+      "DEFFENCE": 0
+    },
+    "ASSASSIN": {
+      "SKILL_TYPE": 0,
+      "RANGE_TYPE": 1,
+      "RANGE_DATA_1": 1,
+      "RANGE_DATA_2": 0,
+      "MAX_HP": 0,
+      "ATTACK": 5,
+      "DEFFENCE": 0
+    }
+
+  }
 }

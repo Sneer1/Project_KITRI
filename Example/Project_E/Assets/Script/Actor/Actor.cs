@@ -78,14 +78,14 @@ public class Actor : BaseObject
             }
         }
         //체력바
-        //if(bEnableBoard)
-        //{
-        //    BaseBoard board = BoardManager.Instance.AddBoard(this, EBoardType.Board_HP);
+        if (bEnableBoard)
+        {
+            BaseBoard board = BoardManager.Instance.AddBoard(this, E_BOARDTYPE.BOARD_HP);
 
-        //    board.SetData(ConstValue.SetData_HP, GetStatusData(EStatusData.MAX_HP), SelfChararcter.CurrentHP);
-        //}
+            board.SetData(ConstValue.SetData_HP, GetStatusData(E_STATUSDATA.MAX_HP), SelfChararcter.CurrentHP);
+        }
 
-        //Debug.Log("이름 : " + gameObject.name + "피 : " + _SelfCharacter.CurrentHP + "생성완료");
+        Debug.Log("이름 : " + gameObject.name + "피 : " + _SelfCharacter.CurrentHP + "생성완료");
 
         ActorManager.Instance.AddActor(this);
     }
