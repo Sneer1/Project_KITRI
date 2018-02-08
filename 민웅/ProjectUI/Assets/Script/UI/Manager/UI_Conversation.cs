@@ -39,7 +39,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     string StrSpriteCurrent = null;
 
     string CenterSprite = null;
-    
+
     public int FontSize
     {
         get
@@ -197,7 +197,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         nextcharactername = null;
         return nextcharactername;
     }
-    
+
     public void ViewText(EStageLevel eStageLevel)
     {
         if (Dialog == null)
@@ -217,7 +217,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
             if (reading == false)
                 startconversation = true;
-
+            
             reading = true;
 
         }

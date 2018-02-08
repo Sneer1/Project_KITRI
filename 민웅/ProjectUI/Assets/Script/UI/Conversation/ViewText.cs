@@ -23,25 +23,23 @@ public class ViewText : MonoBehaviour
     //스프라이트 리스트
     List<Sprite> ListSprite = new List<Sprite>();
 
-    ECharacter leftcharacter_enum = ECharacter.NONE;
-    ECharacter rightcharacter_enum = ECharacter.NONE;
+    ECharacter Centercharacter_enum = ECharacter.NONE;
 
-    Image SpriteLeft = null;
-    Image SpriteRight = null;
+
+    Image SpriteCenter = null;
+
 
     List<string> CurrentCharacterNameList = new List<string>();
 
     int ConversationListSize = 0;
 
-    //bool StartConversation = false;
-    bool Reading = false;
+
+    bool Reading = true;
 
     void Init()
     {
         ConversationListSize = ConversationDic[StageLevel].Count;
         LoadToListSprite();
-
-
     }
 
     private void Update()
@@ -49,13 +47,10 @@ public class ViewText : MonoBehaviour
 
     }
 
-
-
+    //스프라이트 이미지 리스트에 추가, 현재 단락의 모든 이름들 리스트에 추가
     void LoadToListSprite()
     {
-        SpriteLeft = GameObject.Find("CharacterSpriteLeft").GetComponent<Image>();
-        SpriteRight = GameObject.Find("CharacterSpriteRight").GetComponent<Image>();
-
+        SpriteCenter = GameObject.Find("CharacterSpriteCenter").GetComponent<Image>();
         for (int i = 0; i < (int)ECharacter.MAX; ++i)
         {
             ListSprite.Add(Resources.Load<Sprite>("Prefabs/UI/Images/" + ((ECharacter)i).ToString()));
@@ -83,47 +78,67 @@ public class ViewText : MonoBehaviour
 
     void BeforeConversation()
     {
-
     }
 
+    //대사출력
     void ReadingConversation(int currentindex, bool fastread = false)
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (Reading == false)
-                SetSpriteImage();
-        }
-
         List<string> CurrentStageTextList = ConversationDic[StageLevel];
 
         int DialogTextLength = CurrentStageTextList[currentindex].Length;
         int RealTextIndex = DialogTextLength - GetDialogName(currentindex).Length + 1;
 
-        printTextTime += Time.deltaTime;
+        //예외처리
+        if (currentindex > CurrentStageTextList.Count)
+            return;
 
-        if (fastread == true)
+        if (Input.GetMouseButtonDown(0))
         {
-            printTextTime += ConstValue.TextTimeCheck;
+            if (Reading == false)
+                SetSpriteImage(currentindex);
+
+            if (Reading == true)
+                fastread = true;
+
+            Reading = true;
         }
 
-        if (printTextTime > ConstValue.TextTimeCheck)
+        if (Reading == true)
         {
-            ConversationText = CurrentStageTextList[currentindex].Substring(RealTextIndex, CurrentLength);
-            if (RealTextIndex > CurrentLength)
+            printTextTime += Time.deltaTime;
+
+            //빠르게 읽기
+            if (fastread == true)
             {
-                CurrentLength++;
+                printTextTime += ConstValue.TextTimeCheck;
             }
-            printTextTime = 0;
+
+            //디폴트 읽기
+            if (printTextTime > ConstValue.TextTimeCheck)
+            {
+                ConversationText = CurrentStageTextList[currentindex].Substring(RealTextIndex, CurrentLength);
+                if (RealTextIndex > CurrentLength)
+                {
+                    CurrentLength++;
+                }
+                printTextTime = 0;
+            }
+
+            //하나의 텍스트가 끝난다
+            if (CurrentLength > RealTextIndex)
+            {
+                Reading = false;
+                currentindex++;
+                fastread = false;
+            }
         }
-        
     }
 
     void AfterConversation()
     {
-
-        //SetSpriteImage();
     }
 
+    //원하는 텍스트의 이름을 얻는다
     string GetDialogName(int wantindex)
     {
         string charactername = null;
@@ -139,27 +154,16 @@ public class ViewText : MonoBehaviour
         return charactername;
     }
 
-    void SetSpriteImage()
+    //스프라이트 이미지 셋
+    void SetSpriteImage(int currentindex)
     {
-        if (SpriteLeft == null || SpriteRight == null)
+        if (SpriteCenter == null)
         {
             Debug.LogError("스프라이트를 찾지 못했습니다");
             return;
         }
 
-        leftcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), CurrentCharacterNameList[0]);
-        rightcharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), CurrentCharacterNameList[1]);
-
-        SpriteLeft.sprite = ListSprite[(int)leftcharacter_enum];
-        SpriteRight.sprite = ListSprite[(int)rightcharacter_enum];
-
-        //SpriteRight.color = new Color(0.3f, 0.3f, 0.3f, 1f);
-    }
-
-    string GetSpriteCharacterName()
-    {
-
-
-        return null;
+        Centercharacter_enum = (ECharacter)System.Enum.Parse(typeof(ECharacter), CurrentCharacterNameList[currentindex]);
+        SpriteCenter.sprite = ListSprite[(int)Centercharacter_enum];
     }
 }
