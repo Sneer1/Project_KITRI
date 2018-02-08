@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SelectUI : MonoBehaviour
 {
     Transform myTransform;
-    GameObject myGameObject;
+    List<GameObject> mylistGameObject = new List<GameObject>();
 
     void SelectMusic()
     {
@@ -15,18 +15,23 @@ public class SelectUI : MonoBehaviour
 
     void SelectCharacter()
     {
+        //for (int i = 0; i < )
+        //{
+        //    mylistGameObject.Add(Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/SelectButton"), myTransform));
+        //}
 
     }
 
     void Init()
     {
+        Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Select_Canvas"), myTransform);
         myTransform = GameObject.Find("Select_Panel").transform;
-        myGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Select_Canvas"), myTransform);
+        SelectCharacter();
     }
 
     private void Awake()
     {
-        SelectCharacter();
+        Init();
     }
 
 
