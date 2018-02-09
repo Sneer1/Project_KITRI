@@ -13,10 +13,10 @@ public class BoardManager : MonoSingleton<BoardManager>
     {
         if (BoardUI == null)
         {
-            BoardUI = new GameObject("BoardUI_Root");
-            BoardUI.layer = LayerMask.NameToLayer("UI");
+            BoardUI = GameObject.Find("BoardUI_Root");
+            //BoardUI.layer = LayerMask.NameToLayer("UI");
 
-            Transform parent = GameObject.Find("Canvas").GetComponent<Canvas>().transform;
+            //Transform parent = GameObject.Find("Canvas").GetComponent<Canvas>().transform;
 
             
 
@@ -24,9 +24,9 @@ public class BoardManager : MonoSingleton<BoardManager>
             //BoardUI.transform.SetParent(parent, false);
 
             //#2
-            BoardUI.transform.parent = parent;
-            BoardUI.transform.localPosition = Vector3.zero;
-            BoardUI.transform.localScale = Vector3.one;
+            //BoardUI.transform.parent = parent;
+            //BoardUI.transform.localPosition = Vector3.zero;
+            //BoardUI.transform.localScale = Vector3.one;
 
         }
     }
