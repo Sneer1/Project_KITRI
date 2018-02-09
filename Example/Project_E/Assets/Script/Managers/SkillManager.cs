@@ -137,6 +137,15 @@ public class SkillManager : MonoSingleton<SkillManager>
                 }
 
                 makeSkill.ThrowEvent(ConstValue.EventKey_SelectModel, GetModel(E_SKILLMODETYPE.BOX));
+                break;
+
+            case E_SKILLTEMPLATETYPE.STUN_CROWDCONTROL:
+
+                break;
+            case E_SKILLTEMPLATETYPE.GRAVITY_CROWDCONTROL:
+
+                break;
+            case E_SKILLTEMPLATETYPE.DODGE_BUFF:
 
                 break;
         }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 195394566546087574}
   - component: {fileID: 136741699522726566}
   - component: {fileID: 54612090934086832}
+  - component: {fileID: 95717684792308078}
   m_Layer: 0
   m_Name: PF_CHARACTER_HANRAN
   m_TagString: Untagged
@@ -1793,7 +1794,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100116}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 46285ebea83214fba95c7174c55b4d49, type: 3}
   m_Controller: {fileID: 9100000, guid: b93187de8673643afae00780f78c83dd, type: 2}
   m_CullingMode: 1
@@ -2299,6 +2300,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &95717684792308078
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 46285ebea83214fba95c7174c55b4d49, type: 3}
+  m_Controller: {fileID: 9100000, guid: 022d9aa497ced064e8ed44d3da6174f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114953553179577294
 MonoBehaviour:
   m_ObjectHideFlags: 1

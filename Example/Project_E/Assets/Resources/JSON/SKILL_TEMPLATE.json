@@ -12,13 +12,13 @@
     "RANGE_A": {
       "SKILL_TYPE": 1,
       "RANGE_TYPE": 0,
-      "RANGE_DATA_1": 1,
-      "RANGE_DATA_2": 0,
+      "RANGE_DATA_1": 2,
+      "RANGE_DATA_2": 2,
       "MAX_HP": 0,
-      "ATTACK": 1,
+      "ATTACK": 3,
       "DEFFENCE": 0
     },
-    "STUN": {
+    "STUN_CC": {
       "SKILL_TYPE": 2,
       "RANGE_TYPE": 1,
       "RANGE_DATA_1": 1,
@@ -27,52 +27,52 @@
       "ATTACK": 0,
       "DEFFENCE": 0
     },
-    "PUNCH": {
+    "PUNCH_A": {
       "SKILL_TYPE": 0,
       "RANGE_TYPE": 0,
-      "RANGE_DATA_1": 1,
-      "RANGE_DATA_2": 0,
+      "RANGE_DATA_1": 2,
+      "RANGE_DATA_2": 3,
       "MAX_HP": 0,
-      "ATTACK": 1,
+      "ATTACK": 5,
       "DEFFENCE": 0
     },
-    "KICK": {
+    "KICK_A": {
       "SKILL_TYPE": 0,
       "RANGE_TYPE": 0,
-      "RANGE_DATA_1": 1,
-      "RANGE_DATA_2": 0,
+      "RANGE_DATA_1": 2,
+      "RANGE_DATA_2": 3,
       "MAX_HP": 0,
-      "ATTACK": 1,
+      "ATTACK": 7,
       "DEFFENCE": 0
     },
-    "FIRE": {
+    "FIRE_A": {
       "SKILL_TYPE": 1,
-      "RANGE_TYPE": 1,
-      "RANGE_DATA_1": 1,
-      "RANGE_DATA_2": 0,
+      "RANGE_TYPE": 2,
+      "RANGE_DATA_1": 2,
+      "RANGE_DATA_2": 3,
       "MAX_HP": 0,
-      "ATTACK": 1,
+      "ATTACK": 5,
       "DEFFENCE": 0
     },
-    "ICE": {
+    "ICE_A": {
       "SKILL_TYPE": 1,
-      "RANGE_TYPE": 1,
+      "RANGE_TYPE": 3,
       "RANGE_DATA_1": 1,
       "RANGE_DATA_2": 0,
       "MAX_HP": 0,
-      "ATTACK": 1,
+      "ATTACK": 5,
       "DEFFENCE": 0
     },
-    "GRAVITY": {
+    "GAVITY_CC": {
       "SKILL_TYPE": 3,
-      "RANGE_TYPE": 1,
+      "RANGE_TYPE": 4,
       "RANGE_DATA_1": 1,
       "RANGE_DATA_2": 0,
       "MAX_HP": 0,
       "ATTACK": 1,
       "DEFFENCE": 0
     },
-    "DODGE": {
+    "DODGE_BUF": {
       "SKILL_TYPE": 4,
       "RANGE_TYPE": 1,
       "RANGE_DATA_1": 1,
@@ -80,16 +80,6 @@
       "MAX_HP": 0,
       "ATTACK": 0,
       "DEFFENCE": 0
-    },
-    "ASSASSIN": {
-      "SKILL_TYPE": 0,
-      "RANGE_TYPE": 1,
-      "RANGE_DATA_1": 1,
-      "RANGE_DATA_2": 0,
-      "MAX_HP": 0,
-      "ATTACK": 5,
-      "DEFFENCE": 0
     }
-
   }
 }

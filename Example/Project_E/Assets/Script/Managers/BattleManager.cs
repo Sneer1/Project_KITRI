@@ -16,12 +16,12 @@ public class BattleManager : MonoSingleton<BattleManager>
     void Start ()
     {
         List<E_PLAYTYPE> listPlayer = new List<E_PLAYTYPE>();
-        listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_HANRAN);
+        //listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_HANRAN);
         listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_IRIS);
 
         List<E_ENEMYTYPE> listEnemy = new List<E_ENEMYTYPE>();
         listEnemy.Add(E_ENEMYTYPE.PF_ENEMY_BLUE);
-        listEnemy.Add(E_ENEMYTYPE.PF_ENEMY_RED);
+        //listEnemy.Add(E_ENEMYTYPE.PF_ENEMY_RED);
 
         LoadBattle(listPlayer, listEnemy);
 	}

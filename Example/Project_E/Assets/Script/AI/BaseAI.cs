@@ -22,6 +22,12 @@ public class BaseAI : BaseObject
         get { return _CurrentState; }
     }
 
+    public int Attack_Type
+    {
+        set;
+        get;
+    }
+
     public E_AUTOMODE AutoMode = E_AUTOMODE.Auto_On;
 
     bool bUpdateAI = false;
@@ -78,7 +84,8 @@ public class BaseAI : BaseObject
     }
 
     public virtual void AddNextAI(E_STATETYPE nextStateType, BaseObject targetObject = null, Vector3 position = new Vector3())
-    {
+    {  
+     
         NextAI nextAI = new NextAI();
         nextAI.StateType = nextStateType;
         nextAI.TargetObject = targetObject;
@@ -101,8 +108,14 @@ public class BaseAI : BaseObject
 
     protected virtual void ProcessAttack()
     {
-        Target.ThrowEvent(ConstValue.EventKey_SelectSkill, 0);
+        Actor actor = Target as Actor;
+        int nCount = actor.SelfChararcter.GetListCount() + 1;
 
+        Attack_Type = Random.Range(0, nCount);
+
+        Target.ThrowEvent(ConstValue.EventKey_SelectSkill, Attack_Type);
+
+        Anim.SetInteger("Attack_Type", Attack_Type);
         _CurrentState = E_STATETYPE.STATE_ATTACK;
         ChangeAnimation();
     }
