@@ -14,6 +14,8 @@ public class BaseBoard : MonoBehaviour
 
     Vector3 Position = Vector3.zero;
 
+    RectTransform rectTransform;
+
     float DestroyTime = 0.0f;
     protected float CurTime = 0.0f;
 
@@ -39,6 +41,17 @@ public class BaseBoard : MonoBehaviour
                 Cam = Camera.main;
 
             return Cam;
+        }
+    }
+
+    public RectTransform GetRectTran
+    {
+        get
+        {
+            if (rectTransform == null)
+                rectTransform = this.GetComponent<RectTransform>();
+
+            return rectTransform;
         }
     }
 
@@ -70,12 +83,14 @@ public class BaseBoard : MonoBehaviour
         //Vector2 viewPort = WORLD_CAM.WorldToViewportPoint(BoardTransform.position);
         //Vector3 boardPosition = UI_CAM.ViewportToWorldPoint(viewPort);
 
-        Vector3 boardPosition = BoardTransform.position;
+        Vector2 viewPos = WORLD_CAM.WorldToViewportPoint(BoardTransform.position);
 
-        Vector2 pos = RectTransformUtility.WorldToScreenPoint(WORLD_CAM, BoardTransform.position);
+        GetRectTran.anchorMin = viewPos;
+        GetRectTran.anchorMax = viewPos;
+        GetRectTran.anchoredPosition = BoardTransform.position;
 
-        Vector3 viewPos = WORLD_CAM.ScreenToViewportPoint(pos);
-        viewPos.z = 0;
+     //   Vector3 viewPos = WORLD_CAM.ScreenToViewportPoint(pos);
+     //   viewPos.z = 0;
 
         //Vector3 uiscreenPos = 
 

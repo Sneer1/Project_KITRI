@@ -143,21 +143,21 @@ public class Actor : BaseObject
 
             SelfChararcter.IncreaseCurrentHP(-attackDamage);
 
-            //BaseBoard board = BoardManager.Instance.GetBoardData(this, EBoardType.Board_HP);
+            BaseBoard board = BoardManager.Instance.GetBoardData(this, E_BOARDTYPE.BOARD_HP);
 
-            //if(board != null)
-            //{
-            //    board.SetData(ConstValue.SetData_HP, GetStatusData(EStatusData.MAX_HP), SelfChararcter.CurrentHP);
-            //}
+            if (board != null)
+            {
+                board.SetData(ConstValue.SetData_HP, GetStatusData(E_STATUSDATA.MAX_HP), SelfChararcter.CurrentHP);
+            }
 
-            //board = null;
+            board = null;
 
-            //board = BoardManager.Instance.AddBoard(this, EBoardType.Board_Damage);
+            board = BoardManager.Instance.AddBoard(this, E_BOARDTYPE.BOARD_DAMAGE);
 
-            //if(board != null)
-            //{
-            //    board.SetData(ConstValue.SetData_Damage, attackDamage);
-            //}
+            if (board != null)
+            {
+                board.SetData(ConstValue.SetData_Damage, attackDamage);
+            }
 
             AI.Anim.SetInteger("Hit", 1);
         }
