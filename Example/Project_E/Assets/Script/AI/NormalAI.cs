@@ -36,46 +36,28 @@ public class NormalAI : BaseAI
 
     protected override IEnumerator Move()
     {
-        if (AutoMode == E_AUTOMODE.Auto_On)
+        BaseObject targetObject = ActorManager.Instance.GetSearchEnemy(Target);
+
+        if (targetObject != null)
         {
-            BaseObject targetObject = ActorManager.Instance.GetSearchEnemy(Target);
+            SkillData sData = Target.GetData(ConstValue.ActorData_SkillData, 0) as SkillData;
 
-            if (targetObject != null)
-            {
-                SkillData sData = Target.GetData(ConstValue.ActorData_SkillData, 0) as SkillData;
+            float attackRange = 10f;
 
-                float attackRange = 1.1f;
+            if (sData != null)
+                attackRange = sData.Range;
 
-                if (sData != null)
-                    attackRange = sData.Range;
+            float distance = Vector3.Distance(targetObject.SelfTransform.position, SelfTransform.position);
 
-                float distance = Vector3.Distance(targetObject.SelfTransform.position, SelfTransform.position);
-
-                if (distance < attackRange)
-                {
-                    Stop();
-                    AddNextAI(E_STATETYPE.STATE_ATTACK, targetObject);
-                }
-
-                else
-                {
-                    SetMove(targetObject.SelfTransform.position);
-                }
-            }
-        }
-        else
-        {
-            if (MovePosition != Vector3.zero)
-            {
-                SetMove(MovePosition);
-                MovePosition = Vector3.zero;
-                yield return null;
-            }
-
-            if (MoveCheck() == false)
+            if (distance <= attackRange)
             {
                 Stop();
-                AddNextAI(E_STATETYPE.STATE_IDLE);
+                    AddNextAI(E_STATETYPE.STATE_ATTACK, targetObject);
+            }
+
+            else
+            {
+                SetMove(targetObject.SelfTransform.position);
             }
         }
         yield return StartCoroutine(base.Move());

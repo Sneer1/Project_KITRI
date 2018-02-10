@@ -6,39 +6,53 @@
         "MELEE_A"
       ]
     },
-    "SAI": {
+    "RANGE": {
       "RANGE": 5,
       "SKILL": [
-        "STUN",
         "RANGE_A"
       ]
     },
-    "FIGHT": {
-      "RANGE": 1.5,
+    "SAI": {
+      "RANGE": 5,
       "SKILL": [
-        "PUNCH",
-        "KICK"
+        "STUN_CC"
       ]
     },
-    "ELEMENT": {
+    "PUNCH": {
+      "RANGE": 1,
+      "SKILL": [
+        "PUNCH_A"
+      ]
+    },
+    "KICK": {
+      "RANGE": 1.5,
+      "SKILL": [
+        "KICK_A"
+      ]
+    },
+    "FIRE": {
       "RANGE": 8,
       "SKILL": [
-        "FIRE",
-        "ICE"
+        "FIRE_A"
+      ]
+    },
+    "ICE": {
+      "RANGE": 8,
+      "SKILL": [
+        "ICE_A"
       ]
     },
     "GRAVITY": {
       "RANGE": 6,
       "SKILL": [
-        "GAVITYPOS",
-        "RANGE_A"
+        "GAVITY_CC"
       ]
     },
     "DODGE": {
       "RANGE": 8,
       "SKILL": [
-        "DODGE",
-        "ASSASSIN"
+        "DODGE_BUF",
+        "MELEE_A"
       ]
     }
   }
