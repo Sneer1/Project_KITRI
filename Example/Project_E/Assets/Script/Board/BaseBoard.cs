@@ -16,6 +16,7 @@ public class BaseBoard : MonoBehaviour
 
     RectTransform rectTransform;
 
+    [SerializeField]
     float DestroyTime = 0.0f;
     protected float CurTime = 0.0f;
 
@@ -79,29 +80,11 @@ public class BaseBoard : MonoBehaviour
             if (Position == Vector3.zero)
                 Position = BoardTransform.position;
         }
-
-        //Vector2 viewPort = WORLD_CAM.WorldToViewportPoint(BoardTransform.position);
-        //Vector3 boardPosition = UI_CAM.ViewportToWorldPoint(viewPort);
-
         Vector2 viewPos = WORLD_CAM.WorldToViewportPoint(BoardTransform.position);
 
         GetRectTran.anchorMin = viewPos;
         GetRectTran.anchorMax = viewPos;
         GetRectTran.anchoredPosition = BoardTransform.position;
-
-     //   Vector3 viewPos = WORLD_CAM.ScreenToViewportPoint(pos);
-     //   viewPos.z = 0;
-
-        //Vector3 uiscreenPos = 
-
-        //Vector3 aa = WORLD_CAM.WorldToScreenPoint(BoardTransform.position);
-
-        //RectTransform recttrans = this.GetComponent<RectTransform>();
-
-        //boardPosition.z = 0f;
-        //this.transform.position = boardPosition;
-        //recttrans.anchoredPosition = pos;
-
     }
 
     public bool CheckDestroyTime()

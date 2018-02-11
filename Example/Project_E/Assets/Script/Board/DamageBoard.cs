@@ -30,7 +30,8 @@ public class DamageBoard : BaseBoard
     public override void UpdateBoard()
     {
         CurTime += Time.deltaTime;
-        transform.position += Vector3.up * Time.deltaTime * 0.5f;
+
+        GetRectTran.anchoredPosition += Vector2.up * Time.deltaTime * 30f;
     }
 
 }

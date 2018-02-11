@@ -85,4 +85,31 @@ public class NormalAI : BaseAI
         END = true;
         yield return StartCoroutine(base.Die());
     }
+
+    protected override IEnumerator Stun()
+    {
+        IsStun = true;
+        yield return new WaitForEndOfFrame();
+
+        while (IsStun)
+        {
+            if (ObjectState == E_BASEOBJECTSTATE.STATE_DIE)
+                break;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        AddNextAI(E_STATETYPE.STATE_IDLE);
+
+        yield return StartCoroutine(base.Stun());
+    }
+
+    protected override IEnumerator Gravity()
+    {
+        yield return new WaitForSeconds(2f);
+
+        AddNextAI(E_STATETYPE.STATE_IDLE);
+
+        yield return StartCoroutine(base.Gravity());
+    }
 }

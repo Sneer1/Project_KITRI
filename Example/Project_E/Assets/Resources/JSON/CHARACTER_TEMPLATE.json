@@ -4,7 +4,7 @@
     "CHARACTER_HANRAN": 
     {
       "MAX_HP": 100,
-      "ATTACK": 5,
+      "ATTACK": 1,
       "DEFFENCE": 5,
       "SKILL": [
         "RANGE",
@@ -14,7 +14,7 @@
     "CHARACTER_IRIS": 
     {
       "MAX_HP": 300,
-      "ATTACK": 10,
+      "ATTACK": 2,
       "DEFFENCE": 20,
       "SKILL": [
         "PUNCH",
@@ -24,7 +24,7 @@
     "CHARACTER_TIBOUCHINA": 
     {
       "MAX_HP": 100,
-      "ATTACK": 5,
+      "ATTACK": 1,
       "DEFFENCE": 20,
       "SKILL": [
         "FIRE",
@@ -34,7 +34,7 @@
     "CHARACTER_VERBENA": 
     {
       "MAX_HP": 100,
-      "ATTACK": 5,
+      "ATTACK": 1,
       "DEFFENCE": 20,
       "SKILL": [
         "RANGE",
@@ -45,7 +45,7 @@
     "CHARACTER_ROSE": 
     {
       "MAX_HP": 200,
-      "ATTACK": 10,
+      "ATTACK": 2,
       "DEFFENCE": 20,
       "SKILL": [
         "DODGE"
@@ -54,7 +54,7 @@
     "ENEMY_BLUE": 
     {
       "MAX_HP": 100,
-      "ATTACK": 3,
+      "ATTACK": 2,
       "DEFFENCE": 5,
       "SKILL": [
         "MELEE"
@@ -63,7 +63,7 @@
     "ENEMY_RED": 
     {
       "MAX_HP": 200,
-      "ATTACK": 5,
+      "ATTACK": 2,
       "DEFFENCE": 5,
       "SKILL": [
         "MELEE"
@@ -72,7 +72,7 @@
     "ENEMY_TIBOUCHINA": 
     {
       "MAX_HP": 500,
-      "ATTACK": 20,
+      "ATTACK": 10,
       "DEFFENCE": 5,
       "SKILL": [
         "ELEMENT"
@@ -81,7 +81,7 @@
     "ENEMY_VERBENA": 
     {
       "MAX_HP": 500,
-      "ATTACK": 20,
+      "ATTACK": 10,
       "DEFFENCE": 5,
       "SKILL": [
         "GRAVITY"
@@ -90,7 +90,7 @@
     "ENEMY_ROSE": 
     {
       "MAX_HP": 700,
-      "ATTACK": 30,
+      "ATTACK": 25,
       "DEFFENCE": 5,
       "SKILL": [
         "DODGE"

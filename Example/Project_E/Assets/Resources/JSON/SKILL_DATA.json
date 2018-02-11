@@ -19,7 +19,7 @@
       ]
     },
     "PUNCH": {
-      "RANGE": 1,
+      "RANGE": 1.5,
       "SKILL": [
         "PUNCH_A"
       ]

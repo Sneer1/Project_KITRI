@@ -38,6 +38,20 @@ public class BaseAI : BaseObject
         set { bAttack = value; }
     }
 
+    bool bStun = false;
+    public bool IsStun
+    {
+        get { return bStun; }
+        set { bStun = value; }
+
+    }
+
+    public bool IsGravity
+    {
+        get;
+        set;
+    }
+
     bool bEnd = false;
     public bool END
     {
@@ -115,7 +129,7 @@ public class BaseAI : BaseObject
 
         Target.ThrowEvent(ConstValue.EventKey_SelectSkill, Attack_Type);
 
-        Anim.SetInteger("Attack_Type", Attack_Type);
+        Anim.SetInteger("Attack_Type", (int)Attack_Type);
         _CurrentState = E_STATETYPE.STATE_ATTACK;
         ChangeAnimation();
     }
@@ -123,6 +137,18 @@ public class BaseAI : BaseObject
     protected virtual void ProcessDie()
     {
         _CurrentState = E_STATETYPE.STATE_DEAD;
+        ChangeAnimation();
+    }
+
+    protected virtual void ProcessStun()
+    {
+        _CurrentState = E_STATETYPE.STATE_STUN;
+        ChangeAnimation();
+    }
+
+    protected virtual void ProcessGravity()
+    {
+        _CurrentState = E_STATETYPE.STATE_GRAVITY;
         ChangeAnimation();
     }
 
@@ -145,6 +171,18 @@ public class BaseAI : BaseObject
     }
 
     protected virtual IEnumerator Die()
+    {
+        bUpdateAI = false;
+        yield break;
+    }
+
+    protected virtual IEnumerator Stun()
+    {
+        bUpdateAI = false;
+        yield break;
+    }
+
+    protected virtual IEnumerator Gravity()
     {
         bUpdateAI = false;
         yield break;
@@ -188,6 +226,18 @@ public class BaseAI : BaseObject
                     ProcessDie();
                 }
                 break;
+
+            case E_STATETYPE.STATE_STUN:
+                {
+                    ProcessStun();
+                }
+                break;
+
+            case E_STATETYPE.STATE_GRAVITY:
+                {
+                    ProcessGravity();
+                }
+                break;
         }
     }
 
@@ -223,6 +273,12 @@ public class BaseAI : BaseObject
                 break;
             case E_STATETYPE.STATE_DEAD:
                 StartCoroutine("Die");
+                break;
+            case E_STATETYPE.STATE_STUN:
+                StartCoroutine("Stun");
+                break;
+            case E_STATETYPE.STATE_GRAVITY:
+                StartCoroutine("Gravity");
                 break;
         }
     }

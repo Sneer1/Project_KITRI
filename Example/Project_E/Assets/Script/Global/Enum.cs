@@ -18,8 +18,7 @@ public enum E_STATETYPE
     STATE_WALK,
     STATE_DEAD,
     STATE_STUN,
-    STATE_GRAVITY,
-    STATE_DODGE
+    STATE_GRAVITY
 }
 
 public enum E_STATUSDATA
