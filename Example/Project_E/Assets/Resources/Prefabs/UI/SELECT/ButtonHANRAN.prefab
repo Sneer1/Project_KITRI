@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 222571718490669978}
   - component: {fileID: 114598952873680882}
   - component: {fileID: 114867996421214138}
-  - component: {fileID: 114277792696243310}
   m_Layer: 0
   m_Name: ButtonHANRAN
   m_TagString: Untagged
@@ -47,17 +46,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114277792696243310
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1606524051419076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3839b3df11cff1846a385efae552e3c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114436862315623060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,9 +145,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114277792696243310}
-        m_MethodName: CharacterPortrait
-        m_Mode: 1
+      - m_Target: {fileID: 114637483868067386, guid: 8cffb70e270ab294883a3446968777a4,
+          type: 2}
+        m_MethodName: CharacterClickedButton
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

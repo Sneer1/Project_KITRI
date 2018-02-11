@@ -6,25 +6,21 @@ using UnityEngine.UI;
 public class SelectUI : MonoBehaviour
 {
     Transform myTransform;
-    List<GameObject> mylistGameObject = new List<GameObject>();
-
     SelectCharacterData SelectCharacterData = new SelectCharacterData();
+
+    List<GameObject> mylistGameObject = new List<GameObject>();
 
     List<string> listSelectCharacter;
     List<Sprite> listsprite = new List<Sprite>();
+    List<GameObject> SelectCharacterlist = new List<GameObject>();
+
     Dictionary<ESELECTCHARACTERSTAGE, List<string>> SelectCharacterDic;
 
     ESELECTCHARACTERSTAGE eSELECTCHARACTERSTAGE = ESELECTCHARACTERSTAGE.STAGE_3;
 
-    public List<ESELECTCHARACTERSTAGE> mySelectCharacter()
-    {
-        List<ESELECTCHARACTERSTAGE> list = new List<ESELECTCHARACTERSTAGE>();
-        
-        return list;
-    }
-
     void SelectMusic()
     {
+
 
     }
 
@@ -32,7 +28,7 @@ public class SelectUI : MonoBehaviour
     {
         for (int i = 0; i < listSelectCharacter.Count; ++i)
         {
-            mylistGameObject.Add(Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/SelectButton"), myTransform));
+            mylistGameObject.Add(Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Button" + ((ECHARACTER)i).ToString()), myTransform));
         }
 
         for (int j = 0; j < mylistGameObject.Count; ++j)
@@ -44,45 +40,62 @@ public class SelectUI : MonoBehaviour
         {
             case 2:
                 {
-                    mylistGameObject[0].transform.localPosition = new Vector3( -300, -160f, 0f);
-                    mylistGameObject[1].transform.localPosition = new Vector3( 300, -160f, 0f);
+                    mylistGameObject[0].transform.localPosition = new Vector3(-300, -160f, 0f);
+                    mylistGameObject[1].transform.localPosition = new Vector3(300, -160f, 0f);
                 }
                 break;
 
             case 3:
                 {
-                    mylistGameObject[0].transform.localPosition = new Vector3( -300, -160f, 0f);
-                    mylistGameObject[1].transform.localPosition = new Vector3( 0, -160f, 0f);
-                    mylistGameObject[2].transform.localPosition = new Vector3( 300, -160f, 0f);
+                    mylistGameObject[0].transform.localPosition = new Vector3(-300, -160f, 0f);
+                    mylistGameObject[1].transform.localPosition = new Vector3(0, -160f, 0f);
+                    mylistGameObject[2].transform.localPosition = new Vector3(300, -160f, 0f);
                 }
                 break;
 
             case 4:
                 {
-                    mylistGameObject[0].transform.localPosition = new Vector3( -450, -160f, 0f);
-                    mylistGameObject[1].transform.localPosition = new Vector3( -150, -160f, 0f);
-                    mylistGameObject[2].transform.localPosition = new Vector3( 150, -160f, 0f);
-                    mylistGameObject[3].transform.localPosition = new Vector3( 450, -160f, 0f);
+                    mylistGameObject[0].transform.localPosition = new Vector3(-450, -160f, 0f);
+                    mylistGameObject[1].transform.localPosition = new Vector3(-150, -160f, 0f);
+                    mylistGameObject[2].transform.localPosition = new Vector3(150, -160f, 0f);
+                    mylistGameObject[3].transform.localPosition = new Vector3(450, -160f, 0f);
                 }
                 break;
         }
 
+        Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Confirm"), myTransform);
     }
-    
-    void CharacterClickedButton(int selectindex)
+    public List<ECHARACTER> CharacterConfirm()
     {
-        List<GameObject> list = new List<GameObject>();
-        int i = 0;
-        if (list.Count < 3)
+        List<ECHARACTER> list = new List<ECHARACTER>();
+        list = null;
+        string ename = null;
+        for(int i = 0; i < SelectCharacterlist.Count; ++i)
         {
-            list.Add(Instantiate(mylistGameObject[selectindex]));
-            i++;
-            list[i].transform.localPosition = new Vector3(-130f, 150f);
-            list[i].transform.localPosition = new Vector3(130f, 150f);
+            ename = SelectCharacterlist[i].GetComponent<Image>().sprite.name;
+            ECHARACTER Character_enum = (ECHARACTER)System.Enum.Parse(typeof(ECHARACTER), ename);
+            list.Add(Character_enum);
+        }
+        return list;
+    }
+
+    public void CharacterClickedButton(int index)
+    {
+        for (int i = 0; i < SelectCharacterlist.Count; ++i)
+        {
+            if (SelectCharacterlist[i].GetComponent<Image>().sprite == null)
+            {
+                SelectCharacterlist[i].GetComponent<Image>().sprite = listsprite[index];
+                return;
+            }
         }
     }
 
-
+    public void SelectCharacterClicked(int index)
+    {
+        SelectCharacterlist[index].GetComponent<Image>().sprite = null;
+    }
+    
     void Init()
     {
         Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Select_Canvas"), this.transform);
@@ -90,11 +103,14 @@ public class SelectUI : MonoBehaviour
         SelectCharacterDic = SelectCharacterData.LoadJSONSelectCharacterDic("JSON/STAGE_CHARACTER_DATA");
         listSelectCharacter = SelectCharacterDic[eSELECTCHARACTERSTAGE];
 
-        for(int i = 0; i < (int)ECHARACTER.MAX; ++i)
+        for (int i = 0; i < (int)ECHARACTER.MAX; ++i)
         {
             listsprite.Add(Resources.Load<Sprite>("Prefabs/UI/Images/" + ((ECHARACTER)i).ToString()));
         }
-
+        for (int i = 1; i < 3; ++i)
+        {
+            SelectCharacterlist.Add(Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/SelectCharacter" + i), myTransform));
+        }
         SetButton();
     }
 
@@ -102,6 +118,4 @@ public class SelectUI : MonoBehaviour
     {
         Init();
     }
-
-
 }
