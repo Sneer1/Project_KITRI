@@ -69,4 +69,9 @@ public class GameCharacter
         }
         return null;
     }
+
+    public int GetListCount()
+    {
+        return ListSkill.Count;
+    }
 }

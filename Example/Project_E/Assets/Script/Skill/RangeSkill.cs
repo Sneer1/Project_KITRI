@@ -32,7 +32,6 @@ public class RangeSkill : BaseSkill
         if (keyData == ConstValue.EventKey_SelectModel)
         {
             ModelPrefab = datas[0] as GameObject;
-
         }
         else
             base.ThrowEvent(keyData, datas);
