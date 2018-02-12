@@ -171,3 +171,11 @@ public enum ESELECTCHARACTERSTAGE
     STAGE_4,
     MAX
 }
+
+public enum EMUSIC
+{
+    MUSIC_1_HANRAN,
+    MUSIC_2_IRIS,
+    MUSIC_3_TIBOUCHINA,
+    MUSIC_4_VERBENA
+}

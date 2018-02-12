@@ -17,17 +17,14 @@ public class SelectUI : MonoBehaviour
 
     GameObject ConfirmButton;
 
+    EMUSIC eSelectMusic;
+
     Dictionary<ESELECTCHARACTERSTAGE, List<string>> SelectCharacterDic;
 
     ESELECTCHARACTERSTAGE eSELECTCHARACTERSTAGE = ESELECTCHARACTERSTAGE.STAGE_3;
 
     public List<ECHARACTER> SelectCharacter = new List<ECHARACTER>();
-
-    void SelectMusic()
-    {
-
-    }
-
+    
     void SetButton()
     {
         ConfirmButton = GameObject.Find("Confirm").gameObject;
@@ -57,6 +54,11 @@ public class SelectUI : MonoBehaviour
             list.Add(Character_enum);
         }
         SelectCharacter = list;
+    }
+
+    void SelectMusic()
+    {
+
     }
 
     public void CharacterClickedButton(int index)
