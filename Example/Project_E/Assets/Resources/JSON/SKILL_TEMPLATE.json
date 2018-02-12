@@ -42,11 +42,7 @@
       "RANGE_DATA_1": 2,
       "RANGE_DATA_2": 3,
       "MAX_HP": 0,
-<<<<<<< HEAD
-      "ATTACK": 7,
-=======
       "ATTACK": 10,
->>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 0
     },
     "FIRE_A": {
