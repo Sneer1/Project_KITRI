@@ -30,13 +30,13 @@ public class NoteManager : MonoSingleton<NoteManager>
         float distance;
         if (GetNearNoteTrans() == null)
         {
-            //Debug.LogError("가까운 노트를 찾지 못했습니다");
+            Debug.LogError("가까운 노트를 찾지 못했습니다");
             return;
         }
 
         distance = Vector3.SqrMagnitude(transform.position - GetNearNoteTrans().position);
 
-        //Debug.Log(distance);
+        Debug.Log(distance);
 
         if (MyNoteList[0].GetComponent<Note>().NoteIsOver() == true)
         {
@@ -74,9 +74,9 @@ public class NoteManager : MonoSingleton<NoteManager>
 
     void SetNoteToList()
     {
-        for (int i = 0; i < this.gameObject.transform.childCount; ++i)
+        for (int i = 0; i < 10; ++i)
         {
-            MyNoteList.Add(this.gameObject.transform.GetChild(i).gameObject);
+            MyNoteList.Add(Instantiate(Resources.Load<GameObject>("Prefabs/Note/Note")));
         }
 
         if (MyNoteList.Count == 0)

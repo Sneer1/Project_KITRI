@@ -12,8 +12,9 @@ public class Note : MonoBehaviour
 
     private void Awake()
     {
-        Init(5f);
+        Init(500f);
     }
+
     private void FixedUpdate()
     {
         NoteMove();
