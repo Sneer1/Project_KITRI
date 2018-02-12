@@ -19,7 +19,7 @@
       "DEFFENCE": 0
     },
     "STUN_CC": {
-      "SKILL_TYPE": 2,
+      "SKILL_TYPE": 4,
       "RANGE_TYPE": 1,
       "RANGE_DATA_1": 0.1,
       "RANGE_DATA_2": 0,
@@ -46,8 +46,8 @@
       "DEFFENCE": 0
     },
     "FIRE_A": {
-      "SKILL_TYPE": 1,
-      "RANGE_TYPE": 2,
+      "SKILL_TYPE": 2,
+      "RANGE_TYPE": 0,
       "RANGE_DATA_1": 0.1,
       "RANGE_DATA_2": 0.1,
       "MAX_HP": 0,
@@ -55,8 +55,8 @@
       "DEFFENCE": 0
     },
     "LIGHTNING_A": {
-      "SKILL_TYPE": 1,
-      "RANGE_TYPE": 3,
+      "SKILL_TYPE": 3,
+      "RANGE_TYPE": 1,
       "RANGE_DATA_1": 1,
       "RANGE_DATA_2": 0,
       "MAX_HP": 0,
@@ -65,7 +65,7 @@
     },
     "GAVITY_CC": {
       "SKILL_TYPE": 3,
-      "RANGE_TYPE": 4,
+      "RANGE_TYPE": 1,
       "RANGE_DATA_1": 1,
       "RANGE_DATA_2": 0,
       "MAX_HP": 0,

@@ -139,6 +139,32 @@ public class SkillManager : MonoSingleton<SkillManager>
                 makeSkill.ThrowEvent(ConstValue.EventKey_SelectModel, GetModel(E_SKILLMODETYPE.BOX));
                 break;
 
+            case E_SKILLTEMPLATETYPE.RANGE_FIRE:
+                makeSkill = skillObject.AddComponent<RangeSkill>();
+
+                parentTransform = owner.FindInChild("FirePos");
+
+                if (parentTransform == null)
+                {
+                    parentTransform = owner.SelfTransform;
+                }
+
+                makeSkill.ThrowEvent(ConstValue.EventKey_SelectModel, GetModel(E_SKILLMODETYPE.FIRE));
+                break;
+
+            case E_SKILLTEMPLATETYPE.RANGE_LIGHTNING:
+                makeSkill = skillObject.AddComponent<LightningSkill>();
+
+                parentTransform = owner.FindInChild("FirePos");
+
+                if (parentTransform == null)
+                {
+                    parentTransform = owner.SelfTransform;
+                }
+
+                makeSkill.ThrowEvent(ConstValue.EventKey_SelectModel, GetModel(E_SKILLMODETYPE.LIGHT));
+                break;
+
             case E_SKILLTEMPLATETYPE.STUN_CROWDCONTROL:
                 makeSkill = skillObject.AddComponent<Range_CrowdControl>();
 
@@ -191,20 +217,20 @@ public class SkillManager : MonoSingleton<SkillManager>
                 }
                 break;
 
-            case E_SKILLRANGETYPE.RANGE_FIRE:
-                {
-                    SphereCollider collider = skillObject.AddComponent<SphereCollider>();
-                    collider.radius = skillTemplate.RangeData_1;
-                    collider.isTrigger = true;
-                }
-                break;
-            case E_SKILLRANGETYPE.RANGE_LIGHT:
-                {
-                    SphereCollider collider = skillObject.AddComponent<SphereCollider>();
-                    collider.radius = skillTemplate.RangeData_1;
-                    collider.isTrigger = true;
-                }
-                break;
+            //case E_SKILLRANGETYPE.RANGE_FIRE:
+            //    {
+            //        SphereCollider collider = skillObject.AddComponent<SphereCollider>();
+            //        collider.radius = skillTemplate.RangeData_1;
+            //        collider.isTrigger = true;
+            //    }
+            //    break;
+            //case E_SKILLRANGETYPE.RANGE_LIGHT:
+            //    {
+            //        SphereCollider collider = skillObject.AddComponent<SphereCollider>();
+            //        collider.radius = skillTemplate.RangeData_1;
+            //        collider.isTrigger = true;
+            //    }
+            //    break;
         }
 
         return makeSkill;

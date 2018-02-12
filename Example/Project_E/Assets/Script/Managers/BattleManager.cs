@@ -18,6 +18,7 @@ public class BattleManager : MonoSingleton<BattleManager>
         List<E_PLAYTYPE> listPlayer = new List<E_PLAYTYPE>();
         listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_HANRAN);
         listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_IRIS);
+        listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_TIBOUCHINA);
 
         List<E_ENEMYTYPE> listEnemy = new List<E_ENEMYTYPE>();
         listEnemy.Add(E_ENEMYTYPE.PF_ENEMY_BLUE);
