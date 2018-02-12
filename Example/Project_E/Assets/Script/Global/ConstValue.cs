@@ -31,6 +31,7 @@ public static class ConstValue
 	public const string ActorData_AttackRange = "ATTACK_RANGE";
 	public const string ActorData_Character = "CHARACTER";
 	public const string ActorData_Hit = "HIT";
+    public const string ActorData_CrowdControl = "CC";
 	public const string ActorData_SkillData = "SKILL_DATA";
 
 	// ThrowEvent Key 관련

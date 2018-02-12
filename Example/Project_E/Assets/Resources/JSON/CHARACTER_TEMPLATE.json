@@ -4,7 +4,11 @@
     "CHARACTER_HANRAN": 
     {
       "MAX_HP": 100,
+<<<<<<< HEAD
       "ATTACK": 5,
+=======
+      "ATTACK": 1,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 5,
       "SKILL": [
         "RANGE",
@@ -14,7 +18,11 @@
     "CHARACTER_IRIS": 
     {
       "MAX_HP": 300,
+<<<<<<< HEAD
       "ATTACK": 10,
+=======
+      "ATTACK": 2,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 20,
       "SKILL": [
         "PUNCH",
@@ -24,7 +32,11 @@
     "CHARACTER_TIBOUCHINA": 
     {
       "MAX_HP": 100,
+<<<<<<< HEAD
       "ATTACK": 5,
+=======
+      "ATTACK": 1,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 20,
       "SKILL": [
         "FIRE",
@@ -34,7 +46,11 @@
     "CHARACTER_VERBENA": 
     {
       "MAX_HP": 100,
+<<<<<<< HEAD
       "ATTACK": 5,
+=======
+      "ATTACK": 1,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 20,
       "SKILL": [
         "RANGE",
@@ -45,7 +61,11 @@
     "CHARACTER_ROSE": 
     {
       "MAX_HP": 200,
+<<<<<<< HEAD
       "ATTACK": 10,
+=======
+      "ATTACK": 2,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 20,
       "SKILL": [
         "DODGE"
@@ -54,7 +74,11 @@
     "ENEMY_BLUE": 
     {
       "MAX_HP": 100,
+<<<<<<< HEAD
       "ATTACK": 3,
+=======
+      "ATTACK": 2,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 5,
       "SKILL": [
         "MELEE"
@@ -63,7 +87,11 @@
     "ENEMY_RED": 
     {
       "MAX_HP": 200,
+<<<<<<< HEAD
       "ATTACK": 5,
+=======
+      "ATTACK": 2,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 5,
       "SKILL": [
         "MELEE"
@@ -72,7 +100,11 @@
     "ENEMY_TIBOUCHINA": 
     {
       "MAX_HP": 500,
+<<<<<<< HEAD
       "ATTACK": 20,
+=======
+      "ATTACK": 10,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 5,
       "SKILL": [
         "ELEMENT"
@@ -81,7 +113,11 @@
     "ENEMY_VERBENA": 
     {
       "MAX_HP": 500,
+<<<<<<< HEAD
       "ATTACK": 20,
+=======
+      "ATTACK": 10,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 5,
       "SKILL": [
         "GRAVITY"
@@ -90,7 +126,11 @@
     "ENEMY_ROSE": 
     {
       "MAX_HP": 700,
+<<<<<<< HEAD
       "ATTACK": 30,
+=======
+      "ATTACK": 25,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "DEFFENCE": 5,
       "SKILL": [
         "DODGE"

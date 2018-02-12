@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Enemy : Actor
 {
-    EnemyRegenerator Generator;
-
     public override void ThrowEvent(string keyData, params object[] datas)
     {
         switch (keyData)
         {
-            case ConstValue.EventKey_EnemyInit:
-                Generator = datas[0] as EnemyRegenerator;
-                break;
             default:
                 base.ThrowEvent(keyData, datas);
                 break;
@@ -21,9 +16,6 @@ public class Enemy : Actor
 
     private new void OnDisable()
     {
-        if (Generator != null)
-            Generator.RemoveActor(this);
-
         base.OnDisable();
     }
 

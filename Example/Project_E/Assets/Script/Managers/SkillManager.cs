@@ -140,7 +140,20 @@ public class SkillManager : MonoSingleton<SkillManager>
                 break;
 
             case E_SKILLTEMPLATETYPE.STUN_CROWDCONTROL:
+<<<<<<< HEAD
 
+=======
+                makeSkill = skillObject.AddComponent<Range_CrowdControl>();
+
+                parentTransform = owner.FindInChild("FirePos");
+
+                if (parentTransform == null)
+                {
+                    parentTransform = owner.SelfTransform;
+                }
+
+                makeSkill.ThrowEvent(ConstValue.EventKey_SelectModel, GetModel(E_SKILLMODETYPE.CIRCLE));
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
                 break;
             case E_SKILLTEMPLATETYPE.GRAVITY_CROWDCONTROL:
 

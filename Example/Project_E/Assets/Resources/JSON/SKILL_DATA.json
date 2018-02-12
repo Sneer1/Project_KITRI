@@ -19,7 +19,11 @@
       ]
     },
     "PUNCH": {
+<<<<<<< HEAD
       "RANGE": 1,
+=======
+      "RANGE": 1.5,
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
       "SKILL": [
         "PUNCH_A"
       ]
@@ -28,6 +32,7 @@
       "RANGE": 1.5,
       "SKILL": [
         "KICK_A"
+<<<<<<< HEAD
       ]
     },
     "FIRE": {
@@ -39,6 +44,19 @@
     "ICE": {
       "RANGE": 8,
       "SKILL": [
+=======
+      ]
+    },
+    "FIRE": {
+      "RANGE": 8,
+      "SKILL": [
+        "FIRE_A"
+      ]
+    },
+    "ICE": {
+      "RANGE": 8,
+      "SKILL": [
+>>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
         "ICE_A"
       ]
     },

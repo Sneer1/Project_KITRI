@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c214c3764b4ae47be6d1866ee31016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DestroyTime: 0
   ProgressBar: {fileID: 114575691737194500}
   HPText: {fileID: 114570417718880018}
 --- !u!114 &114559658960347010
@@ -155,7 +156,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 26
+    m_FontSize: 10
     m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 0
@@ -316,7 +317,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 40}
+  m_SizeDelta: {x: 80, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224971496549536216
 RectTransform:

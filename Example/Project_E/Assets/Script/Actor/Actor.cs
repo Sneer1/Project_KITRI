@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Actor : BaseObject
 {
-    bool _IsPlayer = false;
+    bool _IsPlayer = true;
     public bool IsPlayer
     {
         get { return _IsPlayer; }
@@ -85,8 +85,6 @@ public class Actor : BaseObject
             board.SetData(ConstValue.SetData_HP, GetStatusData(E_STATUSDATA.MAX_HP), SelfChararcter.CurrentHP);
         }
 
-        Debug.Log("이름 : " + gameObject.name + "피 : " + _SelfCharacter.CurrentHP + "생성완료");
-
         ActorManager.Instance.AddActor(this);
     }
 
@@ -162,13 +160,38 @@ public class Actor : BaseObject
             AI.Anim.SetInteger("Hit", 1);
         }
 
+        else if(keyData == ConstValue.ActorData_CrowdControl)
+        {
+            if (ObjectState == E_BASEOBJECTSTATE.STATE_DIE)
+                return;
+
+            SkillTemplate skillTemplate = datas[0] as SkillTemplate;
+
+            E_SKILLTEMPLATETYPE skillType = skillTemplate.SkillType;
+
+            switch(skillType)
+            {
+                case E_SKILLTEMPLATETYPE.STUN_CROWDCONTROL:
+                    {
+                        AI.AddNextAI(E_STATETYPE.STATE_STUN);
+                    }
+                    break;
+
+                case E_SKILLTEMPLATETYPE.GRAVITY_CROWDCONTROL:
+                    {
+                        AI.AddNextAI(E_STATETYPE.STATE_GRAVITY);
+                    }
+                    break;
+            }           
+        }
+
         base.ThrowEvent(keyData, datas);
     }
 
     protected virtual void Update()
     {
         AI.UpdateAI();
-        if(AI.END)
+        if(IsPlayer == false && AI.END)
         {
             Destroy(SelfObject);
         }
@@ -188,20 +211,20 @@ public class Actor : BaseObject
 
     private void OnEnable()
     {
-        //if (BoardManager.Instance != null)
-        //    BoardManager.Instance.ShowBoard(this, true);
+        if (BoardManager.Instance != null)
+            BoardManager.Instance.ShowBoard(this, true);
     }
 
     public void OnDisable()
     {
-        //if (BoardManager.Instance != null)
-        //    BoardManager.Instance.ShowBoard(this, false);
+        if (BoardManager.Instance != null)
+            BoardManager.Instance.ShowBoard(this, false);
     }
 
     public void OnDestroy()
     {
-        //if (BoardManager.Instance != null)
-        //    BoardManager.Instance.ClearBoard(this);
+        if (BoardManager.Instance != null)
+            BoardManager.Instance.ClearBoard(this);
 
         if (ActorManager.Instance != null)
             ActorManager.Instance.RemoveActor(this);

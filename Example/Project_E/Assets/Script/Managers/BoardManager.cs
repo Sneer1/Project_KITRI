@@ -93,7 +93,8 @@ public class BoardManager : MonoSingleton<BoardManager>
 
                     GameObject UI_HPBoard = Instantiate(hpBoard, BoardUI.transform.position, Quaternion.identity) as GameObject;
 
-                    UI_HPBoard.transform.parent = BoardUI.transform;
+                    UI_HPBoard.transform.SetParent(BoardUI.transform, false);
+                    //UI_HPBoard.transform.parent = BoardUI.transform;
 
                     boardData = UI_HPBoard.GetComponent<HPBoard>();
 
@@ -107,7 +108,9 @@ public class BoardManager : MonoSingleton<BoardManager>
 
                     GameObject UI_DamageBoard = Instantiate(DamageBoard, BoardUI.transform.position, Quaternion.identity) as GameObject;
 
-                    UI_DamageBoard.transform.parent = BoardUI.transform;
+                    UI_DamageBoard.transform.SetParent(BoardUI.transform, false);
+                    //UI_DamageBoard.transform.parent = BoardUI.transform;
+
 
                     boardData = UI_DamageBoard.GetComponent<DamageBoard>();
 
