@@ -17,7 +17,6 @@ public class Note : MonoBehaviour
     private void FixedUpdate()
     {
         NoteMove();
-
     }
     
     public bool NoteIsOver()
@@ -34,11 +33,6 @@ public class Note : MonoBehaviour
         }
         return false;
     }
-    /*public float NoteRadius
-    {
-        get { return _radius; }
-        set { _radius = value; }
-    }*/
 
     public Vector3 NoteMoveTrans
     {

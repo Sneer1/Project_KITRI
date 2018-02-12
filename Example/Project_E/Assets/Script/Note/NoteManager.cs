@@ -23,7 +23,7 @@ public class NoteManager : MonoSingleton<NoteManager>
         NoteCheck();
     }
 
-    public void NoteCheck()
+    void NoteCheck()
     {
         if (MyNoteList.Count == 0)
             return;
@@ -72,7 +72,7 @@ public class NoteManager : MonoSingleton<NoteManager>
         }
     }
 
-    public void SetNoteToList()
+    void SetNoteToList()
     {
         for (int i = 0; i < this.gameObject.transform.childCount; ++i)
         {
@@ -85,7 +85,7 @@ public class NoteManager : MonoSingleton<NoteManager>
         }
     }
 
-    public Transform GetNearNoteTrans()
+    Transform GetNearNoteTrans()
     {
         if (MyNoteList.Count == 0)
         {
@@ -96,7 +96,7 @@ public class NoteManager : MonoSingleton<NoteManager>
         return targetTrans;
     }
 
-    public void RemoveNote()
+    void RemoveNote()
     {
         if (MyNoteList.Count == 0)
         {
