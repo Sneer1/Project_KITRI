@@ -124,21 +124,13 @@ public class BaseAI : BaseObject
     {
         Actor actor = Target as Actor;
         int nCount = actor.SelfChararcter.GetListCount() + 1;
-<<<<<<< HEAD
-
-        Attack_Type = Random.Range(0, nCount);
-
-        Target.ThrowEvent(ConstValue.EventKey_SelectSkill, Attack_Type);
-
-        Anim.SetInteger("Attack_Type", Attack_Type);
-=======
 
         Attack_Type = Random.Range(0, nCount);
 
         Target.ThrowEvent(ConstValue.EventKey_SelectSkill, Attack_Type);
 
         Anim.SetInteger("Attack_Type", (int)Attack_Type);
->>>>>>> 03aa594e2855ce7e06d72e8479335b893d137596
+
         _CurrentState = E_STATETYPE.STATE_ATTACK;
         ChangeAnimation();
     }
