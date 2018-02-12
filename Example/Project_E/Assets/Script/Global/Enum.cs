@@ -77,7 +77,8 @@ public enum E_SKILLRANGETYPE
 {
     RANGE_BOX, //RANGE_A
     RANGE_SPHERE, // STUN
-    // FIRE
+    RANGE_FIRE,
+    RANGE_LIGHT,
     //ICE
     //GRAVITY_CC
 }
@@ -86,6 +87,8 @@ public enum E_SKILLMODETYPE
 {
     BOX,
     CIRCLE,
+    FIRE,
+    LIGHT,
     MAX
 }
 

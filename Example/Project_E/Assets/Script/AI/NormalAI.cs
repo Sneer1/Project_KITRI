@@ -111,7 +111,15 @@ public class NormalAI : BaseAI
 
     protected override IEnumerator Gravity()
     {
-        yield return new WaitForSeconds(2f);
+        IsGravity = true;
+
+        while(IsGravity)
+        {
+            if (ObjectState == E_BASEOBJECTSTATE.STATE_DIE)
+                break;
+
+            yield return new WaitForEndOfFrame();
+        }
 
         AddNextAI(E_STATETYPE.STATE_IDLE);
 

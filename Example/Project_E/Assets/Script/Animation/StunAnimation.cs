@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class StunAnimation : StateMachineBehaviour
 {
-
     Actor TargetActor = null;
-    bool bIsStun = false;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
@@ -17,7 +15,6 @@ public class StunAnimation : StateMachineBehaviour
             if (TargetActor.AI.CurrentState == E_STATETYPE.STATE_STUN)
             {
                 TargetActor.AI.IsStun = true;
-                bIsStun = false;
             }
         }
     }

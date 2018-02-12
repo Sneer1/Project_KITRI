@@ -190,6 +190,21 @@ public class SkillManager : MonoSingleton<SkillManager>
                     collider.isTrigger = true;
                 }
                 break;
+
+            case E_SKILLRANGETYPE.RANGE_FIRE:
+                {
+                    SphereCollider collider = skillObject.AddComponent<SphereCollider>();
+                    collider.radius = skillTemplate.RangeData_1;
+                    collider.isTrigger = true;
+                }
+                break;
+            case E_SKILLRANGETYPE.RANGE_LIGHT:
+                {
+                    SphereCollider collider = skillObject.AddComponent<SphereCollider>();
+                    collider.radius = skillTemplate.RangeData_1;
+                    collider.isTrigger = true;
+                }
+                break;
         }
 
         return makeSkill;

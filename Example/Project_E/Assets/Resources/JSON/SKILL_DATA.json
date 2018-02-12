@@ -36,10 +36,10 @@
         "FIRE_A"
       ]
     },
-    "ICE": {
+    "LIGHTNING": {
       "RANGE": 8,
       "SKILL": [
-        "ICE_A"
+        "LIGHTNING_A"
       ]
     },
     "GRAVITY": {
