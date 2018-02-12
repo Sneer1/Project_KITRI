@@ -89,7 +89,11 @@ public class NormalAI : BaseAI
     protected override IEnumerator Stun()
     {
         IsStun = true;
-        yield return new WaitForEndOfFrame();
+        //       yield return new WaitForEndOfFrame();
+
+        GameObject AI_Model = AI_ModelLoad.Instance.GetModel(E_AIMODETYPE.STUN);
+
+        GameObject go = Instantiate(AI_Model, Target.transform.position, Quaternion.identity);
 
         while (IsStun)
         {
@@ -98,6 +102,7 @@ public class NormalAI : BaseAI
 
             yield return new WaitForEndOfFrame();
         }
+        Destroy(go);
 
         AddNextAI(E_STATETYPE.STATE_IDLE);
 

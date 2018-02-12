@@ -142,6 +142,7 @@ public class BaseAI : BaseObject
 
     protected virtual void ProcessStun()
     {
+
         _CurrentState = E_STATETYPE.STATE_STUN;
         ChangeAnimation();
     }

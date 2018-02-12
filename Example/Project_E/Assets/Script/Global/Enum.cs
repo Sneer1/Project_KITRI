@@ -84,8 +84,14 @@ public enum E_SKILLRANGETYPE
 
 public enum E_SKILLMODETYPE
 {
-    CIRCLE,
     BOX,
+    CIRCLE,
+    MAX
+}
+
+public enum E_AIMODETYPE
+{
+    STUN,
     MAX
 }
 

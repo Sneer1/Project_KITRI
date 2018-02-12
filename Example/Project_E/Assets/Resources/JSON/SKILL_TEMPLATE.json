@@ -12,8 +12,8 @@
     "RANGE_A": {
       "SKILL_TYPE": 1,
       "RANGE_TYPE": 0,
-      "RANGE_DATA_1": 2,
-      "RANGE_DATA_2": 2,
+      "RANGE_DATA_1": 0.1,
+      "RANGE_DATA_2": 0.1,
       "MAX_HP": 0,
       "ATTACK": 3,
       "DEFFENCE": 0
@@ -21,7 +21,7 @@
     "STUN_CC": {
       "SKILL_TYPE": 2,
       "RANGE_TYPE": 1,
-      "RANGE_DATA_1": 1,
+      "RANGE_DATA_1": 0.1,
       "RANGE_DATA_2": 0,
       "MAX_HP": 0,
       "ATTACK": 0,
