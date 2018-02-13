@@ -14,6 +14,20 @@ public class SkillData
 
     public SkillData(string strKey, JSONNode nodeData)
     {
+        TextAsset stringAssetData = Resources.Load(ConstValue.TextDataPath) as TextAsset;
+
+        if(stringAssetData == null)
+        {
+            Debug.LogError("스킬 데이터 로드 실패");
+            return;
+        }
+        JSONNode rootNode = JSON.Parse(stringAssetData.text);
+        if (rootNode == null)
+            return;
+
+        JSONObject stringDataNode = rootNode[ConstValue.]
+
+
         _StrKey = strKey;
         _Range = nodeData["RANGE"].AsFloat;
 

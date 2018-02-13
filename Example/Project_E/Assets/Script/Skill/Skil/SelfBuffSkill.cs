@@ -27,10 +27,10 @@ public class SelfBuffSkill : BaseSkill
         GameObject colObject = other.gameObject;
         BaseObject actorObject = colObject.GetComponent<BaseObject>();
 
-        if (actorObject != Target)
+        if (actorObject != Owner)
             return;
 
-        Target.ThrowEvent(ConstValue.ActorData_Hit, Owner.GetData(ConstValue.ActorData_Character), Template);
+        Owner.ThrowEvent(ConstValue.ActorData_Buff);
 
     }
 }

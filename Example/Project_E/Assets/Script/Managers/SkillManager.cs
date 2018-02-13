@@ -38,7 +38,8 @@ public class SkillManager : MonoSingleton<SkillManager>
 
         foreach (KeyValuePair<string, JSONNode> pair in skillDataNode)
         {
-            SkillData skillData = new SkillData(pair.Key, pair.Value);
+            SkillData skillData = new SkillData
+                (pair.Key, pair.Value);
             DicSkillData.Add(pair.Key, skillData);
         }
 
@@ -178,10 +179,28 @@ public class SkillManager : MonoSingleton<SkillManager>
                 makeSkill.ThrowEvent(ConstValue.EventKey_SelectModel, GetModel(E_SKILLMODETYPE.CIRCLE));
                 break;
             case E_SKILLTEMPLATETYPE.GRAVITY_CROWDCONTROL:
+                makeSkill = skillObject.AddComponent<Quick_CowdControl>();
 
+                parentTransform = owner.FindInChild("FirePos");
+
+                if (parentTransform == null)
+                {
+                    parentTransform = owner.SelfTransform;
+                }
+
+                makeSkill.ThrowEvent(ConstValue.EventKey_SelectModel, GetModel(E_SKILLMODETYPE.GRAVITY));
                 break;
             case E_SKILLTEMPLATETYPE.DODGE_BUFF:
+                makeSkill = skillObject.AddComponent<SelfBuffSkill>();
 
+                parentTransform = owner.FindInChild("FirePos");
+
+                if (parentTransform == null)
+                {
+                    parentTransform = owner.SelfTransform;
+                }
+
+                makeSkill.ThrowEvent(ConstValue.EventKey_SelectModel, GetModel(E_SKILLMODETYPE.BOX));
                 break;
         }
         skillObject.name = skillTemplate.SkillType.ToString();

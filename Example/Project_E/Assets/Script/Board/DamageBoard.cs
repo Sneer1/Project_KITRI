@@ -25,6 +25,13 @@ public class DamageBoard : BaseBoard
 
             base.UpdateBoard(); //위치값 초기화
         }
+
+        else if (strkey == ConstValue.SetData_DamageText)
+        {
+            DamageText.text = (string)datas[0];
+
+            base.UpdateBoard();
+        }
     }
 
     public override void UpdateBoard()

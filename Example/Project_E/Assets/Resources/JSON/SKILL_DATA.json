@@ -49,7 +49,7 @@
       ]
     },
     "DODGE": {
-      "RANGE": 8,
+      "RANGE": 2,
       "SKILL": [
         "DODGE_BUF",
         "MELEE_A"

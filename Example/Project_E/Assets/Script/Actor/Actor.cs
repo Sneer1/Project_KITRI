@@ -23,6 +23,8 @@ public class Actor : BaseObject
         }
     }
 
+
+
     [SerializeField]
     string TemplateKey = string.Empty;
 
@@ -130,6 +132,18 @@ public class Actor : BaseObject
             if (ObjectState == E_BASEOBJECTSTATE.STATE_DIE)
                 return;
 
+            if(ObjectState == E_BASEOBJECTSTATE.STATE_DODGE)
+            {
+                BaseBoard board_temp = BoardManager.Instance.AddBoard(this, E_BOARDTYPE.BOARD_DAMAGE);
+
+                if (board_temp != null)
+                {
+                    board_temp.SetData(ConstValue.SetData_DamageText, "회피");
+                }
+                return;
+            }
+
+
             GameCharacter casterCharacter = datas[0] as GameCharacter;
             SkillTemplate skillTemplate = datas[1] as SkillTemplate;
 
@@ -183,6 +197,14 @@ public class Actor : BaseObject
                     }
                     break;
             }           
+        }
+
+        else if (keyData == ConstValue.ActorData_Buff)
+        {
+            if (ObjectState == E_BASEOBJECTSTATE.STATE_DIE)
+                return;
+
+            SetDodgeState(E_BASEOBJECTSTATE.STATE_DODGE, 0.5f);
         }
 
         base.ThrowEvent(keyData, datas);

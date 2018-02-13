@@ -2,7 +2,8 @@
 public enum E_BASEOBJECTSTATE
 {
     STATE_NORMAL,
-    STATE_DIE
+    STATE_DIE,
+    STATE_DODGE
 }
 
 public enum E_AITYPE
@@ -79,8 +80,6 @@ public enum E_SKILLRANGETYPE // Collision Type
 {
     RANGE_BOX, //RANGE_A
     RANGE_SPHERE, // STUN
-    //ICE
-    //GRAVITY_CC
 }
 
 public enum E_SKILLMODETYPE
@@ -89,6 +88,7 @@ public enum E_SKILLMODETYPE
     CIRCLE,
     FIRE,
     LIGHT,
+    GRAVITY,
     MAX
 }
 

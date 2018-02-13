@@ -1,6 +1,7 @@
 fileFormatVersion: 2
 guid: 6da61b96bf8bf6b49b88c11903583b9d
-timeCreated: 18446744011573954816
+timeCreated: 1518499445
+licenseType: Free
 SubstanceImporter:
   externalObjects: {}
   serializedVersion: 5
@@ -9,8 +10,8 @@ SubstanceImporter:
     name: Juno_Acc
     prototypeName: Juno_Acc
     shaderName: 
-    shader: {fileID: 2, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: 
+    shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _EMISSION
     renderQueue: -1
     lightmapFlags: 5
     inputs:
@@ -48,12 +49,8 @@ SubstanceImporter:
     materialProperties:
       serializedVersion: 3
       texEnvs:
-      - _BumpMap:
-          texture: {fileID: -1499168419, guid: 00000000000000000000000000000000, type: 0}
-          scale: {x: 1, y: 1}
-          offset: {x: 0, y: 0}
       - _MainTex:
-          texture: {fileID: 1586413616, guid: 00000000000000000000000000000000, type: 0}
+          texture: {instanceID: 0}
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       floats:
@@ -74,12 +71,9 @@ SubstanceImporter:
       aniso: 1
       wrapMode: 0
     textureAssignments:
-    - shaderProp: 
+    - shaderProp: _MainTex
       material: {instanceID: 0}
       baseUID: 1381322706
-    - shaderProp: 
-      material: {instanceID: 0}
-      baseUID: 1570771967
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 

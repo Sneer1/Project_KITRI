@@ -1,6 +1,7 @@
 fileFormatVersion: 2
 guid: 98b0376aa3d073c4998e90d47c1b83a0
-timeCreated: 18446744011573954816
+timeCreated: 1518500250
+licenseType: Free
 SubstanceImporter:
   externalObjects: {}
   serializedVersion: 5
@@ -9,10 +10,10 @@ SubstanceImporter:
     name: Juno_Body
     prototypeName: Juno_Body
     shaderName: 
-    shader: {fileID: 2, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: 
+    shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _ALPHABLEND_ON _EMISSION
     renderQueue: -1
-    lightmapFlags: 5
+    lightmapFlags: 1
     inputs:
     - name: Garment_Color_Output_Color
       value:
@@ -42,25 +43,38 @@ SubstanceImporter:
       serializedVersion: 5
       offset: {x: 0, y: 0}
       scale: {x: 1, y: 1}
-      generateMipmaps: 1
+      generateMipmaps: 0
       generateAllOutputs: 0
       animationUpdateRate: 42
     materialProperties:
       serializedVersion: 3
       texEnvs:
-      - _BumpMap:
-          texture: {fileID: 2006633354, guid: 00000000000000000000000000000000, type: 0}
-          scale: {x: 1, y: 1}
-          offset: {x: 0, y: 0}
       - _MainTex:
-          texture: {fileID: 1416702228, guid: 00000000000000000000000000000000, type: 0}
+          texture: {instanceID: 0}
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       floats:
+      - _BumpScale: 1
+      - _Cutoff: 0.5
+      - _DetailNormalMapScale: 1
+      - _DstBlend: 10
+      - _GlossMapScale: 1
+      - _Glossiness: 0.5
+      - _GlossyReflections: 1
       - _Highlight: 64
+      - _Metallic: 0
+      - _Mode: 2
+      - _OcclusionStrength: 1
+      - _Parallax: 0.02
       - _Shininess: 0.078125
+      - _SmoothnessTextureChannel: 0
+      - _SpecularHighlights: 1
+      - _SrcBlend: 5
+      - _UVSec: 0
+      - _ZWrite: 0
       colors:
       - _Color: {r: 1, g: 1, b: 1, a: 1}
+      - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
       - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     textureParameters:
     - name: Juno_Body_diffuse
@@ -74,12 +88,9 @@ SubstanceImporter:
       aniso: 1
       wrapMode: 0
     textureAssignments:
-    - shaderProp: 
+    - shaderProp: _MainTex
       material: {instanceID: 0}
       baseUID: 2965202565
-    - shaderProp: 
-      material: {instanceID: 0}
-      baseUID: 3209181938
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5fb10093ab0dfd7498f410200531352e
-timeCreated: 1517805529
+timeCreated: 1518506951
 licenseType: Free
 SubstanceImporter:
   externalObjects: {}
@@ -10,10 +10,10 @@ SubstanceImporter:
     name: Juno_Hair
     prototypeName: Juno_Hair
     shaderName: 
-    shader: {fileID: 2, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: 
-    renderQueue: -1
-    lightmapFlags: 5
+    shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _EMISSION
+    renderQueue: 5000
+    lightmapFlags: 1
     inputs:
     - name: Hair_Color_Output_Color
       value:
@@ -49,19 +49,38 @@ SubstanceImporter:
     materialProperties:
       serializedVersion: 3
       texEnvs:
-      - _BumpMap:
-          texture: {instanceID: 0}
-          scale: {x: 1, y: 1}
-          offset: {x: 0, y: 0}
       - _MainTex:
           texture: {instanceID: 0}
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       floats:
+      - _BumpScale: 1
+      - _Cutoff: 0.5
+      - _DetailNormalMapScale: 1
+      - _DstBlend: 0
+      - _EdgeThickness: 1
+      - _Emission: 1
+      - _GlossMapScale: 1
+      - _Glossiness: 0.5
+      - _GlossyReflections: 1
       - _Highlight: 64
+      - _Metallic: 0
+      - _Mode: 0
+      - _OcclusionStrength: 1
+      - _Parallax: 0.02
       - _Shininess: 0.078125
+      - _SmoothnessTextureChannel: 0
+      - _SpecularHighlights: 1
+      - _SpecularPower: 20
+      - _SrcBlend: 1
+      - _UVSec: 0
+      - _ZWrite: 1
       colors:
       - _Color: {r: 1, g: 1, b: 1, a: 1}
+      - _Emission: {r: 0, g: 0, b: 0, a: 0}
+      - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+      - _ReflectColor: {r: 1, g: 1, b: 1, a: 0.5}
+      - _ShadowColor: {r: 0.8, g: 0.8, b: 1, a: 1}
       - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     textureParameters:
     - name: Juno_Hair_diffuse
@@ -78,9 +97,6 @@ SubstanceImporter:
     - shaderProp: _MainTex
       material: {instanceID: 0}
       baseUID: 4158786606
-    - shaderProp: _BumpMap
-      material: {instanceID: 0}
-      baseUID: 4162277488
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 

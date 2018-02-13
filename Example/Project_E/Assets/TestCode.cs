@@ -5,24 +5,15 @@ using UnityEngine.UI;
 
 public class TestCode : MonoBehaviour
 {
-    public GameObject prefabUI;
-    public RectTransform position;
-    public Canvas canvas;
-    public Button button;
+    Renderer[] render;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        canvas = GetComponent<Canvas>() as Canvas;
-        prefabUI = Resources.Load("Prefabs/UI/Button") as GameObject;
-        prefabUI = Instantiate(prefabUI, canvas.transform) as GameObject;
-        prefabUI.transform.parent = canvas.transform;
-        position = prefabUI.GetComponent<RectTransform>();
-//        position.anchoredPosition = Vector3.zero;
-
+        render = this.gameObject.GetComponentsInChildren<Renderer>();
+        for(int i = 0; i < render.Length; i++)
+        {
+            render[i].material.color = new Color(render[i].material.color.r, render[i].material.color.g, render[i].material.color.b, 0.5f);
+        }
+        
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

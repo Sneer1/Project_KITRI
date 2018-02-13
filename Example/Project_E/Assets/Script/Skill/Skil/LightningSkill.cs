@@ -17,13 +17,13 @@ public class LightningSkill : BaseSkill
         go.transform.SetParent(this.transform, false);
         LightScript = go.GetComponent<LightningBoltScript>();
         LightScript.StartObject = Target.gameObject;
-        LightScript.EndObject = Owner.gameObject;
+        LightScript.EndObject = Owner.FindInChild("FirePos").gameObject;
 
         if (End == true)
             return;
 
         Target.ThrowEvent(ConstValue.ActorData_Hit, Owner.GetData(ConstValue.ActorData_Character), Template);
-        End = true;
+//        End = true;
     }
 
     public override void UpdateSkill()
@@ -32,6 +32,11 @@ public class LightningSkill : BaseSkill
         {
             End = true;
             return;
+        }
+
+        if(Owner.SelfObject.GetComponent<Actor>().AI.IsAttack == false)
+        {
+            End = true;
         }
 
         //Vector3 TargetPosition = SelfTransform.position + (Target.SelfTransform.position - SelfTransform.position).normalized * 10 * Time.deltaTime;

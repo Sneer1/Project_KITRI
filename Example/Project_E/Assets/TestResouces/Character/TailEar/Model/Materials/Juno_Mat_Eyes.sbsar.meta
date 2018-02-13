@@ -1,6 +1,7 @@
 fileFormatVersion: 2
 guid: 32df670857c3d314b87d4ce4144a9eb8
-timeCreated: 18446744011573954816
+timeCreated: 1518506891
+licenseType: Free
 SubstanceImporter:
   externalObjects: {}
   serializedVersion: 5
@@ -9,8 +10,8 @@ SubstanceImporter:
     name: Juno_Eye_L
     prototypeName: Juno_Eye
     shaderName: 
-    shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: 
+    shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _EMISSION
     renderQueue: -1
     lightmapFlags: 5
     inputs:
@@ -65,7 +66,7 @@ SubstanceImporter:
       serializedVersion: 3
       texEnvs:
       - _MainTex:
-          texture: {fileID: -149579447, guid: 00000000000000000000000000000000, type: 0}
+          texture: {instanceID: 0}
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       floats:
@@ -81,7 +82,7 @@ SubstanceImporter:
       aniso: 1
       wrapMode: 0
     textureAssignments:
-    - shaderProp: 
+    - shaderProp: _MainTex
       material: {instanceID: 0}
       baseUID: 202553568
     buildTargetSettings:
@@ -95,8 +96,8 @@ SubstanceImporter:
     name: Juno_Eye_R
     prototypeName: Juno_Eye
     shaderName: 
-    shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: 
+    shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _EMISSION
     renderQueue: -1
     lightmapFlags: 5
     inputs:
@@ -151,7 +152,7 @@ SubstanceImporter:
       serializedVersion: 3
       texEnvs:
       - _MainTex:
-          texture: {fileID: 1344203422, guid: 00000000000000000000000000000000, type: 0}
+          texture: {instanceID: 0}
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       floats:
@@ -167,7 +168,7 @@ SubstanceImporter:
       aniso: 1
       wrapMode: 0
     textureAssignments:
-    - shaderProp: 
+    - shaderProp: _MainTex
       material: {instanceID: 0}
       baseUID: 202553568
     buildTargetSettings:

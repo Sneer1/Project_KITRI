@@ -1,6 +1,7 @@
 fileFormatVersion: 2
 guid: 693a08e4f073c62438c73339fae3fa6c
-timeCreated: 18446744011573954816
+timeCreated: 1518500939
+licenseType: Free
 SubstanceImporter:
   externalObjects: {}
   serializedVersion: 5
@@ -9,8 +10,8 @@ SubstanceImporter:
     name: Juno_Skirt
     prototypeName: Juno_Skirt
     shaderName: 
-    shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: 
+    shader: {fileID: 30, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _EMISSION
     renderQueue: -1
     lightmapFlags: 5
     inputs:
@@ -49,7 +50,7 @@ SubstanceImporter:
       serializedVersion: 3
       texEnvs:
       - _MainTex:
-          texture: {fileID: 1789258936, guid: 00000000000000000000000000000000, type: 0}
+          texture: {instanceID: 0}
           scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       floats:
@@ -70,7 +71,7 @@ SubstanceImporter:
       aniso: 1
       wrapMode: 0
     textureAssignments:
-    - shaderProp: 
+    - shaderProp: _MainTex
       material: {instanceID: 0}
       baseUID: 1455527414
     buildTargetSettings:
