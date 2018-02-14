@@ -24,9 +24,6 @@ public class SelectUI : MonoBehaviour
     ESELECTCHARACTERSTAGE eSELECTCHARACTERSTAGE = ESELECTCHARACTERSTAGE.STAGE_3;
 
     public List<ECHARACTER> SelectCharacter = new List<ECHARACTER>();
-<<<<<<< HEAD
-    
-=======
 
     public EMUSIC SelectBuff;
     List<GameObject> BuffButton = new List<GameObject>();
@@ -61,7 +58,7 @@ public class SelectUI : MonoBehaviour
         Debug.Log(SelectBuff.ToString());
     }
 
->>>>>>> 7993ceaf22779a890d4443a0bce330b92ad14414
+
     void SetButton()
     {
         ConfirmButton = GameObject.Find("Confirm").gameObject;
