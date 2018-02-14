@@ -24,10 +24,49 @@ public class SelectUI : MonoBehaviour
     ESELECTCHARACTERSTAGE eSELECTCHARACTERSTAGE = ESELECTCHARACTERSTAGE.STAGE_3;
 
     public List<ECHARACTER> SelectCharacter = new List<ECHARACTER>();
+<<<<<<< HEAD
     
+=======
+
+    public EMUSIC SelectBuff;
+    List<GameObject> BuffButton = new List<GameObject>();
+    GameObject SelectBuffBackImage;
+    GameObject SelectCharacterImage;
+
+    public void SelectMusic(int index)
+    {
+        string enumname = BuffButton[index].GetComponent<Image>().sprite.name;
+        ECHARACTER ECharacterindex;
+
+        ECharacterindex = (ECHARACTER)System.Enum.Parse(typeof(ECHARACTER), enumname);
+
+        switch (ECharacterindex)
+        {
+            case ECHARACTER.HANRAN:
+                SelectBuff = EMUSIC.HANRAN_MUSIC_1;
+                break;
+            case ECHARACTER.IRIS:
+                SelectBuff = EMUSIC.IRIS_MUSIC_2;
+                break;
+            case ECHARACTER.TIBOUCHINA:
+                SelectBuff = EMUSIC.TIBOUCHINA_MUSIC_3;
+                break;
+            case ECHARACTER.VERBENA:
+                SelectBuff = EMUSIC.VERBENA_MUSIC_4;
+                break;
+            default:
+                Debug.LogError("버프음악이 설정되지 않습니다");
+                break;
+        }
+        Debug.Log(SelectBuff.ToString());
+    }
+
+>>>>>>> 7993ceaf22779a890d4443a0bce330b92ad14414
     void SetButton()
     {
         ConfirmButton = GameObject.Find("Confirm").gameObject;
+
+        SelectCharacterImage = GameObject.Find("SelectCharacterBorder").gameObject;
 
         for (int i = 1; i < 3; ++i)
         {
@@ -40,6 +79,20 @@ public class SelectUI : MonoBehaviour
             myCharacterlistGameObject[i].GetComponent<Image>().enabled = true;
             myCharacterlistGameObject[i].GetComponent<Button>().interactable = true;
         }
+
+        for (int i = 1; i < 3; ++i)
+        {
+            BuffButton.Add(GameObject.Find("SelectMusic" + i).gameObject);
+        }
+
+        for (int i = 0; i < BuffButton.Count; ++i)
+        {
+            BuffButton[i].SetActive(false);
+        }
+
+        SelectBuffBackImage = GameObject.Find("ButtonBack").gameObject;
+        SelectBuffBackImage.SetActive(false);
+
     }
 
     public void ConfirmClicked()
@@ -54,6 +107,28 @@ public class SelectUI : MonoBehaviour
             list.Add(Character_enum);
         }
         SelectCharacter = list;
+
+        SelectCharacterImage.SetActive(false);
+
+        for (int i = 0; i < myCharacterlistGameObject.Count; ++i)
+        {
+            myCharacterlistGameObject[i].SetActive(false);
+        }
+
+        for (int i = 0; i < SelectCharacterlist.Count; ++i)
+        {
+            SelectCharacterlist[i].SetActive(false);
+        }
+
+        ConfirmButton.SetActive(false);
+
+        SelectBuffBackImage.SetActive(true);
+
+        for (int i = 0; i < BuffButton.Count; ++i)
+        {
+            BuffButton[i].SetActive(true);
+            BuffButton[i].GetComponent<Image>().sprite = SelectCharacterlist[i].GetComponent<Image>().sprite;
+        }
     }
 
     void SelectMusic()
@@ -100,7 +175,6 @@ public class SelectUI : MonoBehaviour
             }
         }
     }
-
     public void SelectCharacterClicked(int index)
     {
         for (int i = 0; i < myCharacterlistGameObject.Count; ++i)
@@ -122,7 +196,6 @@ public class SelectUI : MonoBehaviour
 
     void Init()
     {
-        //Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Select_Canvas"), this.transform);
         myTransform = GameObject.Find("Select_Panel").transform;
         SelectCharacterDic = SelectCharacterData.LoadJSONSelectCharacterDic("JSON/STAGE_CHARACTER_DATA");
         StrlistCharacter = SelectCharacterDic[eSELECTCHARACTERSTAGE];

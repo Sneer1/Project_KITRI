@@ -12,7 +12,7 @@ public class Note : MonoBehaviour
 
     private void Awake()
     {
-        Init(500f);
+        Init(200f);
     }
 
     private void FixedUpdate()
@@ -24,12 +24,12 @@ public class Note : MonoBehaviour
     {
         if (NoteDir == Vector3.right)
         {
-            if (transform.position.x > 5)
+            if (transform.localPosition.x > 5)
                 return true;
         }
         else
         {
-            if (transform.position.x < -5)
+            if (transform.localPosition.x < -5)
                 return true;
         }
         return false;
@@ -64,14 +64,14 @@ public class Note : MonoBehaviour
     }
 
     //노트의 속도변화
-    public void SetNoteSpeed(float notespeed)
+    public void SetNoteSpeedChange(float notespeed)
     {
         NoteSpeed = notespeed;
     }
 
     public void NoteDirSet()
     {
-        if (transform.position.x > 0)
+        if (transform.localPosition.x > 0)
         {
             NoteDir = -NoteDir;
         }
@@ -79,7 +79,7 @@ public class Note : MonoBehaviour
 
     public void Init(float speed)
     {
-        SetNoteSpeed(speed);
+        SetNoteSpeedChange(speed);
         NoteDirSet();
     }
 }
