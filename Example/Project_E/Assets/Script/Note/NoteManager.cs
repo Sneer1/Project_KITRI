@@ -8,6 +8,7 @@ public class NoteManager : MonoSingleton<NoteManager>
 
     ESCORETYPE EMyScore;
 
+    GameObject NoteCheckObject;
     private void Awake()
     {
         if (Instance == null)
@@ -23,29 +24,29 @@ public class NoteManager : MonoSingleton<NoteManager>
         NoteCheck();
     }
 
-    public void NoteCheck()
+    void NoteCheck()
     {
         if (MyNoteList.Count == 0)
             return;
         float distance;
         if (GetNearNoteTrans() == null)
         {
-            //Debug.LogError("가까운 노트를 찾지 못했습니다");
+            Debug.LogError("가까운 노트를 찾지 못했습니다");
             return;
         }
 
-        distance = Vector3.SqrMagnitude(transform.position - GetNearNoteTrans().position);
+        distance = Vector3.SqrMagnitude(transform.localPosition - GetNearNoteTrans().localPosition);
 
-        //Debug.Log(distance);
+        Debug.Log(distance);
 
         if (MyNoteList[0].GetComponent<Note>().NoteIsOver() == true)
         {
             RemoveNote();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (distance < 20)
+            if (distance < 5000)
             {
                 if (distance > 15)
                 {
@@ -72,11 +73,36 @@ public class NoteManager : MonoSingleton<NoteManager>
         }
     }
 
-    public void SetNoteToList()
+    void SetNoteToList()
     {
-        for (int i = 0; i < this.gameObject.transform.childCount; ++i)
+        GameObject testObject;
+        testObject = Instantiate(Resources.Load<GameObject>("Prefabs/Note/NoteUI"), transform);
+
+
+
+        Transform trans = null;
+        for (int i = 0; i < testObject.transform.childCount; ++i)
         {
-            MyNoteList.Add(this.gameObject.transform.GetChild(i).gameObject);
+            if (testObject.transform.GetChild(i).name.Equals("NotePanel"))
+                trans = testObject.transform.GetChild(i);
+        }
+
+
+
+        Transform notetrans = null;
+        for (int i = 0; i < trans.childCount; ++i)
+        {
+            if (trans.GetChild(i).name.Equals("Note"))
+                notetrans = trans.GetChild(i);
+
+            if (trans.GetChild(i).name.Equals("NoteCheck"))
+                NoteCheckObject = trans.GetChild(i).gameObject;
+        }
+
+        for (int i = 0; i < notetrans.childCount; ++i)
+        {
+            MyNoteList.Add(notetrans.GetChild(i).gameObject);
+            //Debug.Log(trans.GetChild(i).GetComponent<GameObject>().name);
         }
 
         if (MyNoteList.Count == 0)
@@ -85,18 +111,38 @@ public class NoteManager : MonoSingleton<NoteManager>
         }
     }
 
-    public Transform GetNearNoteTrans()
+    Transform GetNearNoteTrans()
     {
         if (MyNoteList.Count == 0)
         {
             //Debug.LogError("리스트가 비어있습니다");
             return null;
         }
-        Transform targetTrans = MyNoteList[0].transform;
+        Transform targetTrans = null;
+
+        float distance;
+        
+        float min;
+
+        Vector3 neartrans = MyNoteList[0].transform.localPosition;
+        for (int i = 0; i < MyNoteList.Count; ++i)
+        {
+            if (neartrans.x < 0)
+                neartrans = -neartrans;
+
+            distance = Vector3.SqrMagnitude(NoteCheckObject.transform.localPosition - neartrans);
+            min = distance;
+            for (int j = i + 1; j < MyNoteList.Count; ++j)
+            {
+                
+            }
+            //targetTrans = MyNoteList[j].transform;
+        }
+
         return targetTrans;
     }
 
-    public void RemoveNote()
+    void RemoveNote()
     {
         if (MyNoteList.Count == 0)
         {

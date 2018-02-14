@@ -132,7 +132,7 @@ public class SkillManager : MonoSingleton<SkillManager>
 
                 parentTransform = owner.FindInChild("FirePos");
 
-                if(parentTransform == null)
+                if (parentTransform == null)
                 {
                     parentTransform = owner.SelfTransform;
                 }
@@ -293,10 +293,10 @@ public class SkillManager : MonoSingleton<SkillManager>
 
     public void LoadSkillModel()
     {
-        for(int i = 0; i < (int)E_SKILLMODETYPE.MAX; ++i)
+        for (int i = 0; i < (int)E_SKILLMODETYPE.MAX; ++i)
         {
             GameObject go = Resources.Load("Prefabs/Skill_Models/" + ((E_SKILLMODETYPE)i).ToString()) as GameObject;
-            if(go == null)
+            if (go == null)
             {
                 Debug.LogError("프리팹 스킬모델 로드 실패");
                 continue;
