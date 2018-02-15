@@ -42,19 +42,6 @@ public enum E_AUTOMODE
     Auto_Off,
 }
 
-public enum E_TEXTTYPE
-{
-    INTRO,
-    STAGE1_S,
-    STAGE1_E,
-    STAGE2_S,
-    STAGE2_E,
-    STAGE3_S,
-    STAGE3_E,
-    STAGE4_S,
-    STAGE4_E,
-    END
-}
 
 //Monster 관련
 public enum E_PLAYTYPE
@@ -127,10 +114,9 @@ public enum E_BOARDTYPE
 public enum E_SCENETYPE
 {
     SCENE_NONE,
-    SCENE_TITLE,
+    SCENE_TILE,
     SCENE_INTRO,
-    SCENE_CONVERSATION,
-    SCENE_STAGE_1,
+    SCENE_GAME,
     SCENE_END
 }
 
