@@ -119,24 +119,19 @@ public class NoteManager : MonoSingleton<NoteManager>
             return null;
         }
         Transform targetTrans = null;
+        Vector3 Origin = NoteCheckObject.transform.localPosition;
 
         float distance;
-        
-        float min;
+        float min = Vector3.SqrMagnitude(Origin - MyNoteList[0].transform.localPosition);
 
-        Vector3 neartrans = MyNoteList[0].transform.localPosition;
         for (int i = 0; i < MyNoteList.Count; ++i)
         {
-            if (neartrans.x < 0)
-                neartrans = -neartrans;
-
-            distance = Vector3.SqrMagnitude(NoteCheckObject.transform.localPosition - neartrans);
-            min = distance;
-            for (int j = i + 1; j < MyNoteList.Count; ++j)
+            distance = Vector3.SqrMagnitude(Origin - MyNoteList[i].transform.localPosition);
+            if (distance < min)
             {
-                
+                min = Vector3.SqrMagnitude(Origin - MyNoteList[i].transform.localPosition);
+                targetTrans = MyNoteList[i].transform;
             }
-            //targetTrans = MyNoteList[j].transform;
         }
 
         return targetTrans;
