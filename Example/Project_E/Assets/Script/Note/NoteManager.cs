@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoteManager : MonoSingleton<NoteManager>
 {
@@ -9,6 +10,11 @@ public class NoteManager : MonoSingleton<NoteManager>
     ESCORETYPE EMyScore;
 
     GameObject NoteCheckObject;
+    GameObject NoteGage;
+
+    float MaxScore = 100f;
+    float CurScore = 5f;
+
     private void Awake()
     {
         if (Instance == null)
@@ -37,40 +43,47 @@ public class NoteManager : MonoSingleton<NoteManager>
 
         distance = Vector3.SqrMagnitude(transform.localPosition - GetNearNoteTrans().localPosition);
 
-        Debug.Log(distance);
+        Slider NoteScore = NoteGage.GetComponent<Slider>();
 
-        if (MyNoteList[0].GetComponent<Note>().NoteIsOver() == true)
+        if (GetNearNoteTrans().GetComponent<Note>().NoteIsOver() == true)
         {
             RemoveNote();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (distance < 5000)
+            if (distance < 10000)
             {
-                if (distance > 15)
+                if (distance > 5000)
                 {
                     EMyScore = ESCORETYPE.Score_Miss;
                     Debug.Log("Score_Miss");
                 }
-                else if (distance > 10)
+                else if (distance > 3000)
                 {
                     EMyScore = ESCORETYPE.Score_Good;
                     Debug.Log("Score_Good");
+                    CurScore += 0.3f;
                 }
-                else if (distance > 5)
+                else if (distance > 1000)
                 {
                     EMyScore = ESCORETYPE.Score_Great;
                     Debug.Log("Score_Great");
+                    CurScore += 0.5f;
                 }
-                else if (distance >= 0)
+                else if (distance >= 500)
                 {
-                    EMyScore = ESCORETYPE.Score_Excellent;
-                    Debug.Log("Score_Excellent");
+                    EMyScore = ESCORETYPE.Score_Perpect;
+                    Debug.Log("Score_Perpect");
+                    CurScore += 1f;
                 }
                 RemoveNote();
+                
             }
         }
+        //CurScore -= 0.000002f;
+        NoteScore.value = CurScore / MaxScore;
+        Debug.Log(CurScore);
     }
 
     void SetNoteToList()
@@ -78,16 +91,12 @@ public class NoteManager : MonoSingleton<NoteManager>
         GameObject testObject;
         testObject = Instantiate(Resources.Load<GameObject>("Prefabs/Note/NoteUI"), transform);
 
-
-
         Transform trans = null;
         for (int i = 0; i < testObject.transform.childCount; ++i)
         {
             if (testObject.transform.GetChild(i).name.Equals("NotePanel"))
                 trans = testObject.transform.GetChild(i);
         }
-
-
 
         Transform notetrans = null;
         for (int i = 0; i < trans.childCount; ++i)
@@ -97,6 +106,9 @@ public class NoteManager : MonoSingleton<NoteManager>
 
             if (trans.GetChild(i).name.Equals("NoteCheck"))
                 NoteCheckObject = trans.GetChild(i).gameObject;
+
+            if (trans.GetChild(i).name.Equals("Gage"))
+                NoteGage = trans.GetChild(i).gameObject;
         }
 
         for (int i = 0; i < notetrans.childCount; ++i)
@@ -109,6 +121,22 @@ public class NoteManager : MonoSingleton<NoteManager>
         {
             Debug.LogError("노트 오브젝트를 찾지 못했습니다");
         }
+
+        SortNoteTrans();
+    }
+
+    void SortNoteTrans()
+    {
+        Vector3 Origin = NoteCheckObject.transform.localPosition;
+        MyNoteList.Sort(delegate (GameObject A, GameObject B)
+        {
+            float ADistance = Vector3.SqrMagnitude(Origin - A.transform.localPosition);
+            float BDistance = Vector3.SqrMagnitude(Origin - B.transform.localPosition);
+
+            if (ADistance > BDistance) return 1;
+            else if (ADistance < BDistance) return -1;
+            return 0;
+        });
     }
 
     Transform GetNearNoteTrans()
@@ -118,22 +146,8 @@ public class NoteManager : MonoSingleton<NoteManager>
             //Debug.LogError("리스트가 비어있습니다");
             return null;
         }
-        Transform targetTrans = null;
-        Vector3 Origin = NoteCheckObject.transform.localPosition;
-
-        float distance;
-        float min = Vector3.SqrMagnitude(Origin - MyNoteList[0].transform.localPosition);
-
-        for (int i = 0; i < MyNoteList.Count; ++i)
-        {
-            distance = Vector3.SqrMagnitude(Origin - MyNoteList[i].transform.localPosition);
-            if (distance < min)
-            {
-                min = Vector3.SqrMagnitude(Origin - MyNoteList[i].transform.localPosition);
-                targetTrans = MyNoteList[i].transform;
-            }
-        }
-
+        
+        Transform targetTrans = MyNoteList[0].transform;
         return targetTrans;
     }
 
@@ -144,7 +158,8 @@ public class NoteManager : MonoSingleton<NoteManager>
             Debug.Log("노트 없음");
             return;
         }
-        Destroy(MyNoteList[0]);
-        MyNoteList.RemoveAt(0);
+
+        Destroy(GetNearNoteTrans().gameObject);
+        MyNoteList.Remove(GetNearNoteTrans().gameObject);
     }
 }
