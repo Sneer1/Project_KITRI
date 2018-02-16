@@ -181,7 +181,7 @@ public enum ESCORETYPE
     Score_Miss,
     Score_Good,
     Score_Great,
-    Score_Excellent,
+    Score_Perpect,
 }
 
 public enum ESELECTCHARACTERSTAGE
