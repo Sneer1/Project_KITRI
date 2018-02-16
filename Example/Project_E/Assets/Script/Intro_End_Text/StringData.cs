@@ -5,10 +5,7 @@ using SimpleJSON;
 
 public class StringData : MonoBehaviour
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     string _StrKey = string.Empty;
     List<string> _StringData = new List<string>();
 
@@ -29,13 +26,7 @@ public class StringData : MonoBehaviour
             }
         }
     }
-=======
-=======
->>>>>>> parent of c8ce933... 머지/인트로씬/대화씬
-=======
->>>>>>> parent of c8ce933... 머지/인트로씬/대화씬
-=======
->>>>>>> parent of c8ce933... 머지/인트로씬/대화씬
+
     //string _StrKey = string.Empty;
     //List<string> _StringData = new List<string>();
 
@@ -70,14 +61,5 @@ public class StringData : MonoBehaviour
     //        }
     //    }
     //}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> parent of c8ce933... 머지/인트로씬/대화씬
-=======
->>>>>>> parent of c8ce933... 머지/인트로씬/대화씬
-=======
->>>>>>> parent of c8ce933... 머지/인트로씬/대화씬
-=======
->>>>>>> parent of c8ce933... 머지/인트로씬/대화씬
+
 }
