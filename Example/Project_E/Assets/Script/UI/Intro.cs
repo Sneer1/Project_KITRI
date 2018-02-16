@@ -21,17 +21,22 @@ public class Intro : MonoBehaviour
 
     private void Update()
     {
-        if (isOne == false && Intro_Text.Text.Count <= page_Index)
-        {           
-            Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION, false);
-            UI_Conversation.Instance.Init(E_TEXTTYPE.STAGE1_S);
-            isOne = true;
-        }
+
 
         if (Input.GetMouseButtonDown(0))
         {
-            TextUI.text = Intro_Text.Text[page_Index];
-            page_Index++;
+            if (isOne == false && Intro_Text.Text.Count <= page_Index)
+            {
+                Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION, false);
+                UI_Conversation.Instance.Init(E_TEXTTYPE.STAGE1_S);
+                isOne = true;
+            }
+
+            if (isOne == false)
+            {
+                TextUI.text = Intro_Text.Text[page_Index];
+                page_Index++;
+            }
         }
     }
 }
