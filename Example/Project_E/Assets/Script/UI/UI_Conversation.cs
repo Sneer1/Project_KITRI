@@ -33,7 +33,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     int currentindex = 0;
 
     bool startconversation = true;
-    
+    string StrSpriteCurrent = null;
+
     string CenterSprite = null;
 
     public int FontSize

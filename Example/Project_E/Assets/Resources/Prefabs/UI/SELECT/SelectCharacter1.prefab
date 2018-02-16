@@ -112,7 +112,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114397251951579046, guid: 13177bd2bf1987f478ca95f8aac3853a,
+      - m_Target: {fileID: 114637483868067386, guid: 8cffb70e270ab294883a3446968777a4,
           type: 2}
         m_MethodName: SelectCharacterClicked
         m_Mode: 3
