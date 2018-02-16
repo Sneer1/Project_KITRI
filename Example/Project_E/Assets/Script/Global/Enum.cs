@@ -42,6 +42,19 @@ public enum E_AUTOMODE
     Auto_Off,
 }
 
+public enum E_TEXTTYPE
+{
+    INTRO,
+    STAGE1_S,
+    STAGE1_E,
+    STAGE2_S,
+    STAGE2_E,
+    STAGE3_S,
+    STAGE3_E,
+    STAGE4_S,
+    STAGE4_E,
+    END
+}
 
 //Monster 관련
 public enum E_PLAYTYPE
@@ -114,9 +127,10 @@ public enum E_BOARDTYPE
 public enum E_SCENETYPE
 {
     SCENE_NONE,
-    SCENE_TILE,
+    SCENE_TITLE,
     SCENE_INTRO,
-    SCENE_GAME,
+    SCENE_CONVERSATION,
+    SCENE_STAGE_1,
     SCENE_END
 }
 
@@ -167,7 +181,7 @@ public enum ESCORETYPE
     Score_Miss,
     Score_Good,
     Score_Great,
-    Score_Perpect,
+    Score_Excellent,
 }
 
 public enum ESELECTCHARACTERSTAGE
@@ -177,4 +191,12 @@ public enum ESELECTCHARACTERSTAGE
     STAGE_3,
     STAGE_4,
     MAX
+}
+
+public enum EMUSIC
+{
+    HANRAN_MUSIC_1,
+    IRIS_MUSIC_2,
+    TIBOUCHINA_MUSIC_3,
+    VERBENA_MUSIC_4,
 }
