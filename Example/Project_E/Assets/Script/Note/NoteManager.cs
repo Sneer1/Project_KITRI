@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoteManager : MonoSingleton<NoteManager>
 {
@@ -8,7 +9,18 @@ public class NoteManager : MonoSingleton<NoteManager>
 
     ESCORETYPE EMyScore;
 
+<<<<<<< HEAD
+<<<<<<< HEAD
     GameObject NoteCheckObject;
+    GameObject NoteGage;
+
+    float MaxScore = 100f;
+    float CurScore = 5f;
+
+=======
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
+=======
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
     private void Awake()
     {
         if (Instance == null)
@@ -24,61 +36,84 @@ public class NoteManager : MonoSingleton<NoteManager>
         NoteCheck();
     }
 
-    void NoteCheck()
+    public void NoteCheck()
     {
         if (MyNoteList.Count == 0)
             return;
         float distance;
         if (GetNearNoteTrans() == null)
         {
-            Debug.LogError("가까운 노트를 찾지 못했습니다");
+            //Debug.LogError("가까운 노트를 찾지 못했습니다");
             return;
         }
 
-        distance = Vector3.SqrMagnitude(transform.localPosition - GetNearNoteTrans().localPosition);
+        distance = Vector3.SqrMagnitude(transform.position - GetNearNoteTrans().position);
 
-        Debug.Log(distance);
+<<<<<<< HEAD
+<<<<<<< HEAD
+        Slider NoteScore = NoteGage.GetComponent<Slider>();
+=======
+        //Debug.Log(distance);
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
+=======
+        //Debug.Log(distance);
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
 
-        if (MyNoteList[0].GetComponent<Note>().NoteIsOver() == true)
+        if (GetNearNoteTrans().GetComponent<Note>().NoteIsOver() == true)
         {
             RemoveNote();
         }
-
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (distance < 5000)
+<<<<<<< HEAD
+<<<<<<< HEAD
+            if (distance < 10000)
+=======
+            if (distance < 20)
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
+=======
+            if (distance < 20)
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
             {
-                if (distance > 15)
+                if (distance > 5000)
                 {
                     EMyScore = ESCORETYPE.Score_Miss;
                     Debug.Log("Score_Miss");
                 }
-                else if (distance > 10)
+                else if (distance > 3000)
                 {
                     EMyScore = ESCORETYPE.Score_Good;
                     Debug.Log("Score_Good");
+                    CurScore += 0.3f;
                 }
-                else if (distance > 5)
+                else if (distance > 1000)
                 {
                     EMyScore = ESCORETYPE.Score_Great;
                     Debug.Log("Score_Great");
+                    CurScore += 0.5f;
                 }
-                else if (distance >= 0)
+                else if (distance >= 500)
                 {
-                    EMyScore = ESCORETYPE.Score_Excellent;
-                    Debug.Log("Score_Excellent");
+                    EMyScore = ESCORETYPE.Score_Perpect;
+                    Debug.Log("Score_Perpect");
+                    CurScore += 1f;
                 }
                 RemoveNote();
+                
             }
         }
+        //CurScore -= 0.000002f;
+        NoteScore.value = CurScore / MaxScore;
+        Debug.Log(CurScore);
     }
 
-    void SetNoteToList()
+    public void SetNoteToList()
     {
+<<<<<<< HEAD
+<<<<<<< HEAD
         GameObject testObject;
         testObject = Instantiate(Resources.Load<GameObject>("Prefabs/Note/NoteUI"), transform);
-
-
 
         Transform trans = null;
         for (int i = 0; i < testObject.transform.childCount; ++i)
@@ -86,8 +121,6 @@ public class NoteManager : MonoSingleton<NoteManager>
             if (testObject.transform.GetChild(i).name.Equals("NotePanel"))
                 trans = testObject.transform.GetChild(i);
         }
-
-
 
         Transform notetrans = null;
         for (int i = 0; i < trans.childCount; ++i)
@@ -97,59 +130,74 @@ public class NoteManager : MonoSingleton<NoteManager>
 
             if (trans.GetChild(i).name.Equals("NoteCheck"))
                 NoteCheckObject = trans.GetChild(i).gameObject;
+
+            if (trans.GetChild(i).name.Equals("Gage"))
+                NoteGage = trans.GetChild(i).gameObject;
         }
 
         for (int i = 0; i < notetrans.childCount; ++i)
+=======
+        for (int i = 0; i < this.gameObject.transform.childCount; ++i)
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
+=======
+        for (int i = 0; i < this.gameObject.transform.childCount; ++i)
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
         {
-            MyNoteList.Add(notetrans.GetChild(i).gameObject);
-            //Debug.Log(trans.GetChild(i).GetComponent<GameObject>().name);
+            MyNoteList.Add(this.gameObject.transform.GetChild(i).gameObject);
         }
 
         if (MyNoteList.Count == 0)
         {
             Debug.LogError("노트 오브젝트를 찾지 못했습니다");
         }
+
+        SortNoteTrans();
     }
 
-    Transform GetNearNoteTrans()
+<<<<<<< HEAD
+    void SortNoteTrans()
+    {
+        Vector3 Origin = NoteCheckObject.transform.localPosition;
+        MyNoteList.Sort(delegate (GameObject A, GameObject B)
+        {
+            float ADistance = Vector3.SqrMagnitude(Origin - A.transform.localPosition);
+            float BDistance = Vector3.SqrMagnitude(Origin - B.transform.localPosition);
+
+            if (ADistance > BDistance) return 1;
+            else if (ADistance < BDistance) return -1;
+            return 0;
+        });
+    }
+
+=======
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
+    public Transform GetNearNoteTrans()
     {
         if (MyNoteList.Count == 0)
         {
             //Debug.LogError("리스트가 비어있습니다");
             return null;
         }
-        Transform targetTrans = null;
-
-        float distance;
+<<<<<<< HEAD
+<<<<<<< HEAD
         
-        float min;
-
-        Vector3 neartrans = MyNoteList[0].transform.localPosition;
-        for (int i = 0; i < MyNoteList.Count; ++i)
-        {
-            if (neartrans.x < 0)
-                neartrans = -neartrans;
-
-            distance = Vector3.SqrMagnitude(NoteCheckObject.transform.localPosition - neartrans);
-            min = distance;
-            for (int j = i + 1; j < MyNoteList.Count; ++j)
-            {
-                
-            }
-            //targetTrans = MyNoteList[j].transform;
-        }
-
+=======
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
+=======
+>>>>>>> parent of b5ccdc5... Merge remote-tracking branch 'remotes/origin/minwoongbranch' into MergeBranch
+        Transform targetTrans = MyNoteList[0].transform;
         return targetTrans;
     }
 
-    void RemoveNote()
+    public void RemoveNote()
     {
         if (MyNoteList.Count == 0)
         {
             Debug.Log("노트 없음");
             return;
         }
-        Destroy(MyNoteList[0]);
-        MyNoteList.RemoveAt(0);
+
+        Destroy(GetNearNoteTrans().gameObject);
+        MyNoteList.Remove(GetNearNoteTrans().gameObject);
     }
 }
