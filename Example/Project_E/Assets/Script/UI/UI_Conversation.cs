@@ -7,11 +7,9 @@ using SimpleJSON;
 
 public class UI_Conversation : MonoSingleton<UI_Conversation>
 {
-    //JSONLoad클래스
-    ConversationData ConversationData = new ConversationData();
-
     //대사집딕셔너리
-    Dictionary<ESTAGELEVEL, List<string>> ConversationDic;
+    List<string> CharacterList = new List<string>();
+    List<string> TextList = new List<string>();
 
     Color _fontColor = UnityEngine.Color.black;
     Font _textFont = null;
@@ -106,17 +104,19 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
     }
 
-    private new void Init()
+    public void Init(E_TEXTTYPE _textType)
     {
         MyGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Conversation/UIConversationCanvas"), this.transform);
         Dialog = GameObject.Find("ConversationDialog").GetComponent<Text>();
-        ConversationDic = ConversationData.LoadJSONdialogtext("JSON/ConversationText");
+
+        Text_Character TextData = TextLoad.Instance.GetText_Stage(_textType.ToString());
+        CharacterList = TextData.CharacterName;
+        TextList = TextData.Text;
         SetSpriteResource();
     }
 
     private void Awake()
     {
-        Init();
     }
 
     private void SetSpriteResource()
@@ -129,10 +129,10 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     private void Update()
     {
-        ViewText(ESTAGELEVEL.STAGE_4_END);
+        ViewText();
     }
 
-    public void SetSpriteImage(ESTAGELEVEL eStageLevel)
+    public void SetSpriteImage()
     {
         Image SpriteCenter = GameObject.Find("CharacterSpriteCenter").GetComponent<Image>();
 
@@ -142,11 +142,11 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             return;
         }
 
-        CenterSprite = GetDialogName(eStageLevel);
+        CenterSprite = CharacterList[currentindex];
         SpriteCenter.color = new Color(1f, 1f, 1f);
-        if (GetDialogName(eStageLevel).Equals("HERO"))
+        if (CenterSprite.Equals("HERO") && currentindex + 1 <  CharacterList.Count)
         {
-            CenterSprite = GetNextDialogName(eStageLevel);
+            CenterSprite = CharacterList[currentindex+1];
             SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
         }
 
@@ -155,54 +155,17 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         SpriteCenter.sprite = listsprite[(int)Character_enum];
     }
 
-    string GetDialogName(ESTAGELEVEL eStage, bool IsCurrent = true)
-    {
-        string charactername = null;
-        List<string> currentstagedialog = ConversationDic[eStage];
-        for (int i = 0; i < currentstagedialog[currentindex].Length; ++i)
-        {
-            if (currentstagedialog[currentindex].Substring(i, 1) == "/")
-            {
-                charactername = currentstagedialog[currentindex].Substring(0, i);
-                ConversationIndex = i + 1;
-                break;
-            }
-        }
-        return charactername;
-    }
-    string GetNextDialogName(ESTAGELEVEL estage)
-    {
-        string nextcharactername = null;
-        List<string> currentstagedialog = ConversationDic[estage];
-        for (int j = currentindex; j < currentstagedialog.Count; ++j)
-        {
-            for (int i = 0; i < currentstagedialog[j].Length; ++i)
-            {
-                if (currentstagedialog[j].Substring(i, 1) == "/")
-                {
-                    nextcharactername = currentstagedialog[j].Substring(0, i);
-                    if (GetDialogName(estage).Equals(nextcharactername) == false)
-                    {
-                        return nextcharactername;
-                    }
-                }
-            }
-        }
-        nextcharactername = null;
-        return nextcharactername;
-    }
-
-    public void ViewText(ESTAGELEVEL eStageLevel)
+    public void ViewText()
     {
         if (Dialog == null)
         {
-            Debug.LogError("다이얼로그가 비었습니다");
+            Debug.Log("다이얼로그가 비었습니다");
             return;
         }
 
-        if (ConversationDic[eStageLevel].Count == 0)
+        if (CharacterList.Count == 0)
         {
-            Debug.LogError("리스트 다이얼로그가 비었습니다");
+            Debug.Log("리스트 다이얼로그가 비었습니다");
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -217,14 +180,14 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
 
         //설정된 다이얼로그 list의 최대 인덱스보다 크면 리턴
-        if (ConversationDic[eStageLevel].Count <= currentindex)
+        if (CharacterList.Count <= currentindex)
             return;
 
         printTextTime += Time.deltaTime;
 
         if (startconversation)
         {
-            SetSpriteImage(eStageLevel);
+            SetSpriteImage();
             startconversation = false;
         }
 
@@ -233,8 +196,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         {
             if (printTextTime > ConstValue.TextTimeCheck)
             {
-                Dialog.text = ConversationDic[eStageLevel][currentindex].Substring(ConversationIndex, length);
-                if (ConversationDic[eStageLevel][currentindex].Length - ConversationIndex >= length)
+                Dialog.text = TextList[currentindex].Substring(ConversationIndex, length);
+                if (TextList[currentindex].Length - ConversationIndex >= length)
                 {
                     length++;
                 }
@@ -249,8 +212,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             printTextTime += ConstValue.TextTimeCheck;
             if (printTextTime > ConstValue.TextTimeCheck)
             {
-                Dialog.text = ConversationDic[eStageLevel][currentindex].Substring(ConversationIndex, length);
-                if (ConversationDic[eStageLevel][currentindex].Length - ConversationIndex >= length)
+                Dialog.text = TextList[currentindex].Substring(ConversationIndex, length);
+                if (TextList[currentindex].Length - ConversationIndex >= length)
                 {
                     length++;
                 }
@@ -259,7 +222,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
 
         //다이얼로그 하나가 끝나면 다음 다이얼로그로 넘어간다.
-        if (length >= ConversationDic[eStageLevel][currentindex].Length - ConversationIndex + 1)
+        if (length >= TextList[currentindex].Length - ConversationIndex + 1)
         {
             length = 1;
             fastreading = false;

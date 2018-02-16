@@ -38,8 +38,7 @@ public class SkillManager : MonoSingleton<SkillManager>
 
         foreach (KeyValuePair<string, JSONNode> pair in skillDataNode)
         {
-            SkillData skillData = new SkillData
-                (pair.Key, pair.Value);
+            SkillData skillData = new SkillData (pair.Key, pair.Value);
             DicSkillData.Add(pair.Key, skillData);
         }
 

@@ -9,14 +9,10 @@ public static class ConstValue
 
 
 	// JSON 관련
-	public const string CharacterTemplatePath =
-		"JSON/CHARACTER_TEMPLATE";
-	public const string CharacterTemplateKey =
-		"CHARACTER_TEMPLATE";
-    public const string TextDataPath =
-        "JSON/INTRO";
-    public const string TextDataKey =
-        "JSON/INTRO";
+	public const string CharacterTemplatePath = "JSON/CHARACTER_TEMPLATE";
+	public const string CharacterTemplateKey =	"CHARACTER_TEMPLATE";
+    public const string TextLoadPath =      "JSON/TEXTLOAD";
+    public const string TextLoadKey = "TEXTLOAD_DATA";
 
     public const string SkillTemplatePath = "JSON/SKILL_TEMPLATE";
 	public const string SkillTemplateKey = "SKILL_TEMPLATE";

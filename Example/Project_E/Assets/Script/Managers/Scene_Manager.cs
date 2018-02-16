@@ -8,7 +8,7 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
     bool IsAsyc = false;
     AsyncOperation Operation = null;
 
-    E_SCENETYPE CurrentState = E_SCENETYPE.SCENE_TILE;
+    E_SCENETYPE CurrentState = E_SCENETYPE.SCENE_TITLE;
     E_SCENETYPE NextState = E_SCENETYPE.SCENE_NONE;
 
     float StackTime = 0.0f;
@@ -84,11 +84,11 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
         {
             case E_SCENETYPE.SCENE_NONE:
                 break;
-            case E_SCENETYPE.SCENE_TILE:
+            case E_SCENETYPE.SCENE_TITLE:
                 break;
             case E_SCENETYPE.SCENE_INTRO:
                 break;
-            case E_SCENETYPE.SCENE_GAME:
+            case E_SCENETYPE.SCENE_STAGE_1:
                 break;
             case E_SCENETYPE.SCENE_END:
                 break;
@@ -106,11 +106,11 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
         {
             case E_SCENETYPE.SCENE_NONE:
                 break;
-            case E_SCENETYPE.SCENE_TILE:
+            case E_SCENETYPE.SCENE_TITLE:
                 break;
             case E_SCENETYPE.SCENE_INTRO:                
                 break;
-            case E_SCENETYPE.SCENE_GAME:
+            case E_SCENETYPE.SCENE_STAGE_1:
                 break;
             case E_SCENETYPE.SCENE_END:
                 break;
