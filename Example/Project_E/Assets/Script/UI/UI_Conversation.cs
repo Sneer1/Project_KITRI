@@ -177,6 +177,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             
             reading = true;
 
+            if (CharacterList.Count <= currentindex)
+                ConversationQuitStartSelect();
         }
 
         //설정된 다이얼로그 list의 최대 인덱스보다 크면 리턴
@@ -266,4 +268,11 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         TextFont = font;
         Dialog.font = TextFont;
     }
+
+    void ConversationQuitStartSelect()
+    {
+        Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Select_Canvas"));
+        Destroy(this.gameObject);
+    }
+
 }
