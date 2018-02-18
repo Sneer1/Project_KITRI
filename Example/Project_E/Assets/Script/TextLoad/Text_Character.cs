@@ -9,6 +9,7 @@ public class Text_Character
     List<string> _CharacterName = new List<string>();
     List<string> _Text = new List<string>();
 
+    public string GetStageData { get { return StageData; } }
     public List<string> CharacterName {  get { return _CharacterName; } }
     public List<string> Text { get { return _Text; } }
 

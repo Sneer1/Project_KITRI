@@ -6,6 +6,12 @@ using UnityEngine.UI;
 
 public class SelectUI : MonoBehaviour
 {
+    //battleManager return List
+    List<E_PLAYTYPE> PlayerList = new List<E_PLAYTYPE>();
+    List<E_ENEMYTYPE> EnemyList = new List<E_ENEMYTYPE>();
+
+    E_SCENETYPE currStage;
+
     Transform myTransform;
     SelectCharacterData SelectCharacterData = new SelectCharacterData();
 
@@ -18,10 +24,6 @@ public class SelectUI : MonoBehaviour
     GameObject ConfirmButton;
 
     Dictionary<ESELECTCHARACTERSTAGE, List<string>> SelectCharacterDic;
-
-    ESELECTCHARACTERSTAGE eSELECTCHARACTERSTAGE = ESELECTCHARACTERSTAGE.STAGE_3;
-
-    public List<ECHARACTER> SelectCharacter = new List<ECHARACTER>();
 
     public EMUSIC SelectBuff;
     List<GameObject> BuffButton = new List<GameObject>();
@@ -53,6 +55,11 @@ public class SelectUI : MonoBehaviour
                 Debug.LogError("버프음악이 설정되지 않습니다");
                 break;
         }
+
+        Scene_Manager.Instance.LoadScene(currStage, false);
+        Scene_Manager.Instance.UpdateScene();
+        BattleManager.Instance.PlayerList = PlayerList;
+        BattleManager.Instance.EnemyList = EnemyList;
         Debug.Log(SelectBuff.ToString());
     }
 
@@ -62,7 +69,7 @@ public class SelectUI : MonoBehaviour
 
         SelectCharacterImage = GameObject.Find("SelectCharacterBorder").gameObject;
 
-        for (int i = 1; i < 3; ++i)
+        for (int i = 1; i <= 3; ++i)
         {
             SelectCharacterlist.Add(GameObject.Find("SelectCharacter" + i).gameObject);
         }
@@ -74,7 +81,7 @@ public class SelectUI : MonoBehaviour
             myCharacterlistGameObject[i].GetComponent<Button>().interactable = true;
         }
 
-        for (int i = 1; i < 3; ++i)
+        for (int i = 1; i <= 3; ++i)
         {
             BuffButton.Add(GameObject.Find("SelectMusic" + i).gameObject);
         }
@@ -91,16 +98,17 @@ public class SelectUI : MonoBehaviour
 
     public void ConfirmClicked()
     {
-        List<ECHARACTER> list = new List<ECHARACTER>();
         string ename = null;
         ECHARACTER Character_enum;
         for (int i = 0; i < SelectCharacterlist.Count; ++i)
         {
+            if (SelectCharacterlist[i].GetComponent<Image>().sprite == null)
+                break;
+
             ename = SelectCharacterlist[i].GetComponent<Image>().sprite.name;
             Character_enum = (ECHARACTER)System.Enum.Parse(typeof(ECHARACTER), ename);
-            list.Add(Character_enum);
+            PlayerList.Add((E_PLAYTYPE)Character_enum);
         }
-        SelectCharacter = list;
 
         SelectCharacterImage.SetActive(false);
 
@@ -148,11 +156,32 @@ public class SelectUI : MonoBehaviour
             SelectCharacterlist[1].GetComponent<Image>().enabled = true;
             SelectCharacterlist[1].GetComponent<Button>().interactable = true;
         }
-
-        if (SelectCharacterlist[0].GetComponent<Image>().sprite != null && SelectCharacterlist[1].GetComponent<Image>().sprite != null)
+        else if (SelectCharacterlist[2].GetComponent<Image>().sprite == null)
         {
-            ConfirmButton.GetComponent<Image>().enabled = true;
-            ConfirmButton.GetComponent<Button>().interactable = true;
+            SelectCharacterlist[2].GetComponent<Image>().sprite = listsprite[index];
+            SelectCharacterlist[2].GetComponent<Image>().enabled = true;
+            SelectCharacterlist[2].GetComponent<Button>().interactable = true;
+        }
+
+        //선택할 캐릭터가 2개일 때 (Stage1)
+        if(StrlistCharacter.Count == 2)
+        {
+            if (SelectCharacterlist[0].GetComponent<Image>().sprite != null
+                 && SelectCharacterlist[1].GetComponent<Image>().sprite != null)
+            {
+                ConfirmButton.GetComponent<Image>().enabled = true;
+                ConfirmButton.GetComponent<Button>().interactable = true;
+            }
+        }
+        else
+        {
+            if (SelectCharacterlist[0].GetComponent<Image>().sprite != null
+                && SelectCharacterlist[1].GetComponent<Image>().sprite != null
+                && SelectCharacterlist[2].GetComponent<Image>().sprite != null)
+            {
+                ConfirmButton.GetComponent<Image>().enabled = true;
+                ConfirmButton.GetComponent<Button>().interactable = true;
+            }
         }
 
         for (int j = 0; j < SelectCharacterlist.Count; ++j)
@@ -183,11 +212,35 @@ public class SelectUI : MonoBehaviour
         }
     }
 
-    void Init()
+    public void Init(ESELECTCHARACTERSTAGE _SelectStage)
     {
         myTransform = GameObject.Find("Select_Panel").transform;
         SelectCharacterDic = SelectCharacterData.LoadJSONSelectCharacterDic("JSON/STAGE_CHARACTER_DATA");
-        StrlistCharacter = SelectCharacterDic[eSELECTCHARACTERSTAGE];
+        StrlistCharacter = SelectCharacterDic[_SelectStage];
+
+        switch (_SelectStage)
+        {
+            case ESELECTCHARACTERSTAGE.STAGE_1:
+                EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_BLUE);
+                EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_RED);
+                currStage = E_SCENETYPE.SCENE_STAGE_1;
+                break;
+            case ESELECTCHARACTERSTAGE.STAGE_2:
+                EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_TIBOUCHINA);
+                currStage = E_SCENETYPE.SCENE_STAGE_2;
+                break;
+            case ESELECTCHARACTERSTAGE.STAGE_3:
+                EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_VERBENA);
+                currStage = E_SCENETYPE.SCENE_STAGE_3;
+                break;
+            case ESELECTCHARACTERSTAGE.STAGE_4:
+                EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_ROSE);
+                currStage = E_SCENETYPE.SCENE_STAGE_4;
+                break;
+
+            default:
+                break;
+        }
 
         for (int i = 0; i < (int)ECHARACTER.MAX; ++i)
         {
@@ -195,10 +248,5 @@ public class SelectUI : MonoBehaviour
         }
 
         SetButton();
-    }
-
-    private void Start()
-    {
-        Init();
     }
 }

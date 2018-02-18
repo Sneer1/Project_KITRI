@@ -15,5 +15,14 @@ EditorBuildSettings:
     path: Assets/Scene/SCENE_CONVERSATION.unity
     guid: 1d56d785ba5b70b458be530c227fe8f7
   - enabled: 1
-    path: Assets/Scene/STAGE_1.unity
+    path: Assets/Scene/SCENE_STAGE_1.unity
     guid: 32811fef66092a143959c5f17c5fdaf8
+  - enabled: 1
+    path: Assets/Scene/SCENE_STAGE_2.unity
+    guid: 5bd219d63879bf349ae2ccfed02fc86a
+  - enabled: 1
+    path: Assets/Scene/SCENE_STAGE_3.unity
+    guid: 049301e47a5fceb4aaf14e27c458a9b0
+  - enabled: 1
+    path: Assets/Scene/SCENE_STAGE_4.unity
+    guid: b903880ec19f266449eae07dd82e85db

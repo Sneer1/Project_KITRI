@@ -13,12 +13,25 @@ public class BoardManager : MonoSingleton<BoardManager>
     {
         if (BoardUI == null)
         {
-            BoardUI = GameObject.Find("BoardUI_Root");
+            Transform parent = GameObject.Find("Canvas").GetComponent<Canvas>().transform;
+            BoardUI = new GameObject("BoardUI_Root");
+            DontDestroyOnLoad(parent);
+            BoardUI.transform.SetParent(parent, false);
+            RectTransform rectt = BoardUI.AddComponent<RectTransform>();
+            BoardUI.AddComponent<CanvasRenderer>();
+
+            rectt.anchoredPosition = new Vector2(0, 0);
+            rectt.sizeDelta = new Vector2(0, 0);
+            rectt.anchorMin = new Vector2(0, 0);
+            rectt.anchorMax = new Vector2(1, 1);
+
+
+
             //BoardUI.layer = LayerMask.NameToLayer("UI");
 
-            //Transform parent = GameObject.Find("Canvas").GetComponent<Canvas>().transform;
 
-            
+
+
 
             //#1
             //BoardUI.transform.SetParent(parent, false);
@@ -141,9 +154,14 @@ public class BoardManager : MonoSingleton<BoardManager>
         if (DicBoard.ContainsKey(keyObject) == false)
             return;
 
+
+
         List<BaseBoard> listBoard = DicBoard[keyObject];
         for (int i = 0; i < listBoard.Count; ++i)
         {
+            if (DicBoard[keyObject][i] == null)
+                continue;
+
             if (listBoard[i].gameObject.activeSelf != bEnable)
             {
                 listBoard[i].gameObject.SetActive(bEnable);

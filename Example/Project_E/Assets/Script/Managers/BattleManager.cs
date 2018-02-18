@@ -10,49 +10,18 @@ public class BattleManager : MonoSingleton<BattleManager>
     [SerializeField]
     private Transform[] EnemyGen;
 
-    int nPlayerGenIndex = 0;
-    int nEnemyGenIndex = 0;
+    List<E_PLAYTYPE> _PlayerList = new List<E_PLAYTYPE>();
+    List<E_ENEMYTYPE> _EnemyList = new List<E_ENEMYTYPE>();
 
-    void Start ()
+    public List<E_PLAYTYPE> PlayerList
     {
-        List<E_PLAYTYPE> listPlayer = new List<E_PLAYTYPE>();
-        listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_HANRAN);
-        listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_IRIS);
-        listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_TIBOUCHINA);
-        listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_VERBENA);
-        listPlayer.Add(E_PLAYTYPE.PF_CHARACTER_ROSE);
-
-        List<E_ENEMYTYPE> listEnemy = new List<E_ENEMYTYPE>();
-        listEnemy.Add(E_ENEMYTYPE.PF_ENEMY_BLUE);
-        listEnemy.Add(E_ENEMYTYPE.PF_ENEMY_RED);
-
-        LoadBattle(listPlayer, listEnemy);
-	}
-
-    public void LoadBattle(List<E_PLAYTYPE> _ePlayer, List<E_ENEMYTYPE> _eEnemy)
-    {
-        foreach(E_PLAYTYPE list in _ePlayer)
-        {
-            SpawnPlayer(list);
-        }
-
-        foreach (E_ENEMYTYPE list in _eEnemy)
-        {
-            SpawnEnemy(list);
-        }
+        get { return _PlayerList; }
+        set { _PlayerList = value;}
     }
 
-    public void SpawnPlayer(E_PLAYTYPE _ePlayer)
+    public List<E_ENEMYTYPE> EnemyList
     {
-        GameObject playerPrefab = ActorManager.Instance.GetPlayerPrefab(_ePlayer);
-        GameObject go = Instantiate(playerPrefab, PlayGen[nPlayerGenIndex].position, Quaternion.identity) as GameObject;
-        nPlayerGenIndex++;
-    }
-
-    public void SpawnEnemy(E_ENEMYTYPE _eEnemy)
-    {
-        GameObject EnemyPrefab = ActorManager.Instance.GetEnemyPrefab(_eEnemy);
-        GameObject go = Instantiate(EnemyPrefab, EnemyGen[nEnemyGenIndex].position, Quaternion.identity) as GameObject;
-        nEnemyGenIndex++;
+        get { return _EnemyList; }
+        set { _EnemyList = value; }
     }
 }

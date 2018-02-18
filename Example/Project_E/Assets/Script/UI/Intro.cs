@@ -21,13 +21,12 @@ public class Intro : MonoBehaviour
 
     private void Update()
     {
-
-
         if (Input.GetMouseButtonDown(0))
         {
             if (isOne == false && Intro_Text.Text.Count <= page_Index)
             {
                 Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION, false);
+                Scene_Manager.Instance.UpdateScene();
                 UI_Conversation.Instance.Init(E_TEXTTYPE.STAGE1_S);
                 isOne = true;
             }

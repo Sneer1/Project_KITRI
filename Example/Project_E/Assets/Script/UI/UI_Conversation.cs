@@ -8,8 +8,14 @@ using SimpleJSON;
 public class UI_Conversation : MonoSingleton<UI_Conversation>
 {
     //대사집딕셔너리
+    Text_Character TextData;
+
     List<string> CharacterList = new List<string>();
     List<string> TextList = new List<string>();
+
+    public string stageData;
+    public char checkStartEnd;
+    public GameObject stagePrefab = null;
 
     Color _fontColor = UnityEngine.Color.black;
     Font _textFont = null;
@@ -31,7 +37,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     int currentindex = 0;
 
     bool startconversation = true;
-    
+
     string CenterSprite = null;
 
     public int FontSize
@@ -108,15 +114,17 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     {
         MyGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Conversation/UIConversationCanvas"), this.transform);
         Dialog = GameObject.Find("ConversationDialog").GetComponent<Text>();
-
-        Text_Character TextData = TextLoad.Instance.GetText_Stage(_textType.ToString());
+        TextData = TextLoad.Instance.GetText_Stage(_textType.ToString());
         CharacterList = TextData.CharacterName;
         TextList = TextData.Text;
         SetSpriteResource();
+        stageData = TextData.GetStageData.Substring(0, 6);
+        checkStartEnd = TextData.GetStageData[7];
     }
 
     private void Awake()
     {
+
     }
 
     private void SetSpriteResource()
@@ -144,9 +152,9 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
         CenterSprite = CharacterList[currentindex];
         SpriteCenter.color = new Color(1f, 1f, 1f);
-        if (CenterSprite.Equals("HERO") && currentindex + 1 <  CharacterList.Count)
+        if (CenterSprite.Equals("HERO") && currentindex + 1 < CharacterList.Count)
         {
-            CenterSprite = CharacterList[currentindex+1];
+            CenterSprite = CharacterList[currentindex + 1];
             SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
         }
 
@@ -174,7 +182,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
             if (reading == false)
                 startconversation = true;
-            
+
             reading = true;
 
             if (CharacterList.Count <= currentindex)
@@ -234,7 +242,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
         }
     }
-    
+
     public void SetCanvas(bool bsetcanvas = false)
     {
         GameObject _gobj = GameObject.Find("UIConversationCanvas").gameObject;
@@ -271,7 +279,38 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     void ConversationQuitStartSelect()
     {
-        Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Select_Canvas"));
+        if (checkStartEnd == 'S')
+        {
+            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Select_Canvas")) as GameObject;
+
+            ESELECTCHARACTERSTAGE selectStage = ESELECTCHARACTERSTAGE.STAGE_1;
+            switch (stageData)
+            {
+                case "STAGE1":
+                    selectStage = ESELECTCHARACTERSTAGE.STAGE_1;
+                    break;
+                case "STAGE2":
+                    selectStage = ESELECTCHARACTERSTAGE.STAGE_2;
+                    break;
+                case "STAGE3":
+                    selectStage = ESELECTCHARACTERSTAGE.STAGE_3;
+                    break;
+                case "STAGE4":
+                    selectStage = ESELECTCHARACTERSTAGE.STAGE_4;
+                    break;
+
+                default:
+                    break;
+            }
+            go.GetComponent<SelectUI>().Init(selectStage);
+        }
+        else
+        {
+            GameManager.Instance.UIConversation_Change(E_TEXTTYPE.STAGE1_E);
+            Destroy(stagePrefab);
+        }
+        
+
         Destroy(this.gameObject);
     }
 

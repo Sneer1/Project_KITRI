@@ -19,6 +19,11 @@ public class ActorManager : MonoSingleton<ActorManager>
         EnemyPrefabInit();
     }
 
+    public Dictionary<E_TEAMTYPE, List<Actor>> GetDicActor
+    {
+        get { return DicActor; }
+    }
+
     void PlayerPrefabInit()
     {
         for (int i = 0; i < (int)E_PLAYTYPE.MAX; ++i)

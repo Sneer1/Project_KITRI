@@ -27,31 +27,8 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
         IsAsyc = _async;
     }
 
-    void Update()
+    public void UpdateScene()
     {
-        //if (Operation != null)
-        //{
-        //    StackTime += Time.deltaTime;
-        //    // Loding UI Set
-        //    // UI_Tools.Instance.ShowLoadingUI(Operation.progress);
-        //    UI_Tools.Instance.ShowLoadingUI(StackTime / 2f);
-
-        //    // if (Operation.isDone == true)
-        //    if (Operation.isDone == true && StackTime >= 2.0f)
-        //    {
-        //        CurrentState = NextState;
-        //        ComplateLoad(CurrentState);
-
-        //        Operation = null;
-        //        NextState = E_SCENETYPE.SCENE_NONE;
-
-        //        // Loding UI 삭제
-        //        UI_Tools.Instance.HideUI(E_UITYPE.PF_UI_LOADING, true);
-        //    }
-        //    else
-        //        return;
-        //}
-
         if (CurrentState == E_SCENETYPE.SCENE_NONE)
             return;
 
@@ -77,6 +54,57 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
             }
         }
     }
+
+    //void Update()
+    //{
+    //    //if (Operation != null)
+    //    //{
+    //    //    StackTime += Time.deltaTime;
+    //    //    // Loding UI Set
+    //    //    // UI_Tools.Instance.ShowLoadingUI(Operation.progress);
+    //    //    UI_Tools.Instance.ShowLoadingUI(StackTime / 2f);
+
+    //    //    // if (Operation.isDone == true)
+    //    //    if (Operation.isDone == true && StackTime >= 2.0f)
+    //    //    {
+    //    //        CurrentState = NextState;
+    //    //        ComplateLoad(CurrentState);
+
+    //    //        Operation = null;
+    //    //        NextState = E_SCENETYPE.SCENE_NONE;
+
+    //    //        // Loding UI 삭제
+    //    //        UI_Tools.Instance.HideUI(E_UITYPE.PF_UI_LOADING, true);
+    //    //    }
+    //    //    else
+    //    //        return;
+    //    //}
+
+    //    if (CurrentState == E_SCENETYPE.SCENE_NONE)
+    //        return;
+
+    //    if (NextState != E_SCENETYPE.SCENE_NONE
+    //        && CurrentState != NextState)
+    //    {
+    //        DisableScene(CurrentState);
+
+    //        if (IsAsyc)
+    //        { // 비동기 로드
+    //            //Operation = SceneManager.LoadSceneAsync(
+    //            //    NextState.ToString("F"));
+    //            //StackTime = 0.0f;
+    //            //// Loading UI Set
+    //            //UI_Tools.Instance.ShowLoadingUI(0.0f);
+    //        }
+    //        else
+    //        { // 동기 로드
+    //            SceneManager.LoadScene(NextState.ToString("F"));
+    //            CurrentState = NextState;
+    //            NextState = E_SCENETYPE.SCENE_NONE;
+    //            ComplateLoad(CurrentState);
+    //        }
+    //    }
+    //}
 
     void ComplateLoad(E_SCENETYPE _type)
     {

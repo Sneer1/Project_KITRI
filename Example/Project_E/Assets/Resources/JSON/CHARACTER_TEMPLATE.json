@@ -53,7 +53,7 @@
     },
     "ENEMY_BLUE": 
     {
-      "MAX_HP": 100,
+      "MAX_HP": 1,
       "ATTACK": 2,
       "DEFFENCE": 5,
       "SKILL": [
@@ -62,7 +62,7 @@
     },
     "ENEMY_RED": 
     {
-      "MAX_HP": 200,
+      "MAX_HP": 1,
       "ATTACK": 2,
       "DEFFENCE": 5,
       "SKILL": [
@@ -75,7 +75,8 @@
       "ATTACK": 10,
       "DEFFENCE": 5,
       "SKILL": [
-        "ELEMENT"
+        "FIRE",
+        "LIGHTNING"
       ]
     },
     "ENEMY_VERBENA": 
@@ -84,6 +85,7 @@
       "ATTACK": 10,
       "DEFFENCE": 5,
       "SKILL": [
+        "RANGE",
         "GRAVITY"
       ]
     },
