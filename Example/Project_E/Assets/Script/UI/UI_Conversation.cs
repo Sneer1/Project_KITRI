@@ -156,7 +156,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
         if (CenterSprite.Equals("HERO"))
         {
-            if (currentindex + 1 < CharacterList.Count)
+            if (currentindex > 0)
             {
                 CenterSprite = CharacterList[currentindex - 1];
                 SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
