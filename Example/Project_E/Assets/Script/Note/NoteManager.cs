@@ -44,9 +44,6 @@ public class NoteManager : MonoSingleton<NoteManager>
         distance = Vector3.SqrMagnitude(transform.localPosition - GetNearNoteTrans().localPosition);
 
         Slider NoteScore = NoteGage.GetComponent<Slider>();
-
-        //Debug.Log("거리:" + distance);
-        //Debug.Log("노트의 위치:" + GetNearNoteTrans().localPosition.x);
         
         if (GetNearNoteTrans().GetComponent<Note>().NoteIsOver() == true)
         {
@@ -81,7 +78,6 @@ public class NoteManager : MonoSingleton<NoteManager>
                     CurScore += 1f;
                 }
                 RemoveNote();
-
             }
         }
         NoteScore.value = CurScore / MaxScore;
