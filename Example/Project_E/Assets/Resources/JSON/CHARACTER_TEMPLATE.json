@@ -71,7 +71,7 @@
     },
     "ENEMY_TIBOUCHINA": 
     {
-      "MAX_HP": 500,
+      "MAX_HP": 1,
       "ATTACK": 10,
       "DEFFENCE": 5,
       "SKILL": [
@@ -81,7 +81,7 @@
     },
     "ENEMY_VERBENA": 
     {
-      "MAX_HP": 500,
+      "MAX_HP": 1,
       "ATTACK": 10,
       "DEFFENCE": 5,
       "SKILL": [
@@ -91,11 +91,12 @@
     },
     "ENEMY_ROSE": 
     {
-      "MAX_HP": 700,
+      "MAX_HP": 1,
       "ATTACK": 25,
       "DEFFENCE": 5,
       "SKILL": [
-        "DODGE"
+        "DODGE",
+        "MELEE"
       ]
     }
   }
