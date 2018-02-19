@@ -156,8 +156,16 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
         if (CenterSprite.Equals("HERO"))
         {
-            CenterSprite = CharacterList[currentindex - 1];
-            SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
+            if (currentindex + 1 < CharacterList.Count)
+            {
+                CenterSprite = CharacterList[currentindex - 1];
+                SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
+            }
+            else
+            {
+                CenterSprite = CharacterList[currentindex + 1];
+                SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
+            }
         }
 
         ECHARACTER Character_enum = (ECHARACTER)System.Enum.Parse(typeof(ECHARACTER), CenterSprite);
@@ -311,7 +319,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             GameManager.Instance.UIConversation_Change(E_TEXTTYPE.STAGE1_E);
             Destroy(stagePrefab);
         }
-        
+
 
         Destroy(this.gameObject);
     }
