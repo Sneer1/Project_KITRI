@@ -84,9 +84,7 @@ public class NoteManager : MonoSingleton<NoteManager>
 
             }
         }
-        //CurScore -= 0.000002f;
         NoteScore.value = CurScore / MaxScore;
-        //Debug.Log(CurScore);
     }
 
     void SetNoteToList()
@@ -119,7 +117,6 @@ public class NoteManager : MonoSingleton<NoteManager>
         for (int i = 0; i < notetrans.childCount; ++i)
         {
             MyNoteList.Add(notetrans.GetChild(i).gameObject);
-            //Debug.Log(trans.GetChild(i).GetComponent<GameObject>().name);
         }
 
         if (MyNoteList.Count == 0)
