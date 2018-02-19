@@ -10,6 +10,18 @@ public class BattleManager : MonoSingleton<BattleManager>
     [SerializeField]
     private Transform[] EnemyGen;
 
+    public E_TEXTTYPE E_NextStage
+    {
+        get;
+        set;
+    }
+
+    public E_TEXTTYPE E_CurrStageEnd
+    {
+        get;
+        set;
+    }
+
     List<E_PLAYTYPE> _PlayerList = new List<E_PLAYTYPE>();
     List<E_ENEMYTYPE> _EnemyList = new List<E_ENEMYTYPE>();
 

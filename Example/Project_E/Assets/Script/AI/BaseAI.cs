@@ -123,7 +123,7 @@ public class BaseAI : BaseObject
     protected virtual void ProcessAttack()
     {
         Actor actor = Target as Actor;
-        int nCount = actor.SelfChararcter.GetListCount() + 1;
+        int nCount = actor.SelfChararcter.GetListCount();
 
         Attack_Type = Random.Range(0, nCount);
 

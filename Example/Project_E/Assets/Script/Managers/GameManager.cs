@@ -18,7 +18,7 @@ public class GameManager : MonoSingleton<GameManager>
     IEnumerator waitUIConversationInit(E_TEXTTYPE _eSTextStage)
     {
         yield return new WaitForEndOfFrame();
-        UI_Conversation.Instance.Init(E_TEXTTYPE.STAGE2_S);
+        UI_Conversation.Instance.Init(_eSTextStage);
         GameObject.Find("Stage").GetComponent<Stage_Conversation>().SetStage();
     }
 }

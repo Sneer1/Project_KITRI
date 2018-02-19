@@ -28,7 +28,7 @@ public class LightningSkill : BaseSkill
 
     public override void UpdateSkill()
     {
-        if (Target == null)
+        if (Target == null || Owner.SelfObject.GetComponent<Actor>().AI.END)
         {
             End = true;
             return;

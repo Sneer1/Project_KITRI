@@ -18,5 +18,10 @@ public class Stage_Conversation : MonoBehaviour
             Skybox skyBox = Camera.main.gameObject.AddComponent<Skybox>();
             skyBox.material = Resources.Load("Materials/SkyBox_Night") as Material;
         }
+        else if (UI_Conversation.Instance.stageData.ToString() == "STAGE3")
+        {
+            Skybox skyBox = Camera.main.gameObject.AddComponent<Skybox>();
+            skyBox.material = Resources.Load("Materials/SkyBox_Sunny") as Material;
+        }
     }
 }
