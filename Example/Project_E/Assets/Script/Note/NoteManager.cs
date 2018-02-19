@@ -45,6 +45,9 @@ public class NoteManager : MonoSingleton<NoteManager>
 
         Slider NoteScore = NoteGage.GetComponent<Slider>();
 
+        //Debug.Log("거리:" + distance);
+        //Debug.Log("노트의 위치:" + GetNearNoteTrans().localPosition.x);
+        
         if (GetNearNoteTrans().GetComponent<Note>().NoteIsOver() == true)
         {
             RemoveNote();
@@ -78,12 +81,12 @@ public class NoteManager : MonoSingleton<NoteManager>
                     CurScore += 1f;
                 }
                 RemoveNote();
-                
+
             }
         }
         //CurScore -= 0.000002f;
         NoteScore.value = CurScore / MaxScore;
-        Debug.Log(CurScore);
+        //Debug.Log(CurScore);
     }
 
     void SetNoteToList()
@@ -99,11 +102,13 @@ public class NoteManager : MonoSingleton<NoteManager>
         }
 
         Transform notetrans = null;
+
+        string selectmusic = BackSound.Instance.backsound.ToString();
+
+        notetrans = Instantiate(Resources.Load<GameObject>("Prefabs/Note/" + selectmusic), trans).transform;
+
         for (int i = 0; i < trans.childCount; ++i)
         {
-            if (trans.GetChild(i).name.Equals("Note"))
-                notetrans = trans.GetChild(i);
-
             if (trans.GetChild(i).name.Equals("NoteCheck"))
                 NoteCheckObject = trans.GetChild(i).gameObject;
 
@@ -146,7 +151,7 @@ public class NoteManager : MonoSingleton<NoteManager>
             //Debug.LogError("리스트가 비어있습니다");
             return null;
         }
-        
+
         Transform targetTrans = MyNoteList[0].transform;
         return targetTrans;
     }
