@@ -9,7 +9,7 @@ public class Title : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_INTRO, false);
+            Scene_Manager.Instance.UpdateScene();
         }
     }
-   
 }
