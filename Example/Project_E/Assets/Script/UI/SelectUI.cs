@@ -226,18 +226,26 @@ public class SelectUI : MonoBehaviour
                 EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_BLUE);
                 EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_RED);
                 currStage = E_SCENETYPE.SCENE_STAGE_1;
+                BattleManager.Instance.E_NextStage = E_TEXTTYPE.STAGE2_S;
+                BattleManager.Instance.E_CurrStageEnd = E_TEXTTYPE.STAGE1_E;
                 break;
             case ESELECTCHARACTERSTAGE.STAGE_2:
                 EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_TIBOUCHINA);
                 currStage = E_SCENETYPE.SCENE_STAGE_2;
+                BattleManager.Instance.E_NextStage = E_TEXTTYPE.STAGE3_S;
+                BattleManager.Instance.E_CurrStageEnd = E_TEXTTYPE.STAGE2_E;
                 break;
             case ESELECTCHARACTERSTAGE.STAGE_3:
                 EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_VERBENA);
                 currStage = E_SCENETYPE.SCENE_STAGE_3;
+                BattleManager.Instance.E_NextStage = E_TEXTTYPE.STAGE4_S;
+                BattleManager.Instance.E_CurrStageEnd = E_TEXTTYPE.STAGE3_E;
                 break;
             case ESELECTCHARACTERSTAGE.STAGE_4:
                 EnemyList.Add(E_ENEMYTYPE.PF_ENEMY_ROSE);
                 currStage = E_SCENETYPE.SCENE_STAGE_4;
+                BattleManager.Instance.E_NextStage = E_TEXTTYPE.END;
+                BattleManager.Instance.E_CurrStageEnd = E_TEXTTYPE.STAGE4_E;
                 break;
 
             default:

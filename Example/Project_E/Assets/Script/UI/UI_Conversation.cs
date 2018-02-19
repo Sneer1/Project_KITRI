@@ -316,7 +316,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
         else
         {
-            GameManager.Instance.UIConversation_Change(E_TEXTTYPE.STAGE1_E);
+            GameManager.Instance.UIConversation_Change(BattleManager.Instance.E_NextStage);
             Destroy(stagePrefab);
         }
 

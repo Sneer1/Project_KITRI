@@ -25,7 +25,7 @@ public class Stage_Battle : MonoBehaviour
         {
             Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION, false);
             Scene_Manager.Instance.UpdateScene();
-            UI_Conversation.Instance.Init(E_TEXTTYPE.STAGE1_E);
+            UI_Conversation.Instance.Init(BattleManager.Instance.E_CurrStageEnd);
         }
     }
 
