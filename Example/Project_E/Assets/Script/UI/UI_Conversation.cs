@@ -150,11 +150,13 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
             return;
         }
 
+
         CenterSprite = CharacterList[currentindex];
         SpriteCenter.color = new Color(1f, 1f, 1f);
-        if (CenterSprite.Equals("HERO") && currentindex + 1 < CharacterList.Count)
+
+        if (CenterSprite.Equals("HERO"))
         {
-            CenterSprite = CharacterList[currentindex + 1];
+            CenterSprite = CharacterList[currentindex - 1];
             SpriteCenter.color = new Color(0.3f, 0.3f, 0.3f);
         }
 
