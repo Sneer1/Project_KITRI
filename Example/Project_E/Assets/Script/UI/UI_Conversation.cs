@@ -112,6 +112,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
 
     public void Init(E_TEXTTYPE _textType)
     {
+        SoundManager.Instance.PlayBGM(E_SOUND.SOUND_BGM_CONVERSATION);
         MyGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Conversation/UIConversationCanvas"), this.transform);
         Dialog = GameObject.Find("ConversationDialog").GetComponent<Text>();
         TextData = TextLoad.Instance.GetText_Stage(_textType.ToString());
@@ -187,6 +188,8 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
         if (Input.GetMouseButtonDown(0))
         {
+            SoundManager.Instance.PlayEFF(E_SOUND.SOUND_EFF_NEXTTEXT);
+
             if (reading == true)
                 fastreading = true;
 

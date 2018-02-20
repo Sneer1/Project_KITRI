@@ -97,9 +97,8 @@ public class NoteManager : MonoSingleton<NoteManager>
 
         Transform notetrans = null;
 
-        string selectmusic = BackSound.Instance.backsound.ToString();
 
-        notetrans = Instantiate(Resources.Load<GameObject>("Prefabs/Note/" + selectmusic), trans).transform;
+ //       notetrans = Instantiate(Resources.Load<GameObject>("Prefabs/Note/" + selectmusic), trans).transform;
 
         for (int i = 0; i < trans.childCount; ++i)
         {

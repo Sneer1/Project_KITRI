@@ -25,7 +25,6 @@ public class SelectUI : MonoBehaviour
 
     Dictionary<ESELECTCHARACTERSTAGE, List<string>> SelectCharacterDic;
 
-    public EMUSIC SelectBuff;
     List<GameObject> BuffButton = new List<GameObject>();
     GameObject SelectBuffBackImage;
     GameObject SelectCharacterImage;
@@ -40,16 +39,16 @@ public class SelectUI : MonoBehaviour
         switch (ECharacterindex)
         {
             case ECHARACTER.HANRAN:
-                SelectBuff = EMUSIC.HANRAN_MUSIC_1;
+
                 break;
             case ECHARACTER.IRIS:
-                SelectBuff = EMUSIC.IRIS_MUSIC_2;
+
                 break;
             case ECHARACTER.TIBOUCHINA:
-                SelectBuff = EMUSIC.TIBOUCHINA_MUSIC_3;
+
                 break;
             case ECHARACTER.VERBENA:
-                SelectBuff = EMUSIC.VERBENA_MUSIC_4;
+
                 break;
             default:
                 Debug.LogError("버프음악이 설정되지 않습니다");
@@ -62,7 +61,7 @@ public class SelectUI : MonoBehaviour
         BattleManager.Instance.EnemyList = EnemyList;
 //        BackSound.Instance.BackSoundPlay(SelectBuff);
         
-        Debug.Log(SelectBuff.ToString());
+ //       Debug.Log(SelectBuff.ToString());
     }
 
     void SetButton()
@@ -100,6 +99,7 @@ public class SelectUI : MonoBehaviour
 
     public void ConfirmClicked()
     {
+        SoundManager.Instance.PlayEFF(E_SOUND.SOUND_EFF_NEXTSCENE);
         string ename = null;
         ECHARACTER Character_enum;
         for (int i = 0; i < SelectCharacterlist.Count; ++i)
