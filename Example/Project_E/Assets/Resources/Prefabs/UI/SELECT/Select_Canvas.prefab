@@ -542,7 +542,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB178\uB798~"
+  m_Text: "- \uAC15\uC778\uD568\uC758 \uB178\uB798 -\n\uC544\uC774\uB9AC\uC2A4\uC758
+    \uC2E0\uCCB4\uB2A5\uB825\uC744 \uAC15\uD654\uC2DC\uCF1C\uC900\uB2E4"
 --- !u!114 &114080563231610724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -603,7 +604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b5946d38fe4949a569d4467999f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectCharacter: 
   SelectBuff: 0
 --- !u!114 &114172836171732706
 MonoBehaviour:
@@ -905,7 +905,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB178\uB798~"
+  m_Text: "- \uADF8\uB9AC\uC6C0\uC758 \uB178\uB798 -\n\uD55C\uB780\uC758 \uC815\uC2E0\uC9C0\uBC30
+    \uB2A5\uB825\uC744 \uAC15\uD654\uC2DC\uCF1C\uC900\uB2E4"
 --- !u!114 &114343150639992438
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1303,7 +1304,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB178\uB798~"
+  m_Text: 
 --- !u!114 &114540207175358166
 MonoBehaviour:
   m_ObjectHideFlags: 1

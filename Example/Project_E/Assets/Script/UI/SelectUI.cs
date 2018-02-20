@@ -60,7 +60,7 @@ public class SelectUI : MonoBehaviour
         Scene_Manager.Instance.UpdateScene();
         BattleManager.Instance.PlayerList = PlayerList;
         BattleManager.Instance.EnemyList = EnemyList;
-        BackSound.Instance.BackSoundPlay(SelectBuff);
+//        BackSound.Instance.BackSoundPlay(SelectBuff);
         
         Debug.Log(SelectBuff.ToString());
     }

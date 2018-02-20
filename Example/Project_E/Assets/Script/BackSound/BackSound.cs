@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BackSound : MonoSingleton<BackSound>
 {
-    GameObject MainPlaySound;
-    AudioClip PlayAudio;
+    [SerializeField]
+    AudioClip[] PlayAudio;
+
+    public AudioSource musicSource;
     public EMUSIC backsound;
 
     private void Awake()
@@ -15,15 +17,8 @@ public class BackSound : MonoSingleton<BackSound>
 
     new void Init()
     {
-        MainPlaySound = Camera.main.gameObject;
-        MainPlaySound.AddComponent<AudioSource>();
-    }
-
-    public void BackSoundPlay(EMUSIC eMUSIC)
-    {
-        backsound = eMUSIC;
-        PlayAudio = Resources.Load<AudioClip>("Sound/"+ backsound.ToString());   
-        MainPlaySound.GetComponent<AudioSource>().clip = PlayAudio;
-        MainPlaySound.GetComponent<AudioSource>().Play();
+        musicSource= this.gameObject.AddComponent<AudioSource>();
+        musicSource.clip = PlayAudio[0];
+        musicSource.Play();
     }
 }
