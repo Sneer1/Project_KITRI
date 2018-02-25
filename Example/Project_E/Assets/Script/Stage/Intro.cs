@@ -27,9 +27,7 @@ public class Intro : MonoBehaviour
             if (isOne == false && Intro_Text.Text.Count <= page_Index)
             {
                 SoundManager.Instance.PlayEFF(E_SOUND.SOUND_EFF_NEXTSCENE);
-                Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION, false);
-                Scene_Manager.Instance.UpdateScene();
-                UI_Conversation.Instance.Init(E_TEXTTYPE.STAGE1_S);
+                Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION);                
                 isOne = true;
             }
 

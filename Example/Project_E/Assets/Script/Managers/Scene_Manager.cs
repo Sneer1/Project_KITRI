@@ -11,6 +11,11 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
     E_SCENETYPE CurrentState = E_SCENETYPE.SCENE_TITLE;
     E_SCENETYPE NextState = E_SCENETYPE.SCENE_NONE;
 
+    //Stage Text
+    E_TEXTTYPE e_StageText = E_TEXTTYPE.STAGE1_S;
+    
+
+    GameObject TargetUI;
     float StackTime = 0.0f;
 
     public E_SCENETYPE CURRENT_SCENE
@@ -18,7 +23,7 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
         get { return CurrentState; }
     }
 
-    public void LoadScene(E_SCENETYPE _type, bool _async = false)
+    public void LoadScene(E_SCENETYPE _type, bool _async = true)
     {
         if (CurrentState == _type)
             return;
@@ -27,8 +32,31 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
         IsAsyc = _async;
     }
 
-    public void UpdateScene()
+    void Update()
     {
+        if (Operation != null)
+        {
+            // Loding UI Set
+            // UI_Tools.Instance.ShowLoadingUI(Operation.progress);
+            if(TargetUI)
+            StackTime = TargetUI.GetComponent<UI_Loading>().GetSlider.value = Operation.progress + 0.1f;
+
+            // if (Operation.isDone == true)
+            if (Operation.isDone == true && StackTime >= 1.0f)
+            {
+                CurrentState = NextState;
+                ComplateLoad(CurrentState);
+
+                Operation = null;
+                NextState = E_SCENETYPE.SCENE_NONE;
+
+                // Loding UI 삭제
+                UI_Tools.Instance.HideUI(E_UITYPE.PF_UI_LOADING);
+            }
+            else
+                return;
+        }
+
         if (CurrentState == E_SCENETYPE.SCENE_NONE)
             return;
 
@@ -39,11 +67,11 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
 
             if (IsAsyc)
             { // 비동기 로드
-                //Operation = SceneManager.LoadSceneAsync(
-                //    NextState.ToString("F"));
-                //StackTime = 0.0f;
-                //// Loading UI Set
-                //UI_Tools.Instance.ShowLoadingUI(0.0f);
+                Operation = SceneManager.LoadSceneAsync(
+                    NextState.ToString("F"));
+
+                // Loading UI Set
+                TargetUI = UI_Tools.Instance.ShowUI(E_UITYPE.PF_UI_LOADING);
             }
             else
             { // 동기 로드
@@ -55,57 +83,6 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
         }
     }
 
-    //void Update()
-    //{
-    //    //if (Operation != null)
-    //    //{
-    //    //    StackTime += Time.deltaTime;
-    //    //    // Loding UI Set
-    //    //    // UI_Tools.Instance.ShowLoadingUI(Operation.progress);
-    //    //    UI_Tools.Instance.ShowLoadingUI(StackTime / 2f);
-
-    //    //    // if (Operation.isDone == true)
-    //    //    if (Operation.isDone == true && StackTime >= 2.0f)
-    //    //    {
-    //    //        CurrentState = NextState;
-    //    //        ComplateLoad(CurrentState);
-
-    //    //        Operation = null;
-    //    //        NextState = E_SCENETYPE.SCENE_NONE;
-
-    //    //        // Loding UI 삭제
-    //    //        UI_Tools.Instance.HideUI(E_UITYPE.PF_UI_LOADING, true);
-    //    //    }
-    //    //    else
-    //    //        return;
-    //    //}
-
-    //    if (CurrentState == E_SCENETYPE.SCENE_NONE)
-    //        return;
-
-    //    if (NextState != E_SCENETYPE.SCENE_NONE
-    //        && CurrentState != NextState)
-    //    {
-    //        DisableScene(CurrentState);
-
-    //        if (IsAsyc)
-    //        { // 비동기 로드
-    //            //Operation = SceneManager.LoadSceneAsync(
-    //            //    NextState.ToString("F"));
-    //            //StackTime = 0.0f;
-    //            //// Loading UI Set
-    //            //UI_Tools.Instance.ShowLoadingUI(0.0f);
-    //        }
-    //        else
-    //        { // 동기 로드
-    //            SceneManager.LoadScene(NextState.ToString("F"));
-    //            CurrentState = NextState;
-    //            NextState = E_SCENETYPE.SCENE_NONE;
-    //            ComplateLoad(CurrentState);
-    //        }
-    //    }
-    //}
-
     void ComplateLoad(E_SCENETYPE _type)
     {
         switch (_type)
@@ -115,6 +92,12 @@ public class Scene_Manager : MonoSingleton<Scene_Manager>
             case E_SCENETYPE.SCENE_TITLE:
                 break;
             case E_SCENETYPE.SCENE_INTRO:
+                UI_Tools.Instance.ShowUI(E_UITYPE.PF_UI_INTRO);
+                break;
+            case E_SCENETYPE.SCENE_CONVERSATION:
+                UI_Conversation conversation = UI_Tools.Instance.ShowUI(E_UITYPE.PF_UI_CONVERSATION).GetComponent<UI_Conversation>();
+                conversation.Init(e_StageText);
+                e_StageText++;
                 break;
             case E_SCENETYPE.SCENE_STAGE_1:
                 break;

@@ -7,18 +7,18 @@ public class GameManager : MonoSingleton<GameManager>
 {
     private void Awake()
     {
-
+        UI_Tools.Instance.ShowUI(E_UITYPE.PF_UI_TITLE);
     }
 
-    public void UIConversation_Change(E_TEXTTYPE _eSTextStage)
-    {
-        StartCoroutine("waitUIConversationInit", _eSTextStage);
-    }
+    //public void UIConversation_Change(E_TEXTTYPE _eSTextStage)
+    //{
+    //    StartCoroutine("waitUIConversationInit", _eSTextStage);
+    //}
 
-    IEnumerator waitUIConversationInit(E_TEXTTYPE _eSTextStage)
-    {
-        yield return new WaitForEndOfFrame();
-        UI_Conversation.Instance.Init(_eSTextStage);
-        GameObject.Find("Stage").GetComponent<Stage_Conversation>().SetStage();
-    }
+    //IEnumerator waitUIConversationInit(E_TEXTTYPE _eSTextStage)
+    //{
+    //    yield return new WaitForEndOfFrame();
+    //    UI_Conversation.Instance.Init(_eSTextStage);
+    //    GameObject.Find("Stage").GetComponent<Stage_Conversation>().SetStage();
+    //}
 }

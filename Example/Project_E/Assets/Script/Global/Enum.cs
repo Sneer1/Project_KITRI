@@ -141,8 +141,10 @@ public enum E_UITYPE
 {
     PF_UI_TITLE,
     PF_UI_LOADING,
-    PF_UI_LOBBY,
-    PF_UI_STAGE,
+    PF_UI_INTRO,
+    PF_UI_CONVERSATION,
+    PF_UI_SELECT,
+    PF_UI_STAGE
 }
 
 //public enum eSlotType

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using SimpleJSON;
 
-public class UI_Conversation : MonoSingleton<UI_Conversation>
+public class UI_Conversation : MonoBehaviour
 {
     //대사집딕셔너리
     Text_Character TextData;
@@ -113,7 +113,6 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     public void Init(E_TEXTTYPE _textType)
     {
         SoundManager.Instance.PlayBGM(E_SOUND.SOUND_BGM_CONVERSATION);
-        MyGameObject = Instantiate(Resources.Load<GameObject>("Prefabs/UI/Conversation/UIConversationCanvas"), this.transform);
         Dialog = GameObject.Find("ConversationDialog").GetComponent<Text>();
         TextData = TextLoad.Instance.GetText_Stage(_textType.ToString());
         CharacterList = TextData.CharacterName;
@@ -121,18 +120,19 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         SetSpriteResource();
         stageData = TextData.GetStageData.Substring(0, 6);
         checkStartEnd = TextData.GetStageData[7];
+        SetStage();
     }
 
     private void Awake()
     {
-
+        
     }
 
     private void SetSpriteResource()
     {
         for (int i = 0; i < (int)ECHARACTER.MAX; ++i)
         {
-            listsprite.Add(Resources.Load<Sprite>("Prefabs/UI/Images/" + ((ECHARACTER)i).ToString()));
+            listsprite.Add(Resources.Load<Sprite>("Prefabs/Textures/" + ((ECHARACTER)i).ToString()));
         }
     }
 
@@ -294,7 +294,7 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
     {
         if (checkStartEnd == 'S')
         {
-            GameObject go = Instantiate(Resources.Load<GameObject>("Prefabs/UI/SELECT/Select_Canvas")) as GameObject;
+            GameObject go = UI_Tools.Instance.ShowUI(E_UITYPE.PF_UI_SELECT);
 
             ESELECTCHARACTERSTAGE selectStage = ESELECTCHARACTERSTAGE.STAGE_1;
             switch (stageData)
@@ -319,12 +319,29 @@ public class UI_Conversation : MonoSingleton<UI_Conversation>
         }
         else
         {
-            GameManager.Instance.UIConversation_Change(BattleManager.Instance.E_NextStage);
+            // GameManager.Instance.UIConversation_Change(BattleManager.Instance.E_NextStage);
+            Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION);
             Destroy(stagePrefab);
         }
 
 
         Destroy(this.gameObject);
+    }
+
+    public void SetStage()
+    {
+        stagePrefab = Instantiate(Resources.Load("Prefabs/Stage/" + stageData.ToString())) as GameObject;
+
+        if (stageData.ToString() == "STAGE2")
+        {
+            Skybox skyBox = Camera.main.gameObject.AddComponent<Skybox>();
+            skyBox.material = Resources.Load("Materials/SkyBox_Night") as Material;
+        }
+        else if (stageData.ToString() == "STAGE3")
+        {
+            Skybox skyBox = Camera.main.gameObject.AddComponent<Skybox>();
+            skyBox.material = Resources.Load("Materials/SkyBox_Sunny") as Material;
+        }
     }
 
 }

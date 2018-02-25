@@ -9,26 +9,21 @@ public class UI_Tools : MonoSingleton<UI_Tools>
     Dictionary<E_UITYPE, GameObject> DicUI = new Dictionary<E_UITYPE, GameObject>();
 
 
-    GameObject GetUI(E_UITYPE _uiType, bool isDontDestroy)
+    GameObject GetUI(E_UITYPE _uiType)
     {
-        if (isDontDestroy == false)
-        {
-            if (DicUI.ContainsKey(_uiType) == true)
-                return DicUI[_uiType];
-        }
+        if (DicUI.ContainsKey(_uiType) == true)
+            return DicUI[_uiType];
+
+
 
         GameObject makeUI = null;
         GameObject prefabUI = Resources.Load("Prefabs/UI/" + _uiType.ToString()) as GameObject;
 
-        if(prefabUI != null)
+        if (prefabUI != null)
         {
-            Canvas canvas = GameObject.FindGameObjectWithTag("UI_Canvas").GetComponent<Canvas>();
-            makeUI = Instantiate(prefabUI, canvas.transform) as GameObject;            
-            makeUI.transform.parent = canvas.transform;
-            RectTransform RectPos = makeUI.GetComponent<RectTransform>();
+            makeUI = Instantiate(prefabUI) as GameObject;
 
             makeUI.SetActive(false);
-
             DicUI.Add(_uiType, makeUI);
         }
         return makeUI;
@@ -36,7 +31,7 @@ public class UI_Tools : MonoSingleton<UI_Tools>
 
     public GameObject ShowUI(E_UITYPE _uiType)
     {
-        GameObject showObject = GetUI(_uiType, false);
+        GameObject showObject = GetUI(_uiType);
         if (showObject != null && showObject.activeSelf == false)
         {
             showObject.SetActive(true);
@@ -46,7 +41,7 @@ public class UI_Tools : MonoSingleton<UI_Tools>
 
     public void HideUI(E_UITYPE _uiType)
     {
-        GameObject showObject = GetUI(_uiType, false);
+        GameObject showObject = GetUI(_uiType);
         if (showObject != null && showObject.activeSelf == true)
         {
             showObject.SetActive(false);

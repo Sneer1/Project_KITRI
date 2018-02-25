@@ -56,7 +56,7 @@ public class SelectUI : MonoBehaviour
         }
 
         Scene_Manager.Instance.LoadScene(currStage, false);
-        Scene_Manager.Instance.UpdateScene();
+ //       Scene_Manager.Instance.UpdateScene();
         BattleManager.Instance.PlayerList = PlayerList;
         BattleManager.Instance.EnemyList = EnemyList;
 //        BackSound.Instance.BackSoundPlay(SelectBuff);

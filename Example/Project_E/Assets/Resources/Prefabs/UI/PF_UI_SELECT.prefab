@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 114080563231610724}
   - component: {fileID: 114135825100701724}
   m_Layer: 0
-  m_Name: Select_Canvas
+  m_Name: PF_UI_SELECT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -604,7 +604,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239b5946d38fe4949a569d4467999f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectBuff: 0
 --- !u!114 &114172836171732706
 MonoBehaviour:
   m_ObjectHideFlags: 1

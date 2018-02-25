@@ -23,9 +23,7 @@ public class Stage_Battle : MonoBehaviour
         ActorManager.Instance.GetDicActor.TryGetValue(E_TEAMTYPE.TEAM_2, out temp_ActorList);
         if(temp_ActorList.Count <= 0)
         {
-            Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION, false);
-            Scene_Manager.Instance.UpdateScene();
-            UI_Conversation.Instance.Init(BattleManager.Instance.E_CurrStageEnd);
+            Scene_Manager.Instance.LoadScene(E_SCENETYPE.SCENE_CONVERSATION);
         }
     }
 
